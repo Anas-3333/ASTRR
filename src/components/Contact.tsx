@@ -1,10 +1,12 @@
 function Contact() {
   return (
-    <main className="min-h-screen bg-black text-white">
-
+    <section
+      id="contact"
+      className="min-h-screen bg-black text-white"
+    >
       {/* =====================================================
-          HERO
-      ===================================================== */}
+          CONTACT HERO
+      ====================================================== */}
 
       <section
         className="
@@ -16,8 +18,7 @@ function Contact() {
           overflow-hidden
         "
       >
-
-        {/* Background image */}
+        {/* Background */}
         <img
           src="/images/back_contact.png"
           alt="ASTRR Contact"
@@ -30,16 +31,16 @@ function Contact() {
           "
         />
 
-        {/* Dark cinematic overlay */}
+        {/* Dark overlay */}
         <div
           className="
             absolute
             inset-0
-            bg-black/65
+            bg-black/70
           "
         />
 
-        {/* Red subtle glow */}
+        {/* Red cinematic glow */}
         <div
           className="
             absolute
@@ -64,7 +65,6 @@ function Contact() {
             text-center
           "
         >
-
           <p
             className="
               mb-5
@@ -83,7 +83,7 @@ function Contact() {
               font-black
               uppercase
               leading-none
-              tracking-[-0.04em]
+              tracking-[-0.05em]
 
               sm:text-6xl
               md:text-7xl
@@ -105,20 +105,19 @@ function Contact() {
               uppercase
               tracking-[0.18em]
               text-white/50
+
               sm:text-xs
             "
           >
             BUILT FOR THE MISSION. READY WHEN IT MATTERS MOST.
           </p>
-
         </div>
-
       </section>
 
 
       {/* =====================================================
-          CONTACT SECTION
-      ===================================================== */}
+          CONTACT INFORMATION + FORM
+      ====================================================== */}
 
       <section
         className="
@@ -133,8 +132,8 @@ function Contact() {
           lg:py-28
         "
       >
+        {/* Background grid */}
 
-        {/* Grid background */}
         <div
           className="
             pointer-events-none
@@ -144,11 +143,34 @@ function Contact() {
           "
           style={{
             backgroundImage: `
-              linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px)
+              linear-gradient(
+                rgba(255,255,255,0.035) 1px,
+                transparent 1px
+              ),
+              linear-gradient(
+                90deg,
+                rgba(255,255,255,0.035) 1px,
+                transparent 1px
+              )
             `,
             backgroundSize: "40px 40px",
           }}
+        />
+
+        {/* Red glow */}
+
+        <div
+          className="
+            pointer-events-none
+            absolute
+            right-[-150px]
+            top-[20%]
+            h-[400px]
+            w-[400px]
+            rounded-full
+            bg-[#d93232]/5
+            blur-[130px]
+          "
         />
 
         <div
@@ -167,7 +189,7 @@ function Contact() {
 
           {/* =================================================
               LEFT SIDE
-          ================================================= */}
+          ================================================== */}
 
           <div>
 
@@ -189,9 +211,10 @@ function Contact() {
                 font-black
                 uppercase
                 leading-[0.9]
-                tracking-tight
+                tracking-[-0.04em]
 
                 sm:text-5xl
+                lg:text-6xl
               "
             >
               LET'S BUILD
@@ -220,11 +243,11 @@ function Contact() {
 
             {/* =================================================
                 CONTACT DETAILS
-            ================================================= */}
+            ================================================== */}
 
             <div className="mt-10 space-y-7">
 
-              {/* Location */}
+              {/* HEAD OFFICE */}
 
               <div className="flex gap-5">
 
@@ -279,7 +302,7 @@ function Contact() {
               </div>
 
 
-              {/* Phone */}
+              {/* PHONE */}
 
               <div className="flex gap-5">
 
@@ -330,7 +353,7 @@ function Contact() {
               </div>
 
 
-              {/* Email */}
+              {/* EMAIL */}
 
               <div className="flex gap-5">
 
@@ -383,9 +406,7 @@ function Contact() {
             </div>
 
 
-            {/* =================================================
-                SOCIAL / BRAND LINE
-            ================================================= */}
+            {/* Brand line */}
 
             <div
               className="
@@ -395,7 +416,6 @@ function Contact() {
                 pt-7
               "
             >
-
               <p
                 className="
                   text-[8px]
@@ -406,18 +426,19 @@ function Contact() {
               >
                 ENGINEERED FOR THOSE WHO SERVE
               </p>
-
             </div>
 
           </div>
 
 
           {/* =================================================
-              RIGHT SIDE — FORM
-          ================================================= */}
+              RIGHT SIDE — ENQUIRY FORM
+          ================================================== */}
 
           <div
             className="
+              relative
+              overflow-hidden
               border
               border-white/10
               bg-[#0b0b0b]
@@ -427,6 +448,19 @@ function Contact() {
               lg:p-10
             "
           >
+
+            {/* Red top line */}
+
+            <div
+              className="
+                absolute
+                left-0
+                right-0
+                top-0
+                h-[2px]
+                bg-[#d93232]
+              "
+            />
 
             <div className="mb-8">
 
@@ -468,20 +502,21 @@ function Contact() {
 
             {/* =================================================
                 FORM
-            ================================================= */}
+            ================================================== */}
 
             <form className="space-y-6">
 
-              {/* Name + Email */}
+              {/* NAME + EMAIL */}
 
               <div
                 className="
                   grid
                   gap-6
-
                   sm:grid-cols-2
                 "
               >
+
+                {/* NAME */}
 
                 <div>
 
@@ -500,7 +535,9 @@ function Contact() {
 
                   <input
                     type="text"
+                    name="name"
                     placeholder="Your name"
+                    required
                     className="
                       h-12
                       w-full
@@ -515,6 +552,8 @@ function Contact() {
                       placeholder:text-white/20
 
                       transition
+                      duration-300
+
                       focus:border-[#d93232]
                       focus:bg-white/[0.05]
                     "
@@ -522,6 +561,8 @@ function Contact() {
 
                 </div>
 
+
+                {/* EMAIL */}
 
                 <div>
 
@@ -540,7 +581,9 @@ function Contact() {
 
                   <input
                     type="email"
+                    name="email"
                     placeholder="your@email.com"
+                    required
                     className="
                       h-12
                       w-full
@@ -555,6 +598,8 @@ function Contact() {
                       placeholder:text-white/20
 
                       transition
+                      duration-300
+
                       focus:border-[#d93232]
                       focus:bg-white/[0.05]
                     "
@@ -565,7 +610,7 @@ function Contact() {
               </div>
 
 
-              {/* Company */}
+              {/* COMPANY */}
 
               <div>
 
@@ -584,6 +629,7 @@ function Contact() {
 
                 <input
                   type="text"
+                  name="company"
                   placeholder="Company name"
                   className="
                     h-12
@@ -599,6 +645,8 @@ function Contact() {
                     placeholder:text-white/20
 
                     transition
+                    duration-300
+
                     focus:border-[#d93232]
                     focus:bg-white/[0.05]
                   "
@@ -607,7 +655,7 @@ function Contact() {
               </div>
 
 
-              {/* Subject */}
+              {/* SUBJECT */}
 
               <div>
 
@@ -626,7 +674,9 @@ function Contact() {
 
                 <input
                   type="text"
+                  name="subject"
                   placeholder="What can we help you with?"
+                  required
                   className="
                     h-12
                     w-full
@@ -641,6 +691,8 @@ function Contact() {
                     placeholder:text-white/20
 
                     transition
+                    duration-300
+
                     focus:border-[#d93232]
                     focus:bg-white/[0.05]
                   "
@@ -649,7 +701,7 @@ function Contact() {
               </div>
 
 
-              {/* Message */}
+              {/* MESSAGE */}
 
               <div>
 
@@ -667,8 +719,10 @@ function Contact() {
                 </label>
 
                 <textarea
+                  name="message"
                   rows={6}
                   placeholder="Tell us about your requirement..."
+                  required
                   className="
                     w-full
                     resize-none
@@ -684,6 +738,8 @@ function Contact() {
                     placeholder:text-white/20
 
                     transition
+                    duration-300
+
                     focus:border-[#d93232]
                     focus:bg-white/[0.05]
                   "
@@ -692,7 +748,7 @@ function Contact() {
               </div>
 
 
-              {/* Submit */}
+              {/* SUBMIT BUTTON */}
 
               <button
                 type="submit"
@@ -711,11 +767,17 @@ function Contact() {
 
                   transition
                   duration-300
+
                   hover:bg-[#ef3d3d]
                 "
               >
 
-                <span className="relative z-10">
+                <span
+                  className="
+                    relative
+                    z-10
+                  "
+                >
                   SEND ENQUIRY →
                 </span>
 
@@ -732,11 +794,19 @@ function Contact() {
 
       {/* =====================================================
           MAP SECTION
-      ===================================================== */}
+      ====================================================== */}
 
-      <section className="relative bg-black">
+      <section
+        className="
+          relative
+          bg-black
+          py-16
 
-        {/* Section heading */}
+          lg:py-20
+        "
+      >
+
+        {/* Heading */}
 
         <div
           className="
@@ -744,6 +814,7 @@ function Contact() {
             max-w-[1200px]
             px-5
             pb-8
+
             sm:px-8
             lg:px-12
           "
@@ -766,10 +837,16 @@ function Contact() {
               text-3xl
               font-black
               uppercase
+              tracking-tight
+
               sm:text-4xl
+              lg:text-5xl
             "
           >
-            OUR <span className="text-[#d93232]">LOCATION</span>
+            OUR{" "}
+            <span className="text-[#d93232]">
+              LOCATION
+            </span>
           </h2>
 
         </div>
@@ -805,7 +882,7 @@ function Contact() {
             referrerPolicy="no-referrer-when-downgrade"
           />
 
-          {/* Map cinematic overlay */}
+          {/* Map overlay */}
 
           <div
             className="
@@ -815,7 +892,7 @@ function Contact() {
               bg-gradient-to-b
               from-black/20
               via-transparent
-              to-black/40
+              to-black/50
             "
           />
 
@@ -825,8 +902,8 @@ function Contact() {
 
 
       {/* =====================================================
-          CTA
-      ===================================================== */}
+          FINAL CTA
+      ====================================================== */}
 
       <section
         className="
@@ -843,6 +920,7 @@ function Contact() {
 
         <div
           className="
+            pointer-events-none
             absolute
             left-1/2
             top-1/2
@@ -876,6 +954,7 @@ function Contact() {
               font-black
               uppercase
               leading-none
+              tracking-[-0.04em]
 
               sm:text-5xl
               md:text-6xl
@@ -902,7 +981,8 @@ function Contact() {
             for demanding environments.
           </p>
 
-          {/* <button
+          <button
+            type="button"
             className="
               mt-8
               border
@@ -917,69 +997,18 @@ function Contact() {
 
               transition
               duration-300
+
               hover:bg-[#d93232]
             "
           >
             CONTACT ASTRR →
-          </button> */}
+          </button>
 
         </div>
 
       </section>
 
-
-      {/* =====================================================
-          FOOTER
-      ===================================================== */}
-
-      <footer
-        className="
-          border-t
-          border-white/10
-          bg-black
-          px-6
-          py-10
-          text-center
-        "
-      >
-
-        <h3
-          className="
-            text-2xl
-            font-black
-            tracking-tight
-          "
-        >
-          ASTRR<span className="text-[#d93232]">.CO</span>
-        </h3>
-
-        <p
-          className="
-            mt-3
-            text-[8px]
-            uppercase
-            tracking-[0.25em]
-            text-white/30
-          "
-        >
-          ENGINEERED FOR THOSE WHO SERVE
-        </p>
-
-        <p
-          className="
-            mt-7
-            text-[8px]
-            uppercase
-            tracking-[0.12em]
-            text-white/20
-          "
-        >
-          © {new Date().getFullYear()} ASTRR.CO — ALL RIGHTS RESERVED
-        </p>
-
-      </footer>
-
-    </main>
+    </section>
   );
 }
 

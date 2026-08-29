@@ -1,16 +1,11 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 function Header() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     function handleScroll() {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 50);
     }
 
     window.addEventListener("scroll", handleScroll);
@@ -19,6 +14,30 @@ function Header() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+
+  /* =====================================================
+      CINEMATIC SECTION SCROLL
+  ===================================================== */
+
+  function scrollToSection(id: string) {
+    const section = document.getElementById(id);
+
+    if (!section) return;
+
+    const headerOffset = 10;
+
+    const sectionPosition =
+      section.getBoundingClientRect().top +
+      window.scrollY -
+      headerOffset;
+
+    window.scrollTo({
+      top: sectionPosition,
+      behavior: "smooth",
+    });
+  }
+
 
   return (
     <header
@@ -59,8 +78,9 @@ function Header() {
         }
       `}
     >
+
       <div
-        className={`
+        className="
           mx-auto
           flex
           items-center
@@ -68,17 +88,16 @@ function Header() {
           px-5
           sm:px-7
           lg:px-9
-
-          ${scrolled ? "max-w-[1200px]" : "max-w-none"}
-        `}
+        "
       >
 
-        {/* =====================================
+        {/* =====================================================
             LOGO
-        ====================================== */}
+        ====================================================== */}
 
-        <Link
-          to="/"
+        <button
+          type="button"
+          onClick={() => scrollToSection("home")}
           className="
             flex
             shrink-0
@@ -95,12 +114,12 @@ function Header() {
               sm:h-[46px]
             "
           />
-        </Link>
+        </button>
 
 
-        {/* =====================================
+        {/* =====================================================
             DESKTOP NAVIGATION
-        ====================================== */}
+        ====================================================== */}
 
         <nav
           className="
@@ -114,8 +133,9 @@ function Header() {
 
           {/* HOME */}
 
-          <Link
-            to="/"
+          <button
+            type="button"
+            onClick={() => scrollToSection("home")}
             className="
               text-[14px]
               font-medium
@@ -126,13 +146,14 @@ function Header() {
             "
           >
             Home
-          </Link>
+          </button>
 
 
           {/* PROFILE */}
 
-          <Link
-            to="/Profile"
+          <button
+            type="button"
+            onClick={() => scrollToSection("profile")}
             className="
               text-[14px]
               font-medium
@@ -143,13 +164,14 @@ function Header() {
             "
           >
             Profile
-          </Link>
+          </button>
 
 
           {/* SAFETY SHOE */}
 
-          <Link
-            to="/SafetyShoes"
+          <button
+            type="button"
+            onClick={() => scrollToSection("safety-shoes")}
             className="
               text-[14px]
               font-medium
@@ -160,13 +182,14 @@ function Header() {
             "
           >
             Safety Shoe
-          </Link>
+          </button>
 
 
           {/* MILITARY SHOE */}
 
-          <Link
-            to="/MilitaryShoe"
+          <button
+            type="button"
+            onClick={() => scrollToSection("military")}
             className="
               text-[14px]
               font-medium
@@ -177,13 +200,14 @@ function Header() {
             "
           >
             Military Shoe
-          </Link>
+          </button>
 
 
           {/* PRODUCTION */}
 
-          <Link
-            to="/Production"
+          <button
+            type="button"
+            onClick={() => scrollToSection("production")}
             className="
               text-[14px]
               font-medium
@@ -194,13 +218,14 @@ function Header() {
             "
           >
             Production
-          </Link>
+          </button>
 
 
           {/* CONTACT */}
 
-          <Link
-            to="/Contact"
+          <button
+            type="button"
+            onClick={() => scrollToSection("contact")}
             className="
               text-[14px]
               font-medium
@@ -211,14 +236,14 @@ function Header() {
             "
           >
             Contact
-          </Link>
+          </button>
 
         </nav>
 
 
-        {/* =====================================
-            MOBILE MENU BUTTON
-        ====================================== */}
+        {/* =====================================================
+            MOBILE BUTTON
+        ====================================================== */}
 
         <button
           type="button"
@@ -237,13 +262,18 @@ function Header() {
           "
         >
           <div className="flex flex-col gap-[5px]">
+
             <span className="block h-[2px] w-5 bg-white" />
+
             <span className="block h-[2px] w-5 bg-white" />
+
             <span className="block h-[2px] w-3 bg-white" />
+
           </div>
         </button>
 
       </div>
+
     </header>
   );
 }

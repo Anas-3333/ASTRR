@@ -9,38 +9,25 @@ import Contact from "./components/Contact";
 
 function App() {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <main className="w-full bg-black">
 
-      {/* HEADER */}
       <Header />
 
-      {/* LANDING PAGE */}
-      <main>
+      <Hero />
 
-        {/* 01 */}
-        <Hero />
+      <Profile />
 
-        {/* 02 */}
-        <Profile />
+      <SafetyShoes />
 
-        {/* 03 */}
-        <SafetyShoes />
+      <MilitaryShoe />
 
-        {/* 04 */}
-        <MilitaryShoe />
+      {/* <Production /> */}
 
-        {/* 05 */}
-        {/* <Production /> */}
+      <Contact />
 
-        {/* 06 */}
-        <Contact />
-
-      </main>
-
-      {/* FOOTER */}
       {/* <Footer /> */}
 
-    </div>
+    </main>
   );
 }
 

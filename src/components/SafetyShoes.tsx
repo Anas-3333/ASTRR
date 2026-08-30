@@ -1,36 +1,59 @@
 import { useState } from "react";
 import ProductQuickView from "./ProductQuickView";
 
-
 /* =========================================================
-   TYPES
+   SHARED PRODUCT TYPE
 ========================================================= */
 
-export type Product = {
+export interface Product {
   number: string;
   title: string;
-  image: string;
+  cardImage: string;
+  quickViewImage: string;
   description: string;
-};
-
+  featured?: boolean;
+}
 
 /* =========================================================
-   SHOE DATA
+   B2 IMAGE HELPER
+========================================================= */
+
+const b2Image = (file: string) =>
+  `/api/image?file=${encodeURIComponent(file)}`;
+
+/* =========================================================
+   SAFETY SHOE DATA
 ========================================================= */
 
 const shoes: Product[] = [
   {
     number: "01",
     title: "COMBAT\nFORCES",
-    image: "/images/combat_shoes.png",
+
+    cardImage: b2Image("combat_shoes.webp"),
+
+    quickViewImage: b2Image(
+      "combat_quickview.webp"
+    ),
+
     description:
       "TACTICAL FOOTWEAR | GRIP • DURABILITY • CONTROL",
+
+    featured: true,
   },
 
   {
     number: "02",
     title: "SECURITY\nFORCES",
-    image: "/images/security_force.png",
+
+    cardImage: b2Image(
+      "security_force.webp"
+    ),
+
+    quickViewImage: b2Image(
+      "security_quickview.webp"
+    ),
+
     description:
       "SECURITY FORCES | TACTICAL FOOTWEAR",
   },
@@ -38,7 +61,15 @@ const shoes: Product[] = [
   {
     number: "03",
     title: "EXECUTIVE\nOFFICERS",
-    image: "/images/L1_shoes.png",
+
+    cardImage: b2Image(
+      "executive-officers.webp"
+    ),
+
+    quickViewImage: b2Image(
+      "executive_quickview.webp"
+    ),
+
     description:
       "EXECUTIVE OFFICERS | TACTICAL FOOTWEAR",
   },
@@ -46,7 +77,15 @@ const shoes: Product[] = [
   {
     number: "04",
     title: "INDUSTRIAL\nSAFETY",
-    image: "/images/R1_shoes.png",
+
+    cardImage: b2Image(
+      "industrial-safety.webp"
+    ),
+
+    quickViewImage: b2Image(
+      "industrial_quickview.webp"
+    ),
+
     description:
       "INDUSTRIAL SAFETY | GRIP • DURABILITY",
   },
@@ -54,7 +93,15 @@ const shoes: Product[] = [
   {
     number: "05",
     title: "ELITE\nFORCES",
-    image: "/images/elite_sh.png",
+
+    cardImage: b2Image(
+      "elite_sh.webp"
+    ),
+
+    quickViewImage: b2Image(
+      "elite_quickview.webp"
+    ),
+
     description:
       "ELITE FORCES | TACTICAL FOOTWEAR",
   },
@@ -62,398 +109,253 @@ const shoes: Product[] = [
   {
     number: "06",
     title: "TACTICAL\nOPERATIONS",
-    image: "/images/security_sh.png",
+
+    cardImage: b2Image(
+      "security_sh.webp"
+    ),
+
+    quickViewImage: b2Image(
+      "security_quickview.webp"
+    ),
+
     description:
       "TACTICAL OPERATIONS | GRIP • CONTROL",
   },
 ];
 
-
 /* =========================================================
-   SHOE CARD PROPS
-========================================================= */
-
-type ShoeCardProps = {
-  number: string;
-  title: string;
-  image: string;
-  description: string;
-  featured?: boolean;
-  compact?: boolean;
-  onClick: () => void;
-};
-
-
-/* =========================================================
-   MAIN COMPONENT
+   COMPONENT
 ========================================================= */
 
 function SafetyShoes() {
-
   const [selectedProduct, setSelectedProduct] =
     useState<Product | null>(null);
 
-
   return (
-    <section
-      id="safety-shoes"
-      className="
-        relative
-        w-full
-        overflow-hidden
-        bg-black
-        px-4
-        py-14
-        text-white
+    <>
+      <section
+        id="safety-shoes"
+        className="
+          w-full
+          overflow-hidden
+          bg-black
+          px-4
+          py-12
+          text-white
+          sm:px-6
+          sm:py-16
+          lg:px-10
+          lg:py-20
+        "
+      >
+        <div className="mx-auto max-w-[1235px]">
 
-        sm:px-6
-        sm:py-16
+          {/* =====================================================
+              SECTION HEADER
+          ====================================================== */}
 
-        lg:px-8
-        lg:py-20
-      "
-    >
+          <div className="mb-8 text-center sm:mb-10">
 
-      {/* =====================================================
-          MAIN CONTAINER
-      ===================================================== */}
+            <p
+              className="
+                mb-5
+                text-[10px]
+                font-medium
+                tracking-[0.12em]
+                text-white
+                sm:text-xs
+              "
+            >
+              ASTRR.CO
+            </p>
 
-      <div className="mx-auto w-full max-w-[1280px]">
+            <h2
+              className="
+                text-4xl
+                font-black
+                uppercase
+                leading-none
+                tracking-tight
+                sm:text-5xl
+                md:text-6xl
+                lg:text-[58px]
+              "
+            >
+              HEROES{" "}
+              <span className="text-[#d93232]">
+                WE SERVE
+              </span>
+            </h2>
 
-
-        {/* =====================================================
-            SECTION HEADER
-        ===================================================== */}
-
-        <header
-          className="
-            mb-9
-            text-center
-
-            sm:mb-10
-
-            lg:mb-12
-          "
-        >
-
-          {/* SMALL BRAND */}
-
-          <p
-            className="
-              mb-3
-
-              text-[9px]
-              font-medium
-              uppercase
-              tracking-[0.3em]
-
-              text-white/40
-            "
-          >
-            ASTRR.CO
-          </p>
-
-
-          {/* MAIN TITLE */}
-
-          <h2
-            className="
-              text-[38px]
-              font-black
-              uppercase
-
-              leading-[0.9]
-
-              tracking-[-0.045em]
-
-              sm:text-[48px]
-
-              md:text-[56px]
-
-              lg:text-[62px]
-            "
-          >
-            HEROES{" "}
-
-            <span className="text-[#d93232]">
-              WE SERVE
-            </span>
-
-          </h2>
-
-
-          {/* SUBTITLE */}
-
-          <p
-            className="
-              mt-3
-
-              text-[8px]
-              font-medium
-              uppercase
-
-              tracking-[0.2em]
-
-              text-white/40
-
-              sm:text-[9px]
-            "
-          >
-            ENGINEERED FOR THOSE WHO SERVE
-          </p>
-
-        </header>
-
-
-        {/* =====================================================
-            CINEMATIC GRID
-
-            12 COLUMN SYSTEM
-
-            ROW 1
-
-            COMBAT       = 5
-            SECURITY     = 5
-            EXECUTIVE    = 2
-
-            ROW 2
-
-            INDUSTRIAL   = 2
-            ELITE        = 3
-            TACTICAL     = 7
-        ===================================================== */}
-
-        <div
-          className="
-            grid
-            grid-cols-1
-            gap-[6px]
-
-            sm:grid-cols-2
-
-            lg:grid-cols-12
-            lg:grid-rows-[340px_220px]
-          "
-        >
-
-
-          {/* =================================================
-              01 — COMBAT FORCES
-          ================================================= */}
-
-          <div
-            className="
-              h-[380px]
-
-              sm:h-[400px]
-
-              lg:col-span-5
-              lg:h-auto
-            "
-          >
-
-            <ShoeCard
-              number={shoes[0].number}
-              title={shoes[0].title}
-              image={shoes[0].image}
-              description={shoes[0].description}
-              featured
-              onClick={() =>
-                setSelectedProduct(shoes[0])
-              }
-            />
+            <p
+              className="
+                mt-2
+                text-[8px]
+                font-medium
+                tracking-wide
+                text-white/45
+                sm:text-[10px]
+              "
+            >
+              ENGINEERED FOR THOSE WHO SERVE
+            </p>
 
           </div>
 
-
-          {/* =================================================
-              02 — SECURITY FORCES
-          ================================================= */}
+          {/* =====================================================
+              CARD GRID
+          ====================================================== */}
 
           <div
             className="
-              h-[280px]
-
-              sm:h-[300px]
-
-              lg:col-span-5
-              lg:h-auto
+              grid
+              grid-cols-1
+              gap-[5px]
+              sm:grid-cols-2
+              lg:grid-cols-6
+              lg:grid-rows-[165px_165px_180px]
             "
           >
 
-            <ShoeCard
-              number={shoes[1].number}
-              title={shoes[1].title}
-              image={shoes[1].image}
-              description={shoes[1].description}
-              onClick={() =>
-                setSelectedProduct(shoes[1])
-              }
-            />
+            {/* 01 — COMBAT FORCES */}
+
+            <div
+              className="
+                min-h-[400px]
+                sm:min-h-[350px]
+                lg:col-span-3
+                lg:row-span-2
+                lg:min-h-0
+              "
+            >
+              <ShoeCard
+                product={shoes[0]}
+                featured
+                onClick={() =>
+                  setSelectedProduct(shoes[0])
+                }
+              />
+            </div>
+
+            {/* 02 — SECURITY FORCES */}
+
+            <div
+              className="
+                min-h-[230px]
+                lg:col-span-2
+                lg:col-start-4
+                lg:row-start-1
+              "
+            >
+              <ShoeCard
+                product={shoes[1]}
+                onClick={() =>
+                  setSelectedProduct(shoes[1])
+                }
+              />
+            </div>
+
+            {/* 03 — EXECUTIVE OFFICERS */}
+
+            <div
+              className="
+                min-h-[230px]
+                lg:col-span-2
+                lg:col-start-6
+                lg:row-start-1
+              "
+            >
+              <ShoeCard
+                product={shoes[2]}
+                onClick={() =>
+                  setSelectedProduct(shoes[2])
+                }
+              />
+            </div>
+
+            {/* 04 — INDUSTRIAL SAFETY */}
+
+            <div
+              className="
+                min-h-[230px]
+                lg:col-span-2
+                lg:col-start-1
+                lg:row-start-3
+              "
+            >
+              <ShoeCard
+                product={shoes[3]}
+                onClick={() =>
+                  setSelectedProduct(shoes[3])
+                }
+              />
+            </div>
+
+            {/* 05 — ELITE FORCES */}
+
+            <div
+              className="
+                min-h-[230px]
+                lg:col-span-2
+                lg:col-start-3
+                lg:row-start-3
+              "
+            >
+              <ShoeCard
+                product={shoes[4]}
+                onClick={() =>
+                  setSelectedProduct(shoes[4])
+                }
+              />
+            </div>
+
+            {/* 06 — TACTICAL OPERATIONS */}
+
+            <div
+              className="
+                min-h-[230px]
+                lg:col-span-2
+                lg:col-start-5
+                lg:row-start-3
+              "
+            >
+              <ShoeCard
+                product={shoes[5]}
+                onClick={() =>
+                  setSelectedProduct(shoes[5])
+                }
+              />
+            </div>
 
           </div>
 
+          {/* =====================================================
+              BOTTOM TITLE
+          ====================================================== */}
 
-          {/* =================================================
-              03 — EXECUTIVE OFFICERS
-          ================================================= */}
+          <div className="pt-6 text-center sm:pt-7">
 
-          <div
-            className="
-              h-[280px]
-
-              sm:h-[300px]
-
-              lg:col-span-2
-              lg:h-auto
-            "
-          >
-
-            <ShoeCard
-              number={shoes[2].number}
-              title={shoes[2].title}
-              image={shoes[2].image}
-              description={shoes[2].description}
-              compact
-              onClick={() =>
-                setSelectedProduct(shoes[2])
-              }
-            />
-
-          </div>
-
-
-          {/* =================================================
-              04 — INDUSTRIAL SAFETY
-          ================================================= */}
-
-          <div
-            className="
-              h-[240px]
-
-              sm:h-[260px]
-
-              lg:col-span-2
-              lg:h-auto
-            "
-          >
-
-            <ShoeCard
-              number={shoes[3].number}
-              title={shoes[3].title}
-              image={shoes[3].image}
-              description={shoes[3].description}
-              compact
-              onClick={() =>
-                setSelectedProduct(shoes[3])
-              }
-            />
-
-          </div>
-
-
-          {/* =================================================
-              05 — ELITE FORCES
-          ================================================= */}
-
-          <div
-            className="
-              h-[240px]
-
-              sm:h-[260px]
-
-              lg:col-span-3
-              lg:h-auto
-            "
-          >
-
-            <ShoeCard
-              number={shoes[4].number}
-              title={shoes[4].title}
-              image={shoes[4].image}
-              description={shoes[4].description}
-              onClick={() =>
-                setSelectedProduct(shoes[4])
-              }
-            />
-
-          </div>
-
-
-          {/* =================================================
-              06 — TACTICAL OPERATIONS
-          ================================================= */}
-
-          <div
-            className="
-              h-[340px]
-
-              sm:col-span-2
-
-              sm:h-[360px]
-
-              lg:col-span-7
-
-              lg:h-auto
-            "
-          >
-
-            <ShoeCard
-              number={shoes[5].number}
-              title={shoes[5].title}
-              image={shoes[5].image}
-              description={shoes[5].description}
-              featured
-              onClick={() =>
-                setSelectedProduct(shoes[5])
-              }
-            />
+            <h3
+              className="
+                text-xl
+                font-black
+                uppercase
+                tracking-tight
+                sm:text-2xl
+                lg:text-3xl
+              "
+            >
+              WHEN IT MATTERS MOST
+            </h3>
 
           </div>
 
         </div>
-
-
-        {/* =====================================================
-            FOOTER TITLE
-        ===================================================== */}
-
-        <div
-          className="
-            mt-7
-            flex
-            justify-center
-
-            sm:mt-8
-
-            lg:mt-9
-          "
-        >
-
-          <p
-            className="
-              text-[10px]
-              font-medium
-              uppercase
-
-              tracking-[0.22em]
-
-              text-white/35
-
-              sm:text-[11px]
-            "
-          >
-            WHEN IT MATTERS MOST
-          </p>
-
-        </div>
-
-      </div>
-
+      </section>
 
       {/* =====================================================
-          PRODUCT QUICK VIEW MODAL
-      ===================================================== */}
+          ONE SHARED PRODUCT QUICK VIEW
+      ====================================================== */}
 
       <ProductQuickView
         product={selectedProduct}
@@ -461,33 +363,31 @@ function SafetyShoes() {
           setSelectedProduct(null)
         }
       />
-
-    </section>
+    </>
   );
 }
 
-
-/* ============================================================
+/* =========================================================
    SHOE CARD
-============================================================ */
+========================================================= */
+
+type ShoeCardProps = {
+  product: Product;
+  featured?: boolean;
+  onClick: () => void;
+};
 
 function ShoeCard({
-  number,
-  title,
-  image,
-  description,
+  product,
   featured = false,
-  compact = false,
   onClick,
 }: ShoeCardProps) {
 
   return (
-
     <article
       onClick={onClick}
       role="button"
       tabIndex={0}
-
       onKeyDown={(event) => {
         if (
           event.key === "Enter" ||
@@ -496,343 +396,203 @@ function ShoeCard({
           onClick();
         }
       }}
-
-      className="
+      className={`
         group
         relative
         h-full
         w-full
-
         cursor-pointer
-        select-none
-
         overflow-hidden
-
-        rounded-[3px]
-
+        rounded-[2px]
         border-l-[3px]
         border-[#d93232]
+        bg-[#111]
 
-        bg-[#101010]
-
-        transition-all
-        duration-500
-        ease-out
-
-        hover:-translate-y-[2px]
-      "
+        ${
+          featured
+            ? "min-h-[400px] sm:min-h-[350px]"
+            : "min-h-[230px]"
+        }
+      `}
     >
 
-
-      {/* =================================================
-          PRODUCT IMAGE
-      ================================================= */}
+      {/* ===================================================
+          CARD IMAGE
+      ==================================================== */}
 
       <img
-        src={image}
-        alt={title.replace("\n", " ")}
-
+        src={product.cardImage}
+        alt={product.title.replace("\n", " ")}
         draggable={false}
-
+        loading={featured ? "eager" : "lazy"}
+        decoding="async"
         className="
           absolute
           inset-0
-
           h-full
           w-full
-
           object-cover
           object-center
-
-          scale-[1.01]
-
           transition-transform
-          duration-[900ms]
+          duration-700
           ease-out
-
-          group-hover:scale-[1.045]
+          group-hover:scale-105
         "
       />
 
-
-      {/* =================================================
-          DARK OVERLAY
-      ================================================= */}
+      {/* ===================================================
+          IMAGE DARKENING
+      ==================================================== */}
 
       <div
         className="
-          pointer-events-none
-
           absolute
           inset-0
-
-          bg-black/20
-
-          transition-opacity
+          bg-black/10
+          transition-colors
           duration-500
-
-          group-hover:bg-black/10
+          group-hover:bg-black/0
         "
       />
 
-
-      {/* =================================================
-          TOP VIGNETTE
-      ================================================= */}
-
-      <div
-        className="
-          pointer-events-none
-
-          absolute
-          inset-x-0
-          top-0
-
-          h-[40%]
-
-          bg-gradient-to-b
-          from-black/50
-          to-transparent
-        "
-      />
-
-
-      {/* =================================================
-          BOTTOM CINEMATIC GRADIENT
-      ================================================= */}
+      {/* ===================================================
+          BOTTOM GRADIENT
+      ==================================================== */}
 
       <div
         className="
-          pointer-events-none
-
           absolute
           inset-x-0
           bottom-0
-
-          h-[72%]
-
+          h-[70%]
           bg-gradient-to-t
           from-black
-          via-black/75
+          via-black/70
           to-transparent
         "
       />
 
-
-      {/* =================================================
-          CONTENT
-      ================================================= */}
+      {/* ===================================================
+          CARD CONTENT
+      ==================================================== */}
 
       <div
         className={`
           absolute
           inset-x-0
           bottom-0
-
           z-10
+          p-4
+          sm:p-5
 
           ${
-            compact
-              ? "p-3 sm:p-4 lg:p-4"
-              : featured
-                ? "p-5 sm:p-6 lg:p-6"
-                : "p-4 sm:p-5 lg:p-5"
+            featured
+              ? "lg:p-7"
+              : "lg:p-4"
           }
         `}
       >
 
         {/* NUMBER */}
 
-        <div
+        <p
           className={`
             font-medium
-            leading-none
-
             text-white/60
 
             ${
               featured
-                ? "text-base sm:text-lg"
-                : compact
-                  ? "text-xs"
-                  : "text-sm"
+                ? "text-2xl lg:text-3xl"
+                : "text-lg lg:text-xl"
             }
           `}
         >
-          {number}
-        </div>
-
+          {product.number}
+        </p>
 
         {/* TITLE */}
 
         <h3
           className={`
-            mt-2
-
+            mt-1
             whitespace-pre-line
-
             font-black
             uppercase
-
-            leading-[0.84]
-
-            tracking-[-0.04em]
-
+            leading-[0.88]
+            tracking-tight
             text-white
 
             ${
               featured
-                ? `
-                  text-[36px]
-                  sm:text-[42px]
-                  lg:text-[46px]
-                `
-                : compact
-                  ? `
-                    text-[20px]
-                    sm:text-[24px]
-                    lg:text-[25px]
-                  `
-                  : `
-                    text-[26px]
-                    sm:text-[29px]
-                    lg:text-[30px]
-                  `
+                ? "text-4xl sm:text-5xl lg:text-[52px]"
+                : "text-3xl sm:text-4xl lg:text-[30px]"
             }
           `}
         >
-          {title}
+          {product.title}
         </h3>
 
-
-        {/* =================================================
-            BOTTOM INFORMATION
-        ================================================= */}
+        {/* BOTTOM INFORMATION */}
 
         <div
           className="
             mt-3
-
             flex
-            w-full
-
             items-end
             justify-between
-
             gap-3
           "
         >
 
-          {/* DESCRIPTION */}
-
           <p
-            className={`
-              min-w-0
-
-              overflow-hidden
-
-              text-[6px]
+            className="
+              max-w-[75%]
+              text-[7px]
               font-medium
               uppercase
-
-              leading-[1.35]
-
-              tracking-[0.04em]
-
-              text-white/65
-
-              sm:text-[7px]
-
-              ${
-                compact
-                  ? "max-w-[60%]"
-                  : "max-w-[72%]"
-              }
-            `}
+              leading-tight
+              tracking-wide
+              text-white/75
+              sm:text-[8px]
+            "
           >
-            {description}
+            {product.description}
           </p>
-
-
-          {/* EXPLORE */}
 
           <span
             className="
               shrink-0
-
-              whitespace-nowrap
-
-              text-[7px]
+              text-[8px]
               font-medium
               uppercase
-
-              tracking-wide
-
               text-[#d93232]
-
-              transition-transform
+              transition-all
               duration-300
-
               group-hover:translate-x-1
-
-              sm:text-[8px]
             "
           >
-            EXPLORE →
+            Explore →
           </span>
 
         </div>
 
       </div>
 
-
-      {/* =================================================
-          HOVER BORDER
-      ================================================= */}
+      {/* ===================================================
+          HOVER RED GLOW
+      ==================================================== */}
 
       <div
         className="
           pointer-events-none
-
           absolute
           inset-0
-
           opacity-0
-
           ring-1
           ring-inset
-          ring-white/20
-
+          ring-[#d93232]/40
           transition-opacity
           duration-500
-
-          group-hover:opacity-100
-        "
-      />
-
-
-      {/* =================================================
-          RED EDGE
-      ================================================= */}
-
-      <div
-        className="
-          pointer-events-none
-
-          absolute
-          left-0
-          top-0
-
-          h-full
-          w-[3px]
-
-          bg-[#d93232]
-
-          opacity-80
-
-          transition-all
-          duration-500
-
           group-hover:opacity-100
         "
       />
@@ -840,6 +600,5 @@ function ShoeCard({
     </article>
   );
 }
-
 
 export default SafetyShoes;

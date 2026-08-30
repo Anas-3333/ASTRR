@@ -1,24 +1,49 @@
-type MilitaryCardProps = {
-  number: string;
-  title: string;
-  image: string;
-  description: string;
-  featured?: boolean;
-};
+import { useState } from "react";
+import ProductQuickView from "./ProductQuickView";
+import type { Product } from "./SafetyShoes";
 
-const militaryShoes = [
+/* =========================================================
+   B2 IMAGE HELPER
+========================================================= */
+
+const b2Image = (file: string) =>
+  `/api/image?file=${encodeURIComponent(file)}`;
+
+/* =========================================================
+   MILITARY SHOE DATA
+========================================================= */
+
+const militaryShoes: Product[] = [
   {
     number: "01",
     title: "MILITARY\nFORCES",
-    image: "/images/MIL1.png",
+
+    cardImage: b2Image(
+      "MIL1.webp"
+    ),
+
+    quickViewImage: b2Image(
+      "military_quickview_01.webp"
+    ),
+
     description:
       "FIELD FOOTWEAR | STABILITY • DURABILITY • CONTROL",
+
+    featured: true,
   },
 
   {
     number: "02",
     title: "SECURITY\nFORCES",
-    image: "/images/MIL4.png",
+
+    cardImage: b2Image(
+      "MIL4.webp"
+    ),
+
+    quickViewImage: b2Image(
+      "military_quickview_02.webp"
+    ),
+
     description:
       "TACTICAL FOOTWEAR | PROTECTION • GRIP",
   },
@@ -26,7 +51,15 @@ const militaryShoes = [
   {
     number: "03",
     title: "OFFICER\nSHOES",
-    image: "/images/MIL3.png",
+
+    cardImage: b2Image(
+      "MIL3.webp"
+    ),
+
+    quickViewImage: b2Image(
+      "military_quickview_03.webp"
+    ),
+
     description:
       "FORMAL FIELD FOOTWEAR | COMFORT • CONTROL",
   },
@@ -34,268 +67,324 @@ const militaryShoes = [
   {
     number: "04",
     title: "POLICE\nFORCES",
-    image: "/images/MIL2.png",
+
+    cardImage: b2Image(
+      "MIL2.webp"
+    ),
+
+    quickViewImage: b2Image(
+      "military_quickview_04.webp"
+    ),
+
     description:
       "DUTY FOOTWEAR | GRIP • DURABILITY • CONTROL",
   },
 ];
 
+/* =========================================================
+   COMPONENT
+========================================================= */
 
 function MilitaryShoe() {
+
+  const [selectedProduct, setSelectedProduct] =
+    useState<Product | null>(null);
+
   return (
-    <section
-      id="military-shoe"
-      className="
-        relative
-        w-full
-        overflow-hidden
-        bg-black
-        px-4
-        py-16
-        text-white
-
-        sm:px-6
-        lg:px-8
-        lg:py-24
-      "
-    >
-
-      {/* =====================================================
-          BACKGROUND GLOW
-      ====================================================== */}
-
-      <div
+    <>
+      <section
+        id="military-shoe"
         className="
-          pointer-events-none
-          absolute
-          left-1/2
-          top-1/3
-          h-[500px]
-          w-[500px]
-          -translate-x-1/2
-          rounded-full
-          bg-[#d93232]/5
-          blur-[150px]
+          relative
+          w-full
+          overflow-hidden
+          bg-black
+          px-4
+          py-16
+          text-white
+          sm:px-6
+          lg:px-8
+          lg:py-24
         "
-      />
-
-
-      {/* =====================================================
-          CONTAINER
-      ====================================================== */}
-
-      <div className="relative z-10 mx-auto w-full max-w-[1280px]">
-
+      >
 
         {/* =====================================================
-            HEADER
+            BACKGROUND GLOW
         ====================================================== */}
 
-        <div className="mb-12 lg:mb-16">
+        <div
+          className="
+            pointer-events-none
+            absolute
+            left-1/2
+            top-1/3
+            h-[500px]
+            w-[500px]
+            -translate-x-1/2
+            rounded-full
+            bg-[#d93232]/5
+            blur-[150px]
+          "
+        />
 
-          <div className="flex items-end justify-between gap-8">
+        {/* =====================================================
+            CONTAINER
+        ====================================================== */}
 
-            <div>
+        <div
+          className="
+            relative
+            z-10
+            mx-auto
+            w-full
+            max-w-[1280px]
+          "
+        >
 
-              <p
+          {/* =====================================================
+              HEADER
+          ====================================================== */}
+
+          <div className="mb-12 lg:mb-16">
+
+            <div
+              className="
+                flex
+                items-end
+                justify-between
+                gap-8
+              "
+            >
+
+              <div>
+
+                <p
+                  className="
+                    mb-4
+                    text-[9px]
+                    font-medium
+                    uppercase
+                    tracking-[0.3em]
+                    text-[#d93232]
+                  "
+                >
+                  ASTRR.CO / DEFENCE
+                </p>
+
+                <h2
+                  className="
+                    text-[42px]
+                    font-black
+                    uppercase
+                    leading-[0.86]
+                    tracking-[-0.05em]
+                    sm:text-[56px]
+                    md:text-[68px]
+                    lg:text-[78px]
+                  "
+                >
+                  MILITARY{" "}
+                  <span className="text-[#d93232]">
+                    SHOE
+                  </span>
+                </h2>
+
+                <p
+                  className="
+                    mt-5
+                    max-w-[520px]
+                    text-[9px]
+                    font-medium
+                    uppercase
+                    leading-5
+                    tracking-[0.15em]
+                    text-white/40
+                    sm:text-[10px]
+                  "
+                >
+                  ENGINEERED FOOTWEAR FOR DEMANDING
+                  <br className="hidden sm:block" />
+                  DUTY ENVIRONMENTS.
+                </p>
+
+              </div>
+
+              {/* SIDE NUMBER */}
+
+              <div
                 className="
-                  mb-4
-                  text-[9px]
-                  font-medium
-                  uppercase
-                  tracking-[0.3em]
-                  text-[#d93232]
+                  hidden
+                  shrink-0
+                  text-right
+                  sm:block
                 "
               >
-                ASTRR.CO / DEFENCE
-              </p>
 
+                <p
+                  className="
+                    text-[8px]
+                    uppercase
+                    tracking-[0.25em]
+                    text-white/25
+                  "
+                >
+                  COLLECTION
+                </p>
 
-              <h2
-                className="
-                  text-[42px]
-                  font-black
-                  uppercase
-                  leading-[0.86]
-                  tracking-[-0.05em]
+                <p
+                  className="
+                    mt-1
+                    text-3xl
+                    font-black
+                    text-white/10
+                  "
+                >
+                  04
+                </p>
 
-                  sm:text-[56px]
-                  md:text-[68px]
-                  lg:text-[78px]
-                "
-              >
-                MILITARY{" "}
-                <span className="text-[#d93232]">
-                  SHOE
-                </span>
-              </h2>
-
-
-              <p
-                className="
-                  mt-5
-                  max-w-[520px]
-                  text-[9px]
-                  font-medium
-                  uppercase
-                  leading-5
-                  tracking-[0.15em]
-                  text-white/40
-
-                  sm:text-[10px]
-                "
-              >
-                ENGINEERED FOOTWEAR FOR DEMANDING
-                <br className="hidden sm:block" />
-                DUTY ENVIRONMENTS.
-              </p>
-
-            </div>
-
-
-            {/* SIDE NUMBER */}
-
-            <div className="hidden shrink-0 text-right sm:block">
-
-              <p
-                className="
-                  text-[8px]
-                  uppercase
-                  tracking-[0.25em]
-                  text-white/25
-                "
-              >
-                COLLECTION
-              </p>
-
-              <p
-                className="
-                  mt-1
-                  text-3xl
-                  font-black
-                  text-white/10
-                "
-              >
-                04
-              </p>
+              </div>
 
             </div>
 
           </div>
 
-        </div>
+          {/* =====================================================
+              FEATURED MILITARY CARD
+          ====================================================== */}
 
+          <div className="mb-[6px]">
 
-        {/* =====================================================
-            FEATURED MILITARY CARD
-        ====================================================== */}
-
-        <div className="mb-[6px]">
-
-          <MilitaryCard
-            number={militaryShoes[0].number}
-            title={militaryShoes[0].title}
-            image={militaryShoes[0].image}
-            description={militaryShoes[0].description}
-            featured
-          />
-
-        </div>
-
-
-        {/* =====================================================
-            SECONDARY GRID
-        ====================================================== */}
-
-        <div
-          className="
-            grid
-            grid-cols-1
-            gap-[6px]
-
-            sm:grid-cols-2
-          "
-        >
-
-          {militaryShoes.slice(1).map((shoe) => (
             <MilitaryCard
-              key={shoe.number}
-              number={shoe.number}
-              title={shoe.title}
-              image={shoe.image}
-              description={shoe.description}
+              product={militaryShoes[0]}
+              featured
+              onClick={() =>
+                setSelectedProduct(
+                  militaryShoes[0]
+                )
+              }
             />
-          ))}
+
+          </div>
+
+          {/* =====================================================
+              SECONDARY GRID
+          ====================================================== */}
+
+          <div
+            className="
+              grid
+              grid-cols-1
+              gap-[6px]
+              sm:grid-cols-2
+            "
+          >
+
+            {militaryShoes
+              .slice(1)
+              .map((shoe) => (
+                <MilitaryCard
+                  key={shoe.number}
+                  product={shoe}
+                  onClick={() =>
+                    setSelectedProduct(shoe)
+                  }
+                />
+              ))}
+
+          </div>
+
+          {/* =====================================================
+              BOTTOM LINE
+          ====================================================== */}
+
+          <div
+            className="
+              mt-10
+              flex
+              items-center
+              justify-between
+              border-t
+              border-white/10
+              pt-6
+            "
+          >
+
+            <p
+              className="
+                text-[8px]
+                uppercase
+                tracking-[0.25em]
+                text-white/30
+              "
+            >
+              MILITARY & DEFENCE FOOTWEAR
+            </p>
+
+            <p
+              className="
+                text-[8px]
+                uppercase
+                tracking-[0.25em]
+                text-[#d93232]
+              "
+            >
+              WHEN IT MATTERS MOST
+            </p>
+
+          </div>
 
         </div>
 
+      </section>
 
-        {/* =====================================================
-            BOTTOM LINE
-        ====================================================== */}
+      {/* =====================================================
+          ONE SHARED PRODUCT QUICK VIEW
+      ====================================================== */}
 
-        <div
-          className="
-            mt-10
-            flex
-            items-center
-            justify-between
-            border-t
-            border-white/10
-            pt-6
-          "
-        >
-
-          <p
-            className="
-              text-[8px]
-              uppercase
-              tracking-[0.25em]
-              text-white/30
-            "
-          >
-            MILITARY & DEFENCE FOOTWEAR
-          </p>
-
-
-          <p
-            className="
-              text-[8px]
-              uppercase
-              tracking-[0.25em]
-              text-[#d93232]
-            "
-          >
-            WHEN IT MATTERS MOST
-          </p>
-
-        </div>
-
-      </div>
-
-    </section>
+      <ProductQuickView
+        product={selectedProduct}
+        onClose={() =>
+          setSelectedProduct(null)
+        }
+      />
+    </>
   );
 }
-
 
 /* ============================================================
    MILITARY CARD
 ============================================================ */
 
+type MilitaryCardProps = {
+  product: Product;
+  featured?: boolean;
+  onClick: () => void;
+};
+
 function MilitaryCard({
-  number,
-  title,
-  image,
-  description,
+  product,
   featured = false,
+  onClick,
 }: MilitaryCardProps) {
 
   return (
     <article
+      onClick={onClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(event) => {
+        if (
+          event.key === "Enter" ||
+          event.key === " "
+        ) {
+          onClick();
+        }
+      }}
       className={`
         group
         relative
         w-full
+        cursor-pointer
         overflow-hidden
         rounded-[3px]
         border-l-[3px]
@@ -311,19 +400,20 @@ function MilitaryCard({
         transition-transform
         duration-500
         ease-out
-
         hover:-translate-y-[2px]
       `}
     >
 
       {/* =====================================================
-          IMAGE
+          CARD IMAGE
       ====================================================== */}
 
       <img
-        src={image}
-        alt={title.replace("\n", " ")}
+        src={product.cardImage}
+        alt={product.title.replace("\n", " ")}
         draggable={false}
+        loading={featured ? "eager" : "lazy"}
+        decoding="async"
         className="
           absolute
           inset-0
@@ -331,17 +421,13 @@ function MilitaryCard({
           w-full
           object-cover
           object-center
-
           scale-[1.01]
-
           transition-transform
           duration-[1000ms]
           ease-out
-
           group-hover:scale-[1.06]
         "
       />
-
 
       {/* =====================================================
           DARK OVERLAY
@@ -357,7 +443,6 @@ function MilitaryCard({
           group-hover:bg-black/5
         "
       />
-
 
       {/* =====================================================
           TOP GRADIENT
@@ -375,7 +460,6 @@ function MilitaryCard({
         "
       />
 
-
       {/* =====================================================
           BOTTOM GRADIENT
       ====================================================== */}
@@ -392,7 +476,6 @@ function MilitaryCard({
           to-transparent
         "
       />
-
 
       {/* =====================================================
           TOP NUMBER
@@ -426,11 +509,10 @@ function MilitaryCard({
             text-white/60
           "
         >
-          {number}
+          {product.number}
         </span>
 
       </div>
-
 
       {/* =====================================================
           CONTENT
@@ -466,9 +548,8 @@ function MilitaryCard({
             }
           `}
         >
-          {title}
+          {product.title}
         </h3>
-
 
         <div
           className="
@@ -489,16 +570,13 @@ function MilitaryCard({
               leading-[1.5]
               tracking-[0.08em]
               text-white/55
-
               sm:text-[8px]
             "
           >
-            {description}
+            {product.description}
           </p>
 
-
-          <button
-            type="button"
+          <span
             className="
               shrink-0
               text-[8px]
@@ -506,20 +584,17 @@ function MilitaryCard({
               uppercase
               tracking-[0.15em]
               text-[#d93232]
-
               transition-all
               duration-300
-
               group-hover:translate-x-1
             "
           >
             Explore →
-          </button>
+          </span>
 
         </div>
 
       </div>
-
 
       {/* =====================================================
           HOVER BORDER
@@ -543,6 +618,5 @@ function MilitaryCard({
     </article>
   );
 }
-
 
 export default MilitaryShoe;

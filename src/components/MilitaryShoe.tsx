@@ -3,11 +3,11 @@ import ProductQuickView from "./ProductQuickView";
 import type { Product } from "./SafetyShoes";
 
 /* =========================================================
-   B2 IMAGE HELPER
+   LOCAL PUBLIC IMAGE HELPER
 ========================================================= */
 
-const b2Image = (file: string) =>
-  `/api/image?file=${encodeURIComponent(file)}`;
+const localImage = (file: string) =>
+  `/converted-webp/${file}`;
 
 /* =========================================================
    MILITARY SHOE DATA
@@ -18,11 +18,11 @@ const militaryShoes: Product[] = [
     number: "01",
     title: "MILITARY\nFORCES",
 
-    cardImage: b2Image(
+    cardImage: localImage(
       "MIL1.webp"
     ),
 
-    quickViewImage: b2Image(
+    quickViewImage: localImage(
       "military_quickview_01.webp"
     ),
 
@@ -36,11 +36,11 @@ const militaryShoes: Product[] = [
     number: "02",
     title: "SECURITY\nFORCES",
 
-    cardImage: b2Image(
+    cardImage: localImage(
       "MIL4.webp"
     ),
 
-    quickViewImage: b2Image(
+    quickViewImage: localImage(
       "military_quickview_02.webp"
     ),
 
@@ -52,11 +52,11 @@ const militaryShoes: Product[] = [
     number: "03",
     title: "OFFICER\nSHOES",
 
-    cardImage: b2Image(
+    cardImage: localImage(
       "MIL3.webp"
     ),
 
-    quickViewImage: b2Image(
+    quickViewImage: localImage(
       "military_quickview_03.webp"
     ),
 
@@ -68,11 +68,11 @@ const militaryShoes: Product[] = [
     number: "04",
     title: "POLICE\nFORCES",
 
-    cardImage: b2Image(
+    cardImage: localImage(
       "MIL2.webp"
     ),
 
-    quickViewImage: b2Image(
+    quickViewImage: localImage(
       "military_quickview_04.webp"
     ),
 

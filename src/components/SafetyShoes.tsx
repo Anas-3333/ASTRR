@@ -15,11 +15,11 @@ export interface Product {
 }
 
 /* =========================================================
-   B2 IMAGE HELPER
+   LOCAL PUBLIC IMAGE HELPER
 ========================================================= */
 
-const b2Image = (file: string) =>
-  `/api/image?file=${encodeURIComponent(file)}`;
+const localImage = (file: string) =>
+  `/converted-webp/${file}`;
 
 /* =========================================================
    SAFETY SHOE DATA
@@ -30,9 +30,11 @@ const shoes: Product[] = [
     number: "01",
     title: "COMBAT\nFORCES",
 
-    cardImage: b2Image("combat_shoes.webp"),
+    cardImage: localImage(
+      "combat_shoes.webp"
+    ),
 
-    quickViewImage: b2Image(
+    quickViewImage: localImage(
       "combat_quickview.webp"
     ),
 
@@ -46,11 +48,11 @@ const shoes: Product[] = [
     number: "02",
     title: "SECURITY\nFORCES",
 
-    cardImage: b2Image(
+    cardImage: localImage(
       "security_force.webp"
     ),
 
-    quickViewImage: b2Image(
+    quickViewImage: localImage(
       "security_quickview.webp"
     ),
 
@@ -62,11 +64,11 @@ const shoes: Product[] = [
     number: "03",
     title: "EXECUTIVE\nOFFICERS",
 
-    cardImage: b2Image(
+    cardImage: localImage(
       "executive-officers.webp"
     ),
 
-    quickViewImage: b2Image(
+    quickViewImage: localImage(
       "executive_quickview.webp"
     ),
 
@@ -78,11 +80,11 @@ const shoes: Product[] = [
     number: "04",
     title: "INDUSTRIAL\nSAFETY",
 
-    cardImage: b2Image(
+    cardImage: localImage(
       "industrial-safety.webp"
     ),
 
-    quickViewImage: b2Image(
+    quickViewImage: localImage(
       "industrial_quickview.webp"
     ),
 
@@ -94,11 +96,11 @@ const shoes: Product[] = [
     number: "05",
     title: "ELITE\nFORCES",
 
-    cardImage: b2Image(
+    cardImage: localImage(
       "elite_sh.webp"
     ),
 
-    quickViewImage: b2Image(
+    quickViewImage: localImage(
       "elite_quickview.webp"
     ),
 
@@ -110,11 +112,11 @@ const shoes: Product[] = [
     number: "06",
     title: "TACTICAL\nOPERATIONS",
 
-    cardImage: b2Image(
+    cardImage: localImage(
       "security_sh.webp"
     ),
 
-    quickViewImage: b2Image(
+    quickViewImage: localImage(
       "security_quickview.webp"
     ),
 

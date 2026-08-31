@@ -1,22 +1,41 @@
 import { useEffect } from "react";
-import type { Product } from "./SafetyShoes";
+
+/* =========================================================
+   SHARED PRODUCT TYPE
+========================================================= */
+
+export interface Product {
+  number: string;
+  title: string;
+  cardImage: string;
+  quickViewImage: string;
+  description: string;
+  featured?: boolean;
+}
+
+/* =========================================================
+   PROPS
+========================================================= */
 
 type ProductQuickViewProps = {
   product: Product | null;
   onClose: () => void;
 };
 
+/* =========================================================
+   COMPONENT
+========================================================= */
+
 function ProductQuickView({
   product,
   onClose,
 }: ProductQuickViewProps) {
 
-  /* =========================================================
+  /* =======================================================
      ESC KEY
-  ========================================================= */
+  ======================================================== */
 
   useEffect(() => {
-
     if (!product) {
       return;
     }
@@ -24,11 +43,9 @@ function ProductQuickView({
     const handleKeyDown = (
       event: KeyboardEvent
     ) => {
-
       if (event.key === "Escape") {
         onClose();
       }
-
     };
 
     document.addEventListener(
@@ -42,34 +59,32 @@ function ProductQuickView({
         handleKeyDown
       );
     };
-
   }, [product, onClose]);
 
-  /* =========================================================
-     LOCK PAGE SCROLL
-  ========================================================= */
+  /* =======================================================
+     LOCK BODY SCROLL
+  ======================================================== */
 
   useEffect(() => {
-
     if (!product) {
       return;
     }
 
-    const originalOverflow =
+    const previousOverflow =
       document.body.style.overflow;
 
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow =
+      "hidden";
 
     return () => {
       document.body.style.overflow =
-        originalOverflow;
+        previousOverflow;
     };
-
   }, [product]);
 
-  /* =========================================================
-     DON'T RENDER
-  ========================================================= */
+  /* =======================================================
+     CLOSED
+  ======================================================== */
 
   if (!product) {
     return null;
@@ -84,26 +99,23 @@ function ProductQuickView({
         flex
         items-center
         justify-center
-        bg-black/75
+        bg-black/80
         p-3
         backdrop-blur-[8px]
         sm:p-5
         lg:p-8
-        animate-[fadeIn_300ms_ease-out]
       "
       onClick={onClose}
     >
-
-      {/* =====================================================
+      {/* ===================================================
           MODAL
-      ====================================================== */}
+      ==================================================== */}
 
       <div
         className="
           relative
           flex
-          h-auto
-          max-h-[92vh]
+          max-h-[94vh]
           w-full
           max-w-[1180px]
           overflow-hidden
@@ -112,21 +124,20 @@ function ProductQuickView({
           border-white/10
           bg-[#0c0c0c]
           shadow-[0_0_80px_rgba(0,0,0,0.8)]
-          animate-[modalIn_400ms_ease-out]
           max-lg:flex-col
         "
         onClick={(event) =>
           event.stopPropagation()
         }
       >
-
-        {/* RED OUTER GLOW */}
+        {/* RED BORDER */}
 
         <div
           className="
             pointer-events-none
             absolute
             inset-0
+            z-40
             rounded-[18px]
             ring-1
             ring-inset
@@ -134,9 +145,9 @@ function ProductQuickView({
           "
         />
 
-        {/* =====================================================
-            CLOSE BUTTON
-        ====================================================== */}
+        {/* =================================================
+            CLOSE
+        ================================================== */}
 
         <button
           type="button"
@@ -155,10 +166,10 @@ function ProductQuickView({
             rounded-full
             border
             border-white/20
-            bg-black/60
+            bg-black/70
             text-2xl
             font-light
-            text-white/70
+            text-white/80
             backdrop-blur-md
             transition-all
             duration-300
@@ -172,28 +183,26 @@ function ProductQuickView({
           ×
         </button>
 
-        {/* =====================================================
-            LEFT PRODUCT IMAGE
-        ====================================================== */}
+        {/* =================================================
+            IMAGE
+        ================================================== */}
 
         <div
           className="
             relative
             flex
             min-h-[330px]
-            w-[58%]
+            w-full
             items-center
             justify-center
             overflow-hidden
             bg-[#111]
-            max-lg:min-h-[360px]
-            max-lg:w-full
-            sm:min-h-[420px]
+            sm:min-h-[400px]
             lg:min-h-[650px]
+            lg:w-[58%]
           "
         >
-
-          {/* BACKGROUND LIGHT */}
+          {/* LIGHT */}
 
           <div
             className="
@@ -211,33 +220,33 @@ function ProductQuickView({
             "
           />
 
-          {/* TOP RED LINE */}
+          {/* TOP LINE */}
 
           <div
             className="
               absolute
-              left-10
-              right-10
-              top-10
-              h-[1px]
+              left-8
+              right-8
+              top-8
+              h-px
               bg-gradient-to-r
               from-[#d93232]
               via-white/10
               to-transparent
               opacity-70
+              sm:left-10
+              sm:right-10
             "
           />
 
-          {/* =================================================
-              B2 QUICK VIEW IMAGE
-
-              The actual URL now comes from:
-              SafetyShoes / MilitaryShoes
-          ================================================= */}
+          {/* PRODUCT IMAGE */}
 
           <img
             src={product.quickViewImage}
-            alt={product.title.replace("\n", " ")}
+            alt={product.title.replace(
+              "\n",
+              " "
+            )}
             draggable={false}
             decoding="async"
             className="
@@ -273,7 +282,7 @@ function ProductQuickView({
             PRODUCT {product.number}
           </div>
 
-          {/* IMAGE DECORATION */}
+          {/* RED DOT */}
 
           <div
             className="
@@ -287,31 +296,28 @@ function ProductQuickView({
               shadow-[0_0_15px_rgba(217,50,50,0.8)]
             "
           />
-
         </div>
 
-        {/* =====================================================
-            RIGHT PRODUCT INFORMATION
-        ====================================================== */}
+        {/* =================================================
+            INFORMATION
+        ================================================== */}
 
         <div
           className="
             flex
-            w-[42%]
+            w-full
             flex-col
             justify-center
             overflow-y-auto
-            px-7
-            py-10
+            px-6
+            py-8
             sm:px-9
+            lg:w-[42%]
             lg:px-10
-            max-lg:w-full
-            max-lg:px-7
-            max-lg:py-8
+            lg:py-10
           "
         >
-
-          {/* SMALL LABEL */}
+          {/* LABEL */}
 
           <p
             className="
@@ -326,12 +332,12 @@ function ProductQuickView({
             BUILT FOR THE MISSION
           </p>
 
-          {/* PRODUCT TITLE */}
+          {/* TITLE */}
 
           <h2
             className="
               whitespace-pre-line
-              text-[40px]
+              text-[38px]
               font-black
               uppercase
               leading-[0.84]
@@ -344,7 +350,7 @@ function ProductQuickView({
             {product.title}
           </h2>
 
-          {/* RED ACCENT */}
+          {/* ACCENT */}
 
           <div
             className="
@@ -352,7 +358,6 @@ function ProductQuickView({
               h-[2px]
               w-14
               bg-[#d93232]
-              shadow-[0_0_12px_rgba(217,50,50,0.5)]
             "
           />
 
@@ -368,14 +373,16 @@ function ProductQuickView({
               sm:text-sm
             "
           >
-            Engineered for demanding environments,
-            ASTRR tactical footwear combines durability,
-            advanced grip and all-day performance.
+            Engineered for demanding
+            environments, ASTRR tactical
+            footwear combines durability,
+            advanced grip and all-day
+            performance.
           </p>
 
-          {/* =====================================================
+          {/* =================================================
               FEATURES
-          ====================================================== */}
+          ================================================== */}
 
           <div
             className="
@@ -386,7 +393,6 @@ function ProductQuickView({
               gap-y-6
             "
           >
-
             <Feature
               title="Extreme"
               subtitle="Durability"
@@ -406,12 +412,9 @@ function ProductQuickView({
               title="Mission"
               subtitle="Ready"
             />
-
           </div>
 
-          {/* =====================================================
-              PRODUCT CATEGORY
-          ====================================================== */}
+          {/* CATEGORY */}
 
           <div
             className="
@@ -421,7 +424,6 @@ function ProductQuickView({
               pt-5
             "
           >
-
             <p
               className="
                 text-[9px]
@@ -445,12 +447,11 @@ function ProductQuickView({
             >
               {product.description}
             </p>
-
           </div>
 
-          {/* =====================================================
-              BUTTONS
-          ====================================================== */}
+          {/* =================================================
+              ACTIONS
+          ================================================== */}
 
           <div
             className="
@@ -460,14 +461,10 @@ function ProductQuickView({
               gap-3
             "
           >
-
             <button
               type="button"
               className="
-                group/button
-                relative
                 w-full
-                overflow-hidden
                 rounded-md
                 bg-[#d93232]
                 px-6
@@ -484,9 +481,7 @@ function ProductQuickView({
                 hover:shadow-[0_0_35px_rgba(217,50,50,0.4)]
               "
             >
-              <span className="relative z-10">
-                Explore Product →
-              </span>
+              Explore Product →
             </button>
 
             <button
@@ -513,15 +508,12 @@ function ProductQuickView({
             >
               Enquire Now
             </button>
-
           </div>
-
         </div>
-
       </div>
 
       {/* =====================================================
-          ANIMATION KEYFRAMES
+          ANIMATION
       ====================================================== */}
 
       <style>
@@ -530,7 +522,6 @@ function ProductQuickView({
             from {
               opacity: 0;
             }
-
             to {
               opacity: 1;
             }
@@ -541,21 +532,29 @@ function ProductQuickView({
               opacity: 0;
               transform: scale(0.96) translateY(12px);
             }
-
             to {
               opacity: 1;
               transform: scale(1) translateY(0);
             }
           }
+
+          @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+              animation-duration: 0.01ms !important;
+              animation-iteration-count: 1 !important;
+              transition-duration: 0.01ms !important;
+            }
+          }
         `}
       </style>
-
     </div>
   );
 }
 
 /* =========================================================
-   FEATURE COMPONENT
+   FEATURE
 ========================================================= */
 
 type FeatureProps = {
@@ -567,7 +566,6 @@ function Feature({
   title,
   subtitle,
 }: FeatureProps) {
-
   return (
     <div
       className="
@@ -576,9 +574,9 @@ function Feature({
         gap-3
       "
     >
-
       <span
         className="
+          mt-0.5
           text-lg
           text-white/60
         "
@@ -587,7 +585,6 @@ function Feature({
       </span>
 
       <div>
-
         <p
           className="
             text-[11px]
@@ -609,9 +606,7 @@ function Feature({
         >
           {subtitle}
         </p>
-
       </div>
-
     </div>
   );
 }

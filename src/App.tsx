@@ -15,9 +15,9 @@ function App() {
 
       <Hero />
 
-      <Profile />
-
       <SafetyShoes />
+
+      <Profile />
 
       <MilitaryShoe />
 

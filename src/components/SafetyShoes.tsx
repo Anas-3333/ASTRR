@@ -1,133 +1,58 @@
 import { useState } from "react";
-import ProductQuickView from "./ProductQuickView";
-
-/* =========================================================
-   SHARED PRODUCT TYPE
-========================================================= */
-
-export interface Product {
-  number: string;
-  title: string;
-  cardImage: string;
-  quickViewImage: string;
-  description: string;
-  featured?: boolean;
-}
-
-/* =========================================================
-   LOCAL PUBLIC IMAGE HELPER
-========================================================= */
-
-const localImage = (file: string) =>
-  `/converted-webp/${file}`;
-
-/* =========================================================
-   SAFETY SHOE DATA
-========================================================= */
+import ProductQuickView, {
+  type Product,
+} from "./ProductQuickView";
 
 const shoes: Product[] = [
   {
     number: "01",
     title: "COMBAT\nFORCES",
-
-    cardImage: localImage(
-      "combat_shoes.webp"
-    ),
-
-    quickViewImage: localImage(
-      "combat_quickview.webp"
-    ),
-
+    cardImage: "/converted-webp/combat_shoes.webp",
+    quickViewImage: "/converted-webp/combat_quickview.webp",
     description:
       "TACTICAL FOOTWEAR | GRIP • DURABILITY • CONTROL",
-
-    featured: true,
   },
-
   {
     number: "02",
     title: "SECURITY\nFORCES",
-
-    cardImage: localImage(
-      "security_force.webp"
-    ),
-
-    quickViewImage: localImage(
-      "security_quickview.webp"
-    ),
-
+    cardImage: "/converted-webp/security_force.webp",
+    quickViewImage: "/converted-webp/security_quickview.webp",
     description:
       "SECURITY FORCES | TACTICAL FOOTWEAR",
   },
-
   {
     number: "03",
     title: "EXECUTIVE\nOFFICERS",
-
-    cardImage: localImage(
-      "executive-officers.webp"
-    ),
-
-    quickViewImage: localImage(
-      "executive_quickview.webp"
-    ),
-
+    cardImage: "/converted-webp/MIL3.webp",
+    quickViewImage: "/converted-webp/MIL3.webp",
     description:
       "EXECUTIVE OFFICERS | TACTICAL FOOTWEAR",
   },
-
   {
     number: "04",
     title: "INDUSTRIAL\nSAFETY",
-
-    cardImage: localImage(
-      "industrial-safety.webp"
-    ),
-
-    quickViewImage: localImage(
-      "industrial_quickview.webp"
-    ),
-
+    cardImage: "/converted-webp/MIL4.webp",
+    quickViewImage: "/converted-webp/MIL4.webp",
     description:
       "INDUSTRIAL SAFETY | GRIP • DURABILITY",
   },
-
   {
     number: "05",
     title: "ELITE\nFORCES",
-
-    cardImage: localImage(
-      "elite_sh.webp"
-    ),
-
-    quickViewImage: localImage(
-      "elite_quickview.webp"
-    ),
-
+    cardImage: "/converted-webp/elite_sh.webp",
+    quickViewImage: "/converted-webp/elite_quickview.webp",
     description:
       "ELITE FORCES | TACTICAL FOOTWEAR",
   },
-
   {
     number: "06",
     title: "TACTICAL\nOPERATIONS",
-
-    cardImage: localImage(
-      "security_sh.webp"
-    ),
-
-    quickViewImage: localImage(
-      "security_quickview.webp"
-    ),
-
+    cardImage: "/converted-webp/security_sh.webp",
+    quickViewImage: "/converted-webp/security_quickview.webp",
     description:
       "TACTICAL OPERATIONS | GRIP • CONTROL",
   },
 ];
-
-/* =========================================================
-   COMPONENT
-========================================================= */
 
 function SafetyShoes() {
   const [selectedProduct, setSelectedProduct] =
@@ -138,226 +63,147 @@ function SafetyShoes() {
       <section
         id="safety-shoes"
         className="
+          relative
           w-full
+          max-w-full
           overflow-hidden
           bg-black
-          px-4
-          py-12
           text-white
-          sm:px-6
-          sm:py-16
-          lg:px-10
-          lg:py-20
         "
       >
-        <div className="mx-auto max-w-[1235px]">
+        {/* =====================================================
+            HEADER
+        ====================================================== */}
 
-          {/* =====================================================
-              SECTION HEADER
-          ====================================================== */}
-
-          <div className="mb-8 text-center sm:mb-10">
-
-            <p
-              className="
-                mb-5
-                text-[10px]
-                font-medium
-                tracking-[0.12em]
-                text-white
-                sm:text-xs
-              "
-            >
-              ASTRR.CO
-            </p>
-
-            <h2
-              className="
-                text-4xl
-                font-black
-                uppercase
-                leading-none
-                tracking-tight
-                sm:text-5xl
-                md:text-6xl
-                lg:text-[58px]
-              "
-            >
-              HEROES{" "}
-              <span className="text-[#d93232]">
-                WE SERVE
-              </span>
-            </h2>
-
-            <p
-              className="
-                mt-2
-                text-[8px]
-                font-medium
-                tracking-wide
-                text-white/45
-                sm:text-[10px]
-              "
-            >
-              ENGINEERED FOR THOSE WHO SERVE
-            </p>
-
-          </div>
-
-          {/* =====================================================
-              CARD GRID
-          ====================================================== */}
-
-          <div
+        <div
+          className="
+            w-full
+            px-5
+            pt-16
+            pb-10
+            sm:px-8
+            sm:pt-20
+            sm:pb-12
+            lg:px-10
+            lg:pt-24
+            lg:pb-16
+            xl:px-14
+          "
+        >
+          <p
             className="
-              grid
-              grid-cols-1
-              gap-[5px]
-              sm:grid-cols-2
-              lg:grid-cols-6
-              lg:grid-rows-[165px_165px_180px]
+              mb-4
+              text-[9px]
+              font-medium
+              uppercase
+              tracking-[0.25em]
+              text-[#d93232]
+              sm:text-[10px]
+              lg:text-[11px]
             "
           >
+            ASTRR.CO&nbsp;&nbsp;/&nbsp;&nbsp;DEFENCE
+          </p>
 
-            {/* 01 — COMBAT FORCES */}
+          <h2
+            className="
+              flex
+              w-full
+              flex-wrap
+              items-baseline
+              gap-x-3
+              gap-y-1
+              text-[clamp(42px,7vw,96px)]
+              font-black
+              uppercase
+              leading-[0.82]
+              tracking-[-0.055em]
+            "
+          >
+            <span className="text-white">
+              SAFETY
+            </span>
 
-            <div
-              className="
-                min-h-[400px]
-                sm:min-h-[350px]
-                lg:col-span-3
-                lg:row-span-2
-                lg:min-h-0
-              "
-            >
-              <ShoeCard
-                product={shoes[0]}
-                featured
-                onClick={() =>
-                  setSelectedProduct(shoes[0])
-                }
-              />
-            </div>
+            <span className="text-[#d93232]">
+              SHOE
+            </span>
+          </h2>
 
-            {/* 02 — SECURITY FORCES */}
+          <p
+            className="
+              mt-5
+              max-w-[430px]
+              text-[8px]
+              font-medium
+              uppercase
+              leading-[1.8]
+              tracking-[0.18em]
+              text-white/45
+              sm:text-[9px]
+              lg:text-[10px]
+            "
+          >
+            ENGINEERED FOOTWEAR FOR DEMANDING
+            <br />
+            DUTY ENVIRONMENTS.
+          </p>
+        </div>
 
-            <div
-              className="
-                min-h-[230px]
-                lg:col-span-2
-                lg:col-start-4
-                lg:row-start-1
-              "
-            >
-              <ShoeCard
-                product={shoes[1]}
-                onClick={() =>
-                  setSelectedProduct(shoes[1])
-                }
-              />
-            </div>
+        {/* =====================================================
+            UNIFORM GRID
+        ====================================================== */}
 
-            {/* 03 — EXECUTIVE OFFICERS */}
+        <div
+          className="
+            grid
+            w-full
+            max-w-full
+            grid-cols-1
+            sm:grid-cols-2
+            lg:grid-cols-3
+          "
+        >
+          {shoes.map((product) => (
+            <ShoeCard
+              key={product.number}
+              product={product}
+              onClick={() =>
+                setSelectedProduct(product)
+              }
+            />
+          ))}
+        </div>
 
-            <div
-              className="
-                min-h-[230px]
-                lg:col-span-2
-                lg:col-start-6
-                lg:row-start-1
-              "
-            >
-              <ShoeCard
-                product={shoes[2]}
-                onClick={() =>
-                  setSelectedProduct(shoes[2])
-                }
-              />
-            </div>
+        {/* =====================================================
+            BOTTOM
+        ====================================================== */}
 
-            {/* 04 — INDUSTRIAL SAFETY */}
-
-            <div
-              className="
-                min-h-[230px]
-                lg:col-span-2
-                lg:col-start-1
-                lg:row-start-3
-              "
-            >
-              <ShoeCard
-                product={shoes[3]}
-                onClick={() =>
-                  setSelectedProduct(shoes[3])
-                }
-              />
-            </div>
-
-            {/* 05 — ELITE FORCES */}
-
-            <div
-              className="
-                min-h-[230px]
-                lg:col-span-2
-                lg:col-start-3
-                lg:row-start-3
-              "
-            >
-              <ShoeCard
-                product={shoes[4]}
-                onClick={() =>
-                  setSelectedProduct(shoes[4])
-                }
-              />
-            </div>
-
-            {/* 06 — TACTICAL OPERATIONS */}
-
-            <div
-              className="
-                min-h-[230px]
-                lg:col-span-2
-                lg:col-start-5
-                lg:row-start-3
-              "
-            >
-              <ShoeCard
-                product={shoes[5]}
-                onClick={() =>
-                  setSelectedProduct(shoes[5])
-                }
-              />
-            </div>
-
-          </div>
-
-          {/* =====================================================
-              BOTTOM TITLE
-          ====================================================== */}
-
-          <div className="pt-6 text-center sm:pt-7">
-
-            <h3
-              className="
-                text-xl
-                font-black
-                uppercase
-                tracking-tight
-                sm:text-2xl
-                lg:text-3xl
-              "
-            >
-              WHEN IT MATTERS MOST
-            </h3>
-
-          </div>
-
+        <div
+          className="
+            w-full
+            px-5
+            py-12
+            text-center
+            sm:py-14
+            lg:py-20
+          "
+        >
+          <h3
+            className="
+              text-[clamp(22px,3vw,42px)]
+              font-black
+              uppercase
+              leading-none
+              tracking-[-0.04em]
+              text-white
+            "
+          >
+            WHEN IT MATTERS MOST
+          </h3>
         </div>
       </section>
 
-      {/* =====================================================
-          ONE SHARED PRODUCT QUICK VIEW
-      ====================================================== */}
+      {/* SHARED QUICK VIEW */}
 
       <ProductQuickView
         product={selectedProduct}
@@ -369,65 +215,69 @@ function SafetyShoes() {
   );
 }
 
+
 /* =========================================================
    SHOE CARD
 ========================================================= */
 
 type ShoeCardProps = {
   product: Product;
-  featured?: boolean;
   onClick: () => void;
 };
 
 function ShoeCard({
   product,
-  featured = false,
   onClick,
 }: ShoeCardProps) {
-
   return (
     <article
-      onClick={onClick}
       role="button"
       tabIndex={0}
+      onClick={onClick}
       onKeyDown={(event) => {
         if (
           event.key === "Enter" ||
           event.key === " "
         ) {
+          event.preventDefault();
           onClick();
         }
       }}
-      className={`
+      className="
         group
         relative
-        h-full
+        aspect-[1.35/1]
+        min-h-[300px]
         w-full
+        min-w-0
         cursor-pointer
         overflow-hidden
-        rounded-[2px]
-        border-l-[3px]
+        rounded-none
+        border-l
+        border-b
         border-[#d93232]
         bg-[#111]
+        outline-none
+        focus-visible:ring-2
+        focus-visible:ring-[#d93232]
+        focus-visible:ring-inset
 
-        ${
-          featured
-            ? "min-h-[400px] sm:min-h-[350px]"
-            : "min-h-[230px]"
-        }
-      `}
+        sm:aspect-[1.3/1]
+
+        lg:aspect-[1.25/1]
+      "
     >
-
-      {/* ===================================================
-          CARD IMAGE
-      ==================================================== */}
+      {/* IMAGE */}
 
       <img
         src={product.cardImage}
-        alt={product.title.replace("\n", " ")}
-        draggable={false}
-        loading={featured ? "eager" : "lazy"}
+        alt={product.title.replace(
+          "\n",
+          " "
+        )}
+        loading="lazy"
         decoding="async"
+        draggable={false}
         className="
           absolute
           inset-0
@@ -438,124 +288,150 @@ function ShoeCard({
           transition-transform
           duration-700
           ease-out
-          group-hover:scale-105
+          group-hover:scale-[1.04]
         "
       />
 
-      {/* ===================================================
-          IMAGE DARKENING
-      ==================================================== */}
+      {/* DARK OVERLAY */}
 
       <div
         className="
           absolute
           inset-0
-          bg-black/10
+          bg-black/20
           transition-colors
           duration-500
-          group-hover:bg-black/0
+          group-hover:bg-black/10
         "
       />
 
-      {/* ===================================================
-          BOTTOM GRADIENT
-      ==================================================== */}
+      {/* TOP GRADIENT */}
+
+      <div
+        className="
+          absolute
+          inset-x-0
+          top-0
+          h-[45%]
+          bg-gradient-to-b
+          from-black/45
+          via-black/10
+          to-transparent
+        "
+      />
+
+      {/* BOTTOM GRADIENT */}
 
       <div
         className="
           absolute
           inset-x-0
           bottom-0
-          h-[70%]
+          h-[78%]
           bg-gradient-to-t
           from-black
-          via-black/70
+          via-black/75
           to-transparent
         "
       />
 
-      {/* ===================================================
-          CARD CONTENT
-      ==================================================== */}
+      {/* NUMBER */}
 
       <div
-        className={`
+        className="
+          absolute
+          left-5
+          top-5
+          z-10
+          flex
+          items-center
+          gap-3
+          sm:left-6
+          sm:top-6
+        "
+      >
+        <span
+          className="
+            h-px
+            w-8
+            bg-[#d93232]
+          "
+        />
+
+        <span
+          className="
+            text-[10px]
+            font-medium
+            tracking-[0.08em]
+            text-white/80
+            sm:text-xs
+          "
+        >
+          {product.number}
+        </span>
+      </div>
+
+      {/* CONTENT */}
+
+      <div
+        className="
           absolute
           inset-x-0
           bottom-0
           z-10
-          p-4
-          sm:p-5
-
-          ${
-            featured
-              ? "lg:p-7"
-              : "lg:p-4"
-          }
-        `}
+          p-5
+          sm:p-6
+          lg:p-7
+          xl:p-8
+        "
       >
-
-        {/* NUMBER */}
-
-        <p
-          className={`
-            font-medium
-            text-white/60
-
-            ${
-              featured
-                ? "text-2xl lg:text-3xl"
-                : "text-lg lg:text-xl"
-            }
-          `}
-        >
-          {product.number}
-        </p>
-
         {/* TITLE */}
 
         <h3
-          className={`
-            mt-1
+          className="
+            max-w-full
             whitespace-pre-line
+            break-words
+            text-[clamp(27px,3vw,46px)]
             font-black
             uppercase
-            leading-[0.88]
-            tracking-tight
+            leading-[0.86]
+            tracking-[-0.045em]
             text-white
+            drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]
 
-            ${
-              featured
-                ? "text-4xl sm:text-5xl lg:text-[52px]"
-                : "text-3xl sm:text-4xl lg:text-[30px]"
-            }
-          `}
+            sm:text-[clamp(30px,3vw,42px)]
+
+            lg:text-[clamp(28px,2.5vw,40px)]
+          "
         >
           {product.title}
         </h3>
 
-        {/* BOTTOM INFORMATION */}
+        {/* FOOTER */}
 
         <div
           className="
-            mt-3
+            mt-4
             flex
+            min-w-0
             items-end
             justify-between
-            gap-3
+            gap-4
           "
         >
-
           <p
             className="
+              min-w-0
               max-w-[75%]
               text-[7px]
               font-medium
               uppercase
-              leading-tight
-              tracking-wide
+              leading-[1.5]
+              tracking-[0.07em]
               text-white/75
               sm:text-[8px]
+              lg:text-[9px]
             "
           >
             {product.description}
@@ -564,41 +440,40 @@ function ShoeCard({
           <span
             className="
               shrink-0
+              whitespace-nowrap
               text-[8px]
               font-medium
               uppercase
+              tracking-[0.06em]
               text-[#d93232]
-              transition-all
+              transition-transform
               duration-300
               group-hover:translate-x-1
+              sm:text-[9px]
             "
           >
             Explore →
           </span>
-
         </div>
-
       </div>
 
-      {/* ===================================================
-          HOVER RED GLOW
-      ==================================================== */}
+      {/* HOVER BORDER */}
 
       <div
         className="
           pointer-events-none
           absolute
           inset-0
+          z-20
           opacity-0
           ring-1
           ring-inset
-          ring-[#d93232]/40
+          ring-[#d93232]/70
           transition-opacity
           duration-500
           group-hover:opacity-100
         "
       />
-
     </article>
   );
 }

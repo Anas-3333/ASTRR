@@ -65,7 +65,6 @@ function SafetyShoes() {
         className="
           relative
           w-full
-          max-w-full
           overflow-hidden
           bg-black
           text-white
@@ -150,28 +149,199 @@ function SafetyShoes() {
         </div>
 
         {/* =====================================================
-            UNIFORM GRID
+            MASONRY / COLLAGE GRID
         ====================================================== */}
 
         <div
           className="
-            grid
             w-full
-            max-w-full
-            grid-cols-1
-            sm:grid-cols-2
-            lg:grid-cols-3
+            bg-black
+            px-3
+            sm:px-5
+            lg:px-8
+            xl:px-10
           "
         >
-          {shoes.map((product) => (
+          <div
+            className="
+              grid
+              w-full
+              grid-cols-1
+              gap-[5px]
+              bg-black
+
+              md:grid-cols-4
+              md:grid-rows-[180px_180px_180px_180px]
+              lg:grid-rows-[220px_220px_220px_220px]
+              xl:grid-rows-[250px_250px_250px_250px]
+            "
+          >
+            {/* =================================================
+                01 — TALL LEFT
+            ================================================== */}
+
             <ShoeCard
-              key={product.number}
-              product={product}
+              product={shoes[0]}
               onClick={() =>
-                setSelectedProduct(product)
+                setSelectedProduct(shoes[0])
               }
+              className="
+                md:col-start-1
+                md:row-start-1
+                md:row-span-2
+              "
             />
-          ))}
+
+            {/* =================================================
+                02 — LARGE TOP
+            ================================================== */}
+
+            <ShoeCard
+              product={shoes[1]}
+              onClick={() =>
+                setSelectedProduct(shoes[1])
+              }
+              className="
+                md:col-start-2
+                md:col-span-3
+                md:row-start-1
+                md:row-span-2
+              "
+            />
+
+            {/* =================================================
+                03 — LEFT MIDDLE
+            ================================================== */}
+
+            <ShoeCard
+              product={shoes[2]}
+              onClick={() =>
+                setSelectedProduct(shoes[2])
+              }
+              className="
+                md:col-start-1
+                md:row-start-3
+                md:row-span-1
+              "
+            />
+
+            {/* =================================================
+                CENTER TEXT
+            ================================================== */}
+
+            <div
+              className="
+                flex
+                min-h-[240px]
+                flex-col
+                items-center
+                justify-center
+                bg-[#080808]
+                px-6
+                py-10
+                text-center
+
+                md:col-start-2
+                md:col-span-2
+                md:row-start-3
+                md:row-span-1
+                md:min-h-0
+              "
+            >
+              <span
+                className="
+                  mb-4
+                  text-[8px]
+                  font-medium
+                  uppercase
+                  tracking-[0.28em]
+                  text-[#d93232]
+                  sm:text-[9px]
+                "
+              >
+                ASTRR.CO
+              </span>
+
+              <h3
+                className="
+                  text-3xl
+                  font-black
+                  uppercase
+                  leading-[0.9]
+                  tracking-[-0.05em]
+                  text-white
+                  sm:text-4xl
+                  lg:text-5xl
+                "
+              >
+                ENGINEERED
+                <br />
+                FOR
+                <br />
+                <span className="text-[#d93232]">
+                  PURPOSE
+                </span>
+              </h3>
+
+              <div
+                className="
+                  mt-5
+                  h-px
+                  w-10
+                  bg-[#d93232]
+                "
+              />
+            </div>
+
+            {/* =================================================
+                04 — RIGHT MIDDLE
+            ================================================== */}
+
+            <ShoeCard
+              product={shoes[3]}
+              onClick={() =>
+                setSelectedProduct(shoes[3])
+              }
+              className="
+                md:col-start-4
+                md:row-start-3
+                md:row-span-1
+              "
+            />
+
+            {/* =================================================
+                05 — LARGE BOTTOM LEFT
+            ================================================== */}
+
+            <ShoeCard
+              product={shoes[4]}
+              onClick={() =>
+                setSelectedProduct(shoes[4])
+              }
+              className="
+                md:col-start-1
+                md:col-span-3
+                md:row-start-4
+                md:row-span-1
+              "
+            />
+
+            {/* =================================================
+                06 — TALL BOTTOM RIGHT
+            ================================================== */}
+
+            <ShoeCard
+              product={shoes[5]}
+              onClick={() =>
+                setSelectedProduct(shoes[5])
+              }
+              className="
+                md:col-start-4
+                md:row-start-4
+                md:row-span-1
+              "
+            />
+          </div>
         </div>
 
         {/* =====================================================
@@ -203,7 +373,9 @@ function SafetyShoes() {
         </div>
       </section>
 
-      {/* SHARED QUICK VIEW */}
+      {/* =====================================================
+          QUICK VIEW
+      ====================================================== */}
 
       <ProductQuickView
         product={selectedProduct}
@@ -223,11 +395,13 @@ function SafetyShoes() {
 type ShoeCardProps = {
   product: Product;
   onClick: () => void;
+  className?: string;
 };
 
 function ShoeCard({
   product,
   onClick,
+  className = "",
 }: ShoeCardProps) {
   return (
     <article
@@ -243,31 +417,29 @@ function ShoeCard({
           onClick();
         }
       }}
-      className="
+      className={`
         group
         relative
-        aspect-[1.35/1]
-        min-h-[300px]
+        min-h-[280px]
         w-full
         min-w-0
         cursor-pointer
         overflow-hidden
         rounded-none
-        border-l
-        border-b
-        border-[#d93232]
         bg-[#111]
         outline-none
         focus-visible:ring-2
         focus-visible:ring-[#d93232]
         focus-visible:ring-inset
 
-        sm:aspect-[1.3/1]
+        md:min-h-0
 
-        lg:aspect-[1.25/1]
-      "
+        ${className}
+      `}
     >
-      {/* IMAGE */}
+      {/* =====================================================
+          IMAGE
+      ====================================================== */}
 
       <img
         src={product.cardImage}
@@ -288,11 +460,13 @@ function ShoeCard({
           transition-transform
           duration-700
           ease-out
-          group-hover:scale-[1.04]
+          group-hover:scale-[1.045]
         "
       />
 
-      {/* DARK OVERLAY */}
+      {/* =====================================================
+          DARK OVERLAY
+      ====================================================== */}
 
       <div
         className="
@@ -305,29 +479,33 @@ function ShoeCard({
         "
       />
 
-      {/* TOP GRADIENT */}
+      {/* =====================================================
+          TOP GRADIENT
+      ====================================================== */}
 
       <div
         className="
           absolute
           inset-x-0
           top-0
-          h-[45%]
+          h-[50%]
           bg-gradient-to-b
-          from-black/45
+          from-black/50
           via-black/10
           to-transparent
         "
       />
 
-      {/* BOTTOM GRADIENT */}
+      {/* =====================================================
+          BOTTOM GRADIENT
+      ====================================================== */}
 
       <div
         className="
           absolute
           inset-x-0
           bottom-0
-          h-[78%]
+          h-[75%]
           bg-gradient-to-t
           from-black
           via-black/75
@@ -335,7 +513,9 @@ function ShoeCard({
         "
       />
 
-      {/* NUMBER */}
+      {/* =====================================================
+          NUMBER
+      ====================================================== */}
 
       <div
         className="
@@ -371,7 +551,9 @@ function ShoeCard({
         </span>
       </div>
 
-      {/* CONTENT */}
+      {/* =====================================================
+          CONTENT
+      ====================================================== */}
 
       <div
         className="
@@ -385,30 +567,22 @@ function ShoeCard({
           xl:p-8
         "
       >
-        {/* TITLE */}
-
         <h3
           className="
-            max-w-full
+            max-w-[90%]
             whitespace-pre-line
             break-words
-            text-[clamp(27px,3vw,46px)]
+            text-[clamp(25px,3vw,46px)]
             font-black
             uppercase
             leading-[0.86]
             tracking-[-0.045em]
             text-white
-            drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]
-
-            sm:text-[clamp(30px,3vw,42px)]
-
-            lg:text-[clamp(28px,2.5vw,40px)]
+            drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]
           "
         >
           {product.title}
         </h3>
-
-        {/* FOOTER */}
 
         <div
           className="
@@ -423,7 +597,7 @@ function ShoeCard({
           <p
             className="
               min-w-0
-              max-w-[75%]
+              max-w-[72%]
               text-[7px]
               font-medium
               uppercase
@@ -457,7 +631,9 @@ function ShoeCard({
         </div>
       </div>
 
-      {/* HOVER BORDER */}
+      {/* =====================================================
+          RED HOVER BORDER
+      ====================================================== */}
 
       <div
         className="
@@ -468,7 +644,7 @@ function ShoeCard({
           opacity-0
           ring-1
           ring-inset
-          ring-[#d93232]/70
+          ring-[#d93232]/80
           transition-opacity
           duration-500
           group-hover:opacity-100

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ProductQuickView, {
   type Product,
 } from "./ProductQuickView";
@@ -55,12 +55,37 @@ const shoes: Product[] = [
 ];
 
 function SafetyShoes() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
   const [selectedProduct, setSelectedProduct] =
     useState<Product | null>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(section);
+        }
+      },
+      {
+        threshold: 0.12,
+      }
+    );
+
+    observer.observe(section);
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
       <section
+        ref={sectionRef}
         id="safety-shoes"
         className="
           relative
@@ -75,7 +100,7 @@ function SafetyShoes() {
         ====================================================== */}
 
         <div
-          className="
+          className={`
             w-full
             px-5
             pt-16
@@ -87,7 +112,18 @@ function SafetyShoes() {
             lg:pt-24
             lg:pb-16
             xl:px-14
-          "
+
+            transform
+            transition-all
+            duration-[1200ms]
+            ease-[cubic-bezier(0.16,1,0.3,1)]
+
+            ${
+              isVisible
+                ? "translate-y-0 opacity-100"
+                : "translate-y-12 opacity-0"
+            }
+          `}
         >
           <p
             className="
@@ -149,16 +185,15 @@ function SafetyShoes() {
         </div>
 
         {/* =====================================================
-            MASONRY / COLLAGE GRID
+            EXACT 01-06 GRID
         ====================================================== */}
 
         <div
           className="
             w-full
-            bg-black
-            px-3
-            sm:px-5
-            lg:px-8
+            px-2
+            sm:px-4
+            lg:px-7
             xl:px-10
           "
         >
@@ -167,178 +202,112 @@ function SafetyShoes() {
               grid
               w-full
               grid-cols-1
-              gap-[5px]
+              gap-[2px]
               bg-black
 
-              md:grid-cols-4
-              md:grid-rows-[180px_180px_180px_180px]
-              lg:grid-rows-[220px_220px_220px_220px]
-              xl:grid-rows-[250px_250px_250px_250px]
+              md:grid-cols-2
+              md:grid-rows-[220px_220px_220px_220px]
+
+              lg:grid-rows-[260px_260px_260px_260px]
+
+              xl:grid-rows-[300px_300px_300px_300px]
             "
           >
-            {/* =================================================
-                01 — TALL LEFT
-            ================================================== */}
+            {/* 01 */}
 
-            <ShoeCard
+            <AnimatedShoeCard
               product={shoes[0]}
               onClick={() =>
                 setSelectedProduct(shoes[0])
               }
+              isVisible={isVisible}
+              animation="left"
+              delay={100}
               className="
                 md:col-start-1
                 md:row-start-1
-                md:row-span-2
               "
             />
 
-            {/* =================================================
-                02 — LARGE TOP
-            ================================================== */}
+            {/* 02 — spans rows 1 + 2 */}
 
-            <ShoeCard
+            <AnimatedShoeCard
               product={shoes[1]}
               onClick={() =>
                 setSelectedProduct(shoes[1])
               }
+              isVisible={isVisible}
+              animation="right"
+              delay={220}
               className="
                 md:col-start-2
-                md:col-span-3
                 md:row-start-1
                 md:row-span-2
               "
             />
 
-            {/* =================================================
-                03 — LEFT MIDDLE
-            ================================================== */}
+            {/* 03 — spans rows 2 + 3 */}
 
-            <ShoeCard
+            <AnimatedShoeCard
               product={shoes[2]}
               onClick={() =>
                 setSelectedProduct(shoes[2])
               }
+              isVisible={isVisible}
+              animation="left"
+              delay={340}
               className="
                 md:col-start-1
-                md:row-start-3
-                md:row-span-1
+                md:row-start-2
+                md:row-span-2
               "
             />
 
-            {/* =================================================
-                CENTER TEXT
-            ================================================== */}
+            {/* 04 */}
 
-            <div
-              className="
-                flex
-                min-h-[240px]
-                flex-col
-                items-center
-                justify-center
-                bg-[#080808]
-                px-6
-                py-10
-                text-center
-
-                md:col-start-2
-                md:col-span-2
-                md:row-start-3
-                md:row-span-1
-                md:min-h-0
-              "
-            >
-              <span
-                className="
-                  mb-4
-                  text-[8px]
-                  font-medium
-                  uppercase
-                  tracking-[0.28em]
-                  text-[#d93232]
-                  sm:text-[9px]
-                "
-              >
-                ASTRR.CO
-              </span>
-
-              <h3
-                className="
-                  text-3xl
-                  font-black
-                  uppercase
-                  leading-[0.9]
-                  tracking-[-0.05em]
-                  text-white
-                  sm:text-4xl
-                  lg:text-5xl
-                "
-              >
-                ENGINEERED
-                <br />
-                FOR
-                <br />
-                <span className="text-[#d93232]">
-                  PURPOSE
-                </span>
-              </h3>
-
-              <div
-                className="
-                  mt-5
-                  h-px
-                  w-10
-                  bg-[#d93232]
-                "
-              />
-            </div>
-
-            {/* =================================================
-                04 — RIGHT MIDDLE
-            ================================================== */}
-
-            <ShoeCard
+            <AnimatedShoeCard
               product={shoes[3]}
               onClick={() =>
                 setSelectedProduct(shoes[3])
               }
+              isVisible={isVisible}
+              animation="right"
+              delay={460}
               className="
-                md:col-start-4
+                md:col-start-2
                 md:row-start-3
-                md:row-span-1
               "
             />
 
-            {/* =================================================
-                05 — LARGE BOTTOM LEFT
-            ================================================== */}
+            {/* 05 */}
 
-            <ShoeCard
+            <AnimatedShoeCard
               product={shoes[4]}
               onClick={() =>
                 setSelectedProduct(shoes[4])
               }
+              isVisible={isVisible}
+              animation="left"
+              delay={580}
               className="
                 md:col-start-1
-                md:col-span-3
                 md:row-start-4
-                md:row-span-1
               "
             />
 
-            {/* =================================================
-                06 — TALL BOTTOM RIGHT
-            ================================================== */}
+            {/* 06 */}
 
-            <ShoeCard
+            <AnimatedShoeCard
               product={shoes[5]}
               onClick={() =>
                 setSelectedProduct(shoes[5])
               }
+              isVisible={isVisible}
+              animation="right"
+              delay={700}
               className="
-                md:col-start-4
+                md:col-start-2
                 md:row-start-4
-                md:row-span-1
               "
             />
           </div>
@@ -373,10 +342,6 @@ function SafetyShoes() {
         </div>
       </section>
 
-      {/* =====================================================
-          QUICK VIEW
-      ====================================================== */}
-
       <ProductQuickView
         product={selectedProduct}
         onClose={() =>
@@ -389,20 +354,31 @@ function SafetyShoes() {
 
 
 /* =========================================================
-   SHOE CARD
+   ANIMATED CARD
 ========================================================= */
 
-type ShoeCardProps = {
+type AnimatedShoeCardProps = {
   product: Product;
   onClick: () => void;
+  isVisible: boolean;
+  animation: "left" | "right";
+  delay: number;
   className?: string;
 };
 
-function ShoeCard({
+function AnimatedShoeCard({
   product,
   onClick,
+  isVisible,
+  animation,
+  delay,
   className = "",
-}: ShoeCardProps) {
+}: AnimatedShoeCardProps) {
+  const initialPosition =
+    animation === "left"
+      ? "-translate-x-24"
+      : "translate-x-24";
+
   return (
     <article
       role="button"
@@ -417,29 +393,40 @@ function ShoeCard({
           onClick();
         }
       }}
+      style={{
+        transitionDelay: `${delay}ms`,
+      }}
       className={`
         group
         relative
-        min-h-[280px]
+        min-h-[300px]
         w-full
-        min-w-0
         cursor-pointer
         overflow-hidden
-        rounded-none
         bg-[#111]
         outline-none
+
+        transform
+        transition-all
+        duration-[1200ms]
+        ease-[cubic-bezier(0.16,1,0.3,1)]
+
+        md:min-h-0
+
+        ${
+          isVisible
+            ? "translate-x-0 translate-y-0 scale-100 opacity-100"
+            : `${initialPosition} scale-[0.94] opacity-0`
+        }
+
         focus-visible:ring-2
         focus-visible:ring-[#d93232]
         focus-visible:ring-inset
 
-        md:min-h-0
-
         ${className}
       `}
     >
-      {/* =====================================================
-          IMAGE
-      ====================================================== */}
+      {/* IMAGE */}
 
       <img
         src={product.cardImage}
@@ -457,48 +444,30 @@ function ShoeCard({
           w-full
           object-cover
           object-center
+
           transition-transform
-          duration-700
-          ease-out
-          group-hover:scale-[1.045]
+          duration-[1400ms]
+          ease-[cubic-bezier(0.16,1,0.3,1)]
+
+          group-hover:scale-[1.08]
+          group-hover:rotate-[0.3deg]
         "
       />
 
-      {/* =====================================================
-          DARK OVERLAY
-      ====================================================== */}
+      {/* DARK OVERLAY */}
 
       <div
         className="
           absolute
           inset-0
-          bg-black/20
-          transition-colors
-          duration-500
+          bg-black/25
+          transition-all
+          duration-700
           group-hover:bg-black/10
         "
       />
 
-      {/* =====================================================
-          TOP GRADIENT
-      ====================================================== */}
-
-      <div
-        className="
-          absolute
-          inset-x-0
-          top-0
-          h-[50%]
-          bg-gradient-to-b
-          from-black/50
-          via-black/10
-          to-transparent
-        "
-      />
-
-      {/* =====================================================
-          BOTTOM GRADIENT
-      ====================================================== */}
+      {/* CINEMATIC GRADIENT */}
 
       <div
         className="
@@ -508,33 +477,52 @@ function ShoeCard({
           h-[75%]
           bg-gradient-to-t
           from-black
-          via-black/75
+          via-black/65
+          to-transparent
+          transition-opacity
+          duration-700
+          group-hover:opacity-80
+        "
+      />
+
+      {/* TOP GRADIENT */}
+
+      <div
+        className="
+          absolute
+          inset-x-0
+          top-0
+          h-[35%]
+          bg-gradient-to-b
+          from-black/50
           to-transparent
         "
       />
 
-      {/* =====================================================
-          NUMBER
-      ====================================================== */}
+      {/* NUMBER */}
 
       <div
         className="
           absolute
           left-5
           top-5
-          z-10
+          z-20
           flex
           items-center
           gap-3
-          sm:left-6
-          sm:top-6
+          sm:left-7
+          sm:top-7
         "
       >
         <span
           className="
             h-px
             w-8
+            origin-left
             bg-[#d93232]
+            transition-all
+            duration-500
+            group-hover:w-14
           "
         />
 
@@ -542,8 +530,8 @@ function ShoeCard({
           className="
             text-[10px]
             font-medium
-            tracking-[0.08em]
-            text-white/80
+            tracking-[0.12em]
+            text-white/85
             sm:text-xs
           "
         >
@@ -551,34 +539,35 @@ function ShoeCard({
         </span>
       </div>
 
-      {/* =====================================================
-          CONTENT
-      ====================================================== */}
+      {/* CONTENT */}
 
       <div
         className="
           absolute
           inset-x-0
           bottom-0
-          z-10
+          z-20
           p-5
-          sm:p-6
-          lg:p-7
-          xl:p-8
+          sm:p-7
+          lg:p-8
         "
       >
         <h3
           className="
-            max-w-[90%]
             whitespace-pre-line
-            break-words
-            text-[clamp(25px,3vw,46px)]
+            text-[clamp(27px,4vw,55px)]
             font-black
             uppercase
-            leading-[0.86]
-            tracking-[-0.045em]
+            leading-[0.84]
+            tracking-[-0.05em]
             text-white
-            drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]
+            drop-shadow-[0_3px_15px_rgba(0,0,0,0.9)]
+
+            transition-transform
+            duration-700
+            ease-out
+
+            group-hover:-translate-y-2
           "
         >
           {product.title}
@@ -588,22 +577,25 @@ function ShoeCard({
           className="
             mt-4
             flex
-            min-w-0
             items-end
             justify-between
             gap-4
+            opacity-80
+            transition-all
+            duration-700
+            group-hover:translate-y-0
+            group-hover:opacity-100
           "
         >
           <p
             className="
-              min-w-0
               max-w-[72%]
               text-[7px]
               font-medium
               uppercase
               leading-[1.5]
               tracking-[0.07em]
-              text-white/75
+              text-white/80
               sm:text-[8px]
               lg:text-[9px]
             "
@@ -614,16 +606,16 @@ function ShoeCard({
           <span
             className="
               shrink-0
-              whitespace-nowrap
               text-[8px]
               font-medium
               uppercase
-              tracking-[0.06em]
+              tracking-[0.08em]
               text-[#d93232]
-              transition-transform
-              duration-300
+
+              transition-all
+              duration-500
+
               group-hover:translate-x-1
-              sm:text-[9px]
             "
           >
             Explore →
@@ -631,23 +623,37 @@ function ShoeCard({
         </div>
       </div>
 
-      {/* =====================================================
-          RED HOVER BORDER
-      ====================================================== */}
+      {/* RED EDGE */}
 
       <div
         className="
           pointer-events-none
           absolute
           inset-0
-          z-20
-          opacity-0
-          ring-1
-          ring-inset
-          ring-[#d93232]/80
-          transition-opacity
-          duration-500
-          group-hover:opacity-100
+          z-30
+          border
+          border-[#d93232]/0
+          transition-all
+          duration-700
+          group-hover:border-[#d93232]/70
+        "
+      />
+
+      {/* MOVING RED LIGHT */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          bottom-0
+          left-0
+          z-30
+          h-[2px]
+          w-0
+          bg-[#d93232]
+          transition-all
+          duration-700
+          group-hover:w-full
         "
       />
     </article>

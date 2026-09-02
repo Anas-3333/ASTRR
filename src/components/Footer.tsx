@@ -10,6 +10,13 @@ function Footer() {
     }
   };
 
+  const goHome = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <footer className="w-full bg-black text-white">
       {/* =====================================================
@@ -21,8 +28,8 @@ function Footer() {
           className="
             grid
             grid-cols-1
-            md:grid-cols-[1fr_1fr_1fr]
             gap-y-12
+            md:grid-cols-[1fr_1fr_1fr]
             md:gap-y-0
           "
         >
@@ -96,11 +103,14 @@ function Footer() {
             </h3>
 
             <nav className="mt-[25px] flex flex-col gap-[5px]">
+              {/* HOME */}
+
               <button
                 type="button"
-                onClick={() => scrollToSection("hero")}
+                onClick={goHome}
                 className="
                   w-fit
+                  cursor-pointer
                   border-0
                   bg-transparent
                   p-0
@@ -117,11 +127,14 @@ function Footer() {
                 Home
               </button>
 
+              {/* ARMY SHOES */}
+
               <button
                 type="button"
-                onClick={() => scrollToSection("safetyshoes")}
+                onClick={() => scrollToSection("safety-shoes")}
                 className="
                   w-fit
+                  cursor-pointer
                   border-0
                   bg-transparent
                   p-0
@@ -138,11 +151,14 @@ function Footer() {
                 Army Shoes
               </button>
 
+              {/* PRODUCTION */}
+
               <button
                 type="button"
                 onClick={() => scrollToSection("production")}
                 className="
                   w-fit
+                  cursor-pointer
                   border-0
                   bg-transparent
                   p-0
@@ -159,11 +175,14 @@ function Footer() {
                 Production
               </button>
 
+              {/* CONTACT */}
+
               <button
                 type="button"
                 onClick={() => scrollToSection("contact")}
                 className="
                   w-fit
+                  cursor-pointer
                   border-0
                   bg-transparent
                   p-0
@@ -389,7 +408,7 @@ function Footer() {
       </div>
 
       {/* =====================================================
-          RESPONSIVE ADJUSTMENTS
+          RESPONSIVE
       ====================================================== */}
 
       <style>

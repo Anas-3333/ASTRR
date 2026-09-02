@@ -4,10 +4,10 @@ import Profile from "./components/Profile";
 import SafetyShoes from "./components/SafetyShoes";
 import MilitaryShoe from "./components/MilitaryShoe";
 import HeroWeServe from "./components/HeroWeServe";
-// import Production from "./components/Production";
+import Production from "./components/Production";
 import Contact from "./components/Contact";
 // import HeroesWeServe from "./components/HeroWeServe";
-// import Footer from "./components/Footer";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -25,11 +25,11 @@ function App() {
       
       <MilitaryShoe />
 
-      {/* <Production /> */}
+      <Production />
 
       <Contact />
 
-      {/* <Footer /> */}
+      <Footer />
 
     </main>
   );

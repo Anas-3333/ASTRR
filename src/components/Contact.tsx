@@ -1,4 +1,13 @@
 function Contact() {
+  const scrollToContactForm = () => {
+    document
+      .getElementById("contact-form")
+      ?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+  };
+
   return (
     <section
       id="contact"
@@ -19,6 +28,7 @@ function Contact() {
         "
       >
         {/* Background */}
+
         <img
           src="/images/back_contact.png"
           alt="ASTRR Contact"
@@ -32,6 +42,7 @@ function Contact() {
         />
 
         {/* Dark overlay */}
+
         <div
           className="
             absolute
@@ -41,6 +52,7 @@ function Contact() {
         />
 
         {/* Red cinematic glow */}
+
         <div
           className="
             absolute
@@ -57,6 +69,7 @@ function Contact() {
         />
 
         {/* Hero content */}
+
         <div
           className="
             relative
@@ -113,7 +126,6 @@ function Contact() {
           </p>
         </div>
       </section>
-
 
       {/* =====================================================
           CONTACT INFORMATION + FORM
@@ -186,13 +198,11 @@ function Contact() {
             lg:gap-20
           "
         >
-
           {/* =================================================
               LEFT SIDE
           ================================================== */}
 
           <div>
-
             <p
               className="
                 mb-4
@@ -240,17 +250,14 @@ function Contact() {
               Our team is ready to connect with you.
             </p>
 
-
             {/* =================================================
                 CONTACT DETAILS
             ================================================== */}
 
             <div className="mt-10 space-y-7">
-
               {/* HEAD OFFICE */}
 
               <div className="flex gap-5">
-
                 <div
                   className="
                     flex
@@ -271,7 +278,6 @@ function Contact() {
                 </div>
 
                 <div>
-
                   <p
                     className="
                       text-[8px]
@@ -296,16 +302,12 @@ function Contact() {
                     <br />
                     India
                   </p>
-
                 </div>
-
               </div>
-
 
               {/* PHONE */}
 
               <div className="flex gap-5">
-
                 <div
                   className="
                     flex
@@ -326,7 +328,6 @@ function Contact() {
                 </div>
 
                 <div>
-
                   <p
                     className="
                       text-[8px]
@@ -345,18 +346,14 @@ function Contact() {
                       text-white/75
                     "
                   >
-                    +91 XXXXX XXXXX
+                    +91-961-6242222
                   </p>
-
                 </div>
-
               </div>
-
 
               {/* EMAIL */}
 
               <div className="flex gap-5">
-
                 <div
                   className="
                     flex
@@ -377,7 +374,6 @@ function Contact() {
                 </div>
 
                 <div>
-
                   <p
                     className="
                       text-[8px]
@@ -398,13 +394,9 @@ function Contact() {
                   >
                     info@astrr.co
                   </p>
-
                 </div>
-
               </div>
-
             </div>
-
 
             {/* Brand line */}
 
@@ -427,9 +419,7 @@ function Contact() {
                 ENGINEERED FOR THOSE WHO SERVE
               </p>
             </div>
-
           </div>
-
 
           {/* =================================================
               RIGHT SIDE — ENQUIRY FORM
@@ -448,7 +438,6 @@ function Contact() {
               lg:p-10
             "
           >
-
             {/* Red top line */}
 
             <div
@@ -463,7 +452,6 @@ function Contact() {
             />
 
             <div className="mb-8">
-
               <p
                 className="
                   text-[9px]
@@ -496,16 +484,16 @@ function Contact() {
               >
                 Tell us what you are looking for.
               </p>
-
             </div>
-
 
             {/* =================================================
                 FORM
             ================================================== */}
 
-            <form className="space-y-6">
-
+            <form
+              id="contact-form"
+              className="space-y-6"
+            >
               {/* NAME + EMAIL */}
 
               <div
@@ -515,11 +503,9 @@ function Contact() {
                   sm:grid-cols-2
                 "
               >
-
                 {/* NAME */}
 
                 <div>
-
                   <label
                     className="
                       mb-2
@@ -558,14 +544,11 @@ function Contact() {
                       focus:bg-white/[0.05]
                     "
                   />
-
                 </div>
-
 
                 {/* EMAIL */}
 
                 <div>
-
                   <label
                     className="
                       mb-2
@@ -604,16 +587,12 @@ function Contact() {
                       focus:bg-white/[0.05]
                     "
                   />
-
                 </div>
-
               </div>
-
 
               {/* COMPANY */}
 
               <div>
-
                 <label
                   className="
                     mb-2
@@ -651,14 +630,11 @@ function Contact() {
                     focus:bg-white/[0.05]
                   "
                 />
-
               </div>
-
 
               {/* SUBJECT */}
 
               <div>
-
                 <label
                   className="
                     mb-2
@@ -697,14 +673,11 @@ function Contact() {
                     focus:bg-white/[0.05]
                   "
                 />
-
               </div>
-
 
               {/* MESSAGE */}
 
               <div>
-
                 <label
                   className="
                     mb-2
@@ -744,9 +717,7 @@ function Contact() {
                     focus:bg-white/[0.05]
                   "
                 />
-
               </div>
-
 
               {/* SUBMIT BUTTON */}
 
@@ -771,7 +742,6 @@ function Contact() {
                   hover:bg-[#ef3d3d]
                 "
               >
-
                 <span
                   className="
                     relative
@@ -780,17 +750,11 @@ function Contact() {
                 >
                   SEND ENQUIRY →
                 </span>
-
               </button>
-
             </form>
-
           </div>
-
         </div>
-
       </section>
-
 
       {/* =====================================================
           MAP SECTION
@@ -805,7 +769,6 @@ function Contact() {
           lg:py-20
         "
       >
-
         {/* Heading */}
 
         <div
@@ -819,7 +782,6 @@ function Contact() {
             lg:px-12
           "
         >
-
           <p
             className="
               text-[9px]
@@ -848,9 +810,7 @@ function Contact() {
               LOCATION
             </span>
           </h2>
-
         </div>
-
 
         {/* MAP */}
 
@@ -866,7 +826,6 @@ function Contact() {
             sm:h-[500px]
           "
         >
-
           <iframe
             title="ASTRR Location"
             src="https://www.google.com/maps?q=Hasanpur%2C%20Amroha%2C%20Uttar%20Pradesh&output=embed"
@@ -895,11 +854,8 @@ function Contact() {
               to-black/50
             "
           />
-
         </div>
-
       </section>
-
 
       {/* =====================================================
           FINAL CTA
@@ -915,7 +871,6 @@ function Contact() {
           text-center
         "
       >
-
         {/* Red glow */}
 
         <div
@@ -935,7 +890,6 @@ function Contact() {
         />
 
         <div className="relative z-10">
-
           <p
             className="
               text-[9px]
@@ -981,10 +935,18 @@ function Contact() {
             for demanding environments.
           </p>
 
+          {/* =================================================
+              FIXED CONTACT ASTRR BUTTON
+          ================================================== */}
+
           <button
             type="button"
+            onClick={scrollToContactForm}
             className="
+              group
+              relative
               mt-8
+              overflow-hidden
               border
               border-[#d93232]
               px-8
@@ -995,19 +957,29 @@ function Contact() {
               tracking-[0.18em]
               text-white
 
-              transition
-              duration-300
+              transition-all
+              duration-500
 
               hover:bg-[#d93232]
+              hover:shadow-[0_0_30px_rgba(217,50,50,0.25)]
+
+              active:scale-95
             "
           >
-            CONTACT ASTRR →
+            <span
+              className="
+                relative
+                z-10
+                transition-all
+                duration-300
+                group-hover:tracking-[0.22em]
+              "
+            >
+              CONTACT ASTRR →
+            </span>
           </button>
-
         </div>
-
       </section>
-
     </section>
   );
 }

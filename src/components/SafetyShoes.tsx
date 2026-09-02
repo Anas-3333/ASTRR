@@ -7,7 +7,7 @@ const shoes: Product[] = [
   {
     number: "01",
     title: "COMBAT\nFORCES",
-    cardImage: "/converted-webp/combat_shoes.webp",
+    cardImage: "/converted-webp/webp-combat.webp",
     quickViewImage: "/converted-webp/combat_quickview.webp",
     description:
       "TACTICAL FOOTWEAR | GRIP • DURABILITY • CONTROL",
@@ -15,7 +15,7 @@ const shoes: Product[] = [
   {
     number: "02",
     title: "SECURITY\nFORCES",
-    cardImage: "/converted-webp/security_force.webp",
+    cardImage: "/converted-webp/webp-security.webp",
     quickViewImage: "/converted-webp/security_quickview.webp",
     description:
       "SECURITY FORCES | TACTICAL FOOTWEAR",
@@ -23,7 +23,7 @@ const shoes: Product[] = [
   {
     number: "03",
     title: "EXECUTIVE\nOFFICERS",
-    cardImage: "/converted-webp/MIL3.webp",
+    cardImage: "/converted-webp/webp-officer.webp",
     quickViewImage: "/converted-webp/MIL3.webp",
     description:
       "EXECUTIVE OFFICERS | TACTICAL FOOTWEAR",
@@ -31,7 +31,7 @@ const shoes: Product[] = [
   {
     number: "04",
     title: "INDUSTRIAL\nSAFETY",
-    cardImage: "/converted-webp/MIL4.webp",
+    cardImage: "/converted-webp/webp-industrialsafety.webp",
     quickViewImage: "/converted-webp/MIL4.webp",
     description:
       "INDUSTRIAL SAFETY | GRIP • DURABILITY",
@@ -39,7 +39,7 @@ const shoes: Product[] = [
   {
     number: "05",
     title: "ELITE\nFORCES",
-    cardImage: "/converted-webp/elite_sh.webp",
+    cardImage: "/converted-webp/webp-elite.webp",
     quickViewImage: "/converted-webp/elite_quickview.webp",
     description:
       "ELITE FORCES | TACTICAL FOOTWEAR",
@@ -47,7 +47,7 @@ const shoes: Product[] = [
   {
     number: "06",
     title: "TACTICAL\nOPERATIONS",
-    cardImage: "/converted-webp/security_sh.webp",
+    cardImage: "/converted-webp/webp-tactical.webp",
     quickViewImage: "/converted-webp/security_quickview.webp",
     description:
       "TACTICAL OPERATIONS | GRIP • CONTROL",

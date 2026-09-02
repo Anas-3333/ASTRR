@@ -33,7 +33,7 @@ const heroes: Hero[] = [
   {
     number: "04",
     title: "Officer",
-    image: "/converted-webp/officer.webp",
+    image: "/converted-webp/webp-officer.webp",
     description: "Professional footwear for those who lead.",
   },
   {

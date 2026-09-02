@@ -1,7 +1,17 @@
 function Hero() {
+  const scrollToContact = () => {
+    const contactSection = document.getElementById("contact");
+
+    if (contactSection) {
+      contactSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
+
   return (
     <section className="relative h-screen w-full overflow-hidden bg-black">
-
       {/* =====================================================
           BACKGROUND VIDEO
       ====================================================== */}
@@ -26,7 +36,6 @@ function Hero() {
         />
       </video>
 
-
       {/* =====================================================
           CINEMATIC OVERLAY
       ====================================================== */}
@@ -39,7 +48,7 @@ function Hero() {
         "
       />
 
-      {/* Left dark gradient for text readability */}
+      {/* Left dark gradient */}
 
       <div
         className="
@@ -68,7 +77,6 @@ function Hero() {
         "
       />
 
-
       {/* =====================================================
           HERO CONTENT
       ====================================================== */}
@@ -82,7 +90,6 @@ function Hero() {
           items-center
         "
       >
-
         <div
           className="
             ml-[7%]
@@ -90,7 +97,6 @@ function Hero() {
             text-white
           "
         >
-
           {/* SMALL LABEL */}
 
           <p
@@ -102,13 +108,11 @@ function Hero() {
               uppercase
               tracking-[0.35em]
               text-white/60
-
               sm:text-[10px]
             "
           >
             ASTRR.CO
           </p>
-
 
           {/* MAIN HEADLINE */}
 
@@ -120,7 +124,6 @@ function Hero() {
               uppercase
               leading-[0.88]
               tracking-[-0.05em]
-
               sm:text-[68px]
               md:text-[82px]
               lg:text-[96px]
@@ -141,7 +144,6 @@ function Hero() {
             MISSION.
           </h1>
 
-
           {/* SUPPORTING LINE */}
 
           <p
@@ -155,7 +157,6 @@ function Hero() {
               leading-5
               tracking-[0.18em]
               text-white/65
-
               sm:text-xs
               sm:leading-6
             "
@@ -168,8 +169,9 @@ function Hero() {
             OPERATE WHERE PERFORMANCE MATTERS MOST.
           </p>
 
-
-          {/* CTA */}
+          {/* =================================================
+              CTA
+          ================================================== */}
 
           <div
             className="
@@ -180,10 +182,13 @@ function Hero() {
               animationDelay: "450ms",
             }}
           >
-            <a
-              href="/Contact"
+            <button
+              type="button"
+              onClick={scrollToContact}
               className="
+                group
                 inline-flex
+                cursor-pointer
                 items-center
                 gap-4
                 border
@@ -197,26 +202,31 @@ function Hero() {
                 tracking-[0.2em]
                 text-white
                 backdrop-blur-sm
-
                 transition-all
                 duration-300
-
                 hover:border-[#d93232]
                 hover:bg-[#d93232]
               "
             >
-              CONTACT ASTRR
+              <span>
+                CONTACT ASTRR
+              </span>
 
-              <span className="text-[#d93232] transition-colors duration-300 group-hover:text-white">
+              <span
+                className="
+                  text-[#d93232]
+                  transition-all
+                  duration-300
+                  group-hover:translate-x-1
+                  group-hover:text-white
+                "
+              >
                 →
               </span>
-            </a>
+            </button>
           </div>
-
         </div>
-
       </div>
-
 
       {/* =====================================================
           BOTTOM LABEL
@@ -228,7 +238,6 @@ function Hero() {
           bottom-7
           right-7
           z-10
-
           hidden
           sm:block
         "
@@ -244,7 +253,6 @@ function Hero() {
           ENGINEERED FOR THOSE WHO SERVE
         </p>
       </div>
-
 
       {/* =====================================================
           SLIDE RIGHT ANIMATION
@@ -268,7 +276,6 @@ function Hero() {
           animation: heroSlideRight 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
       `}</style>
-
     </section>
   );
 }

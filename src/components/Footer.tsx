@@ -1,110 +1,80 @@
-import React from "react";
-
 function Footer() {
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
+
   return (
-    <footer
-      className="
-        relative
-        w-full
-        overflow-hidden
-        bg-black
-        text-white
-      "
-    >
+    <footer className="w-full bg-black text-white">
       {/* =====================================================
-          MAIN FOOTER
+          FOOTER CONTENT
       ====================================================== */}
 
-      <div
-        className="
-          mx-auto
-          w-full
-          max-w-[1400px]
-          px-8
-          pb-8
-          pt-14
-
-          sm:px-10
-          sm:pt-16
-
-          lg:px-[4.4%]
-          lg:pb-9
-          lg:pt-16
-        "
-      >
+      <div className="mx-auto w-full max-w-[1365px] px-[60px] pt-[62px] pb-[35px]">
         <div
           className="
             grid
             grid-cols-1
-            gap-12
-
-            sm:grid-cols-2
-            sm:gap-14
-
-            lg:grid-cols-[1.55fr_0.9fr_1fr]
-            lg:gap-16
+            md:grid-cols-[1fr_1fr_1fr]
+            gap-y-12
+            md:gap-y-0
           "
         >
           {/* =================================================
-              LEFT — CONTACT INFORMATION
+              LEFT — CONTACT DETAILS
           ================================================== */}
 
-          <div
-            className="
-              flex
-              flex-col
-              gap-5
-            "
-          >
-            {/* Phone */}
-
+          <div className="flex flex-col">
             <a
               href="tel:+919616242222"
               className="
                 w-fit
                 text-[14px]
-                font-semibold
-                leading-none
+                font-medium
+                leading-[1.6]
                 text-white
-                transition-colors
-                duration-300
-                hover:text-[#d93232]
+                transition-opacity
+                duration-200
+                hover:opacity-70
               "
             >
               +91-961-6242222
             </a>
 
-            {/* Email */}
-
             <a
               href="mailto:info@aligtannery.com"
               className="
+                mt-[17px]
                 w-fit
                 text-[14px]
-                font-semibold
-                leading-none
+                font-medium
+                leading-[1.6]
                 text-white
-                transition-colors
-                duration-300
-                hover:text-[#d93232]
+                transition-opacity
+                duration-200
+                hover:opacity-70
               "
             >
               info@aligtannery.com
             </a>
 
-            {/* Address */}
-
             <p
               className="
-                max-w-[470px]
+                mt-[17px]
+                max-w-[430px]
                 text-[14px]
-                font-semibold
-                leading-6
+                font-medium
+                leading-[1.6]
                 text-white
               "
             >
-              150 Feet Road, Jajmau, Kanpur - 208010,
-              U.P. INDIA
+              150 Feet Road, Jajmau, Kanpur – 208010, U.P. INDIA
             </p>
           </div>
 
@@ -112,99 +82,103 @@ function Footer() {
               CENTER — QUICK LINKS
           ================================================== */}
 
-          <div>
-            <h2
+          <div className="md:pl-[72px]">
+            <h3
               className="
-                mb-5
                 text-[34px]
-                font-medium
+                font-semibold
                 leading-none
-                tracking-[-0.035em]
+                tracking-[-0.04em]
                 text-white
-
-                sm:text-[38px]
-
-                lg:text-[40px]
               "
             >
               Quick Links
-            </h2>
+            </h3>
 
-            <nav
-              className="
-                flex
-                flex-col
-                gap-1
-              "
-              aria-label="Footer navigation"
-            >
-              <a
-                href="/"
+            <nav className="mt-[25px] flex flex-col gap-[5px]">
+              <button
+                type="button"
+                onClick={() => scrollToSection("hero")}
                 className="
                   w-fit
+                  border-0
+                  bg-transparent
+                  p-0
+                  text-left
                   text-[15px]
-                  font-semibold
-                  leading-5
+                  font-medium
+                  leading-[1.25]
                   text-white
-                  transition-all
-                  duration-300
-                  hover:translate-x-1
-                  hover:text-[#d93232]
+                  transition-opacity
+                  duration-200
+                  hover:opacity-60
                 "
               >
                 Home
-              </a>
+              </button>
 
-              <a
-                href="#safety-shoes"
+              <button
+                type="button"
+                onClick={() => scrollToSection("safetyshoes")}
                 className="
                   w-fit
+                  border-0
+                  bg-transparent
+                  p-0
+                  text-left
                   text-[15px]
-                  font-semibold
-                  leading-5
+                  font-medium
+                  leading-[1.25]
                   text-white
-                  transition-all
-                  duration-300
-                  hover:translate-x-1
-                  hover:text-[#d93232]
+                  transition-opacity
+                  duration-200
+                  hover:opacity-60
                 "
               >
                 Army Shoes
-              </a>
+              </button>
 
-              <a
-                href="#production"
+              <button
+                type="button"
+                onClick={() => scrollToSection("production")}
                 className="
                   w-fit
+                  border-0
+                  bg-transparent
+                  p-0
+                  text-left
                   text-[15px]
-                  font-semibold
-                  leading-5
+                  font-medium
+                  leading-[1.25]
                   text-white
-                  transition-all
-                  duration-300
-                  hover:translate-x-1
-                  hover:text-[#d93232]
+                  transition-opacity
+                  duration-200
+                  hover:opacity-60
                 "
               >
                 Production
-              </a>
+              </button>
 
-              <a
-                href="#contact"
+              <button
+                type="button"
+                onClick={() => scrollToSection("contact")}
                 className="
                   w-fit
+                  border-0
+                  bg-transparent
+                  p-0
+                  text-left
                   text-[15px]
-                  font-semibold
-                  leading-5
+                  font-medium
+                  leading-[1.25]
                   text-white
-                  transition-all
-                  duration-300
-                  hover:translate-x-1
-                  hover:text-[#d93232]
+                  transition-opacity
+                  duration-200
+                  hover:opacity-60
                 "
               >
                 Contact
-              </a>
+              </button>
             </nav>
           </div>
 
@@ -212,51 +186,44 @@ function Footer() {
               RIGHT — CONNECT
           ================================================== */}
 
-          <div>
-            <h2
+          <div className="md:pl-[45px]">
+            <h3
               className="
-                mb-6
                 text-[34px]
-                font-medium
+                font-semibold
                 leading-none
-                tracking-[-0.035em]
+                tracking-[-0.04em]
                 text-white
-
-                sm:text-[38px]
-
-                lg:text-[40px]
               "
             >
               Connect
-            </h2>
+            </h3>
 
-            {/* ================= SOCIAL ICONS ================= */}
+            {/* SOCIAL ICONS */}
 
-            <div
-              className="
-                mb-6
-                flex
-                items-center
-                gap-7
-              "
-            >
+            <div className="mt-[28px] flex items-center gap-[27px]">
               {/* Facebook */}
 
               <a
                 href="#"
                 aria-label="Facebook"
                 className="
-                  text-white/25
-                  transition-all
-                  duration-300
-                  hover:-translate-y-1
-                  hover:text-[#d93232]
+                  flex
+                  h-[22px]
+                  w-[22px]
+                  items-center
+                  justify-center
+                  text-[#3d3d3d]
+                  transition-colors
+                  duration-200
+                  hover:text-white
                 "
               >
                 <svg
                   viewBox="0 0 24 24"
-                  className="h-6 w-6"
+                  className="h-[22px] w-[22px]"
                   fill="currentColor"
+                  aria-hidden="true"
                 >
                   <path d="M14 8h3V4h-3c-3.31 0-5 1.69-5 5v3H6v4h3v8h4v-8h3l1-4h-4V9c0-.66.34-1 1-1z" />
                 </svg>
@@ -268,19 +235,24 @@ function Footer() {
                 href="#"
                 aria-label="Twitter"
                 className="
-                  text-white/25
-                  transition-all
-                  duration-300
-                  hover:-translate-y-1
-                  hover:text-[#d93232]
+                  flex
+                  h-[22px]
+                  w-[22px]
+                  items-center
+                  justify-center
+                  text-[#3d3d3d]
+                  transition-colors
+                  duration-200
+                  hover:text-white
                 "
               >
                 <svg
                   viewBox="0 0 24 24"
-                  className="h-5 w-5"
+                  className="h-[21px] w-[21px]"
                   fill="currentColor"
+                  aria-hidden="true"
                 >
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817-5.963 6.817H1.684l7.73-8.835L1.254 2.25h6.826l4.713 6.231 5.451-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z" />
+                  <path d="M18.9 2H22l-6.77 7.74L23.2 22h-6.24l-4.89-6.39L6.48 22H3.36l7.24-8.28L2.8 2h6.4l4.42 5.84L18.9 2Zm-1.1 17.9h1.73L8.28 4H6.42l11.38 15.9Z" />
                 </svg>
               </a>
 
@@ -290,19 +262,24 @@ function Footer() {
                 href="#"
                 aria-label="Instagram"
                 className="
-                  text-white/25
-                  transition-all
-                  duration-300
-                  hover:-translate-y-1
-                  hover:text-[#d93232]
+                  flex
+                  h-[22px]
+                  w-[22px]
+                  items-center
+                  justify-center
+                  text-[#3d3d3d]
+                  transition-colors
+                  duration-200
+                  hover:text-white
                 "
               >
                 <svg
                   viewBox="0 0 24 24"
-                  className="h-6 w-6"
+                  className="h-[21px] w-[21px]"
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth="1.8"
+                  strokeWidth="1.7"
+                  aria-hidden="true"
                 >
                   <rect
                     x="3"
@@ -334,88 +311,106 @@ function Footer() {
                 href="#"
                 aria-label="LinkedIn"
                 className="
-                  text-white/25
-                  transition-all
-                  duration-300
-                  hover:-translate-y-1
-                  hover:text-[#d93232]
+                  flex
+                  h-[22px]
+                  w-[22px]
+                  items-center
+                  justify-center
+                  text-[#3d3d3d]
+                  transition-colors
+                  duration-200
+                  hover:text-white
                 "
               >
                 <svg
                   viewBox="0 0 24 24"
-                  className="h-6 w-6"
+                  className="h-[21px] w-[21px]"
                   fill="currentColor"
+                  aria-hidden="true"
                 >
-                  <path d="M5.2 3.5a2.2 2.2 0 1 1 0 4.4 2.2 2.2 0 0 1 0-4.4zM3.3 9h3.8v11.7H3.3V9zm6.2 0h3.6v1.6h.1c.5-.9 1.7-2 3.7-2 4 0 4.7 2.6 4.7 6v6.1h-3.8v-5.4c0-1.3 0-3.1-1.9-3.1s-2.2 1.5-2.2 3v5.5H9.5V9z" />
+                  <path d="M5.2 7H1.5V22h3.7V7ZM3.35 2C2.1 2 1 3.02 1 4.27s1.1 2.27 2.35 2.27S5.7 5.52 5.7 4.27 4.6 2 3.35 2ZM22.5 13.4c0-4.52-2.41-6.63-5.63-6.63-2.6 0-3.77 1.43-4.42 2.43V7H8.75v15h3.7v-7.42c0-1.96.37-3.86 2.8-3.86 2.4 0 2.43 2.25 2.43 3.99V22h3.7l.02-8.6Z" />
                 </svg>
               </a>
             </div>
 
-            {/* ================= DESCRIPTION ================= */}
+            {/* DESCRIPTION */}
 
             <p
               className="
-                max-w-[330px]
+                mt-[22px]
+                max-w-[315px]
                 text-[13px]
                 font-medium
-                leading-[1.65]
+                leading-[1.8]
                 text-white
               "
             >
               We bring the years, global experience,
-              and stamina to guide our clients through
-              new and often disruptive realities.
+              <br />
+              and stamina to guide our clients through new and
+              <br className="hidden xl:block" />
+              often disruptive realities.
             </p>
 
-            {/* ================= LOGO ================= */}
+            {/* LOGO */}
 
-            <div
-              className="
-                mt-10
-                flex
-                justify-start
-              "
-            >
+            <div className="mt-[47px]">
               <img
                 src="https://astrr.co/img/army-shoes/astrr-logo-nav.webp"
                 alt="ASTRR"
                 className="
                   h-auto
-                  w-[150px]
+                  w-[155px]
                   object-contain
                 "
+                loading="lazy"
               />
             </div>
           </div>
         </div>
+
+        {/* =================================================
+            COPYRIGHT
+        ================================================== */}
+
+        <div className="mt-[28px] flex justify-center">
+          <p
+            className="
+              text-center
+              text-[13px]
+              font-normal
+              leading-none
+              text-[#777777]
+            "
+          >
+            Copyright © 2026 ASTRR. All rights reserved
+          </p>
+        </div>
       </div>
 
       {/* =====================================================
-          COPYRIGHT
+          RESPONSIVE ADJUSTMENTS
       ====================================================== */}
 
-      <div
-        className="
-          flex
-          w-full
-          justify-center
-          px-6
-          pb-5
-          pt-5
-        "
-      >
-        <p
-          className="
-            text-center
-            text-[12px]
-            font-normal
-            tracking-[0.01em]
-            text-white/45
-          "
-        >
-          Copyright © 2026 ASTRR. All rights reserved
-        </p>
-      </div>
+      <style>
+        {`
+          @media (max-width: 767px) {
+            footer > div:first-of-type {
+              padding-left: 24px;
+              padding-right: 24px;
+              padding-top: 45px;
+              padding-bottom: 30px;
+            }
+          }
+
+          @media (min-width: 768px) and (max-width: 1100px) {
+            footer > div:first-of-type {
+              padding-left: 35px;
+              padding-right: 35px;
+            }
+          }
+        `}
+      </style>
     </footer>
   );
 }

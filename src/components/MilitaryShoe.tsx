@@ -6,49 +6,51 @@ import ProductQuickView, {
 const militaryShoes: Product[] = [
   {
     number: "01",
-    title: "COMBAT\nFORCES",
-    cardImage: "/converted-webp/combat_shoes.webp",
-    quickViewImage: "/converted-webp/combat_quickview.webp",
+    title: "Oil & Gas",
+    cardImage: "/converted-webp/webp-oil & gas.webp",
+    quickViewImage: "/converted-webp/webp-oil & gas.webp",
     description:
       "TACTICAL FOOTWEAR | GRIP • DURABILITY • CONTROL",
   },
   {
     number: "02",
-    title: "SECURITY\nFORCES",
-    cardImage: "/converted-webp/security_force.webp",
-    quickViewImage: "/converted-webp/security_quickview.webp",
+    title: "EMS",
+    cardImage: "/converted-webp/webp-ems.webp",
+    desktopCardImage: "/converted-webp/webp-EMS-desktop.webp",
+    quickViewImage: "/converted-webp/webp-ems.webp",
     description:
       "SECURITY FORCES | TACTICAL FOOTWEAR",
   },
   {
     number: "03",
-    title: "EXECUTIVE\nOFFICERS",
-    cardImage: "/converted-webp/MIL3.webp",
-    quickViewImage: "/converted-webp/MIL3.webp",
+    title: "Outdoor",
+    cardImage: "/converted-webp/webp-outdoor.webp",
+    desktopCardImage: "/converted-webp/webp-outdoor-desktop.webp",
+    quickViewImage: "/converted-webp/webp-outdoor.webp",
     description:
       "EXECUTIVE OFFICERS | TACTICAL FOOTWEAR",
   },
   {
     number: "04",
-    title: "INDUSTRIAL\nSAFETY",
-    cardImage: "/converted-webp/MIL4.webp",
-    quickViewImage: "/converted-webp/MIL4.webp",
+    title: "Electrical",
+    cardImage: "/converted-webp/webp-electrical.webp",
+    quickViewImage: "/converted-webp/webp-electrical.webp",
     description:
       "INDUSTRIAL SAFETY | GRIP • DURABILITY",
   },
   {
     number: "05",
-    title: "ELITE\nFORCES",
-    cardImage: "/converted-webp/elite_sh.webp",
-    quickViewImage: "/converted-webp/elite_quickview.webp",
+    title: "Construction",
+    cardImage: "/converted-webp/webp-construction.webp",
+    quickViewImage: "/converted-webp/webp-construction.webp",
     description:
       "ELITE FORCES | TACTICAL FOOTWEAR",
   },
   {
     number: "06",
-    title: "TACTICAL\nOPERATIONS",
-    cardImage: "/converted-webp/security_sh.webp",
-    quickViewImage: "/converted-webp/security_quickview.webp",
+    title: "Factory",
+    cardImage: "/converted-webp/webp-factory.webp",
+    quickViewImage: "/converted-webp/webp-factory.webp",
     description:
       "TACTICAL OPERATIONS | GRIP • CONTROL",
   },
@@ -157,11 +159,11 @@ function MilitaryShoes() {
             "
           >
             <span className="text-white">
-              MILITARY
+              SAFETY
             </span>
 
             <span className="text-[#d93232]">
-              SHOE
+              SHOES
             </span>
           </h2>
 
@@ -207,11 +209,9 @@ function MilitaryShoes() {
               bg-black
 
               md:grid-cols-2
-              md:grid-rows-[220px_220px_220px_220px]
+              md:auto-rows-[clamp(180px,25vw,350px)]
 
-              lg:grid-rows-[260px_260px_260px_260px]
 
-              xl:grid-rows-[300px_300px_300px_300px]
             "
           >
             {/* 01 */}
@@ -416,7 +416,7 @@ function AnimatedMilitaryCard({
       className={`
         group
         relative
-        min-h-[300px]
+        min-h-[clamp(260px,65vw,340px)]
         w-full
         cursor-pointer
         overflow-hidden
@@ -429,6 +429,7 @@ function AnimatedMilitaryCard({
         ease-[cubic-bezier(0.16,1,0.3,1)]
 
         md:min-h-0
+        md:h-full
 
         ${
           isVisible
@@ -445,6 +446,7 @@ function AnimatedMilitaryCard({
     >
       {/* IMAGE */}
 
+      {/* Mobile Image */}
       <img
         src={product.cardImage}
         alt={product.title.replace(
@@ -454,24 +456,49 @@ function AnimatedMilitaryCard({
         loading="lazy"
         decoding="async"
         draggable={false}
-        className="
+        className={`
           absolute
           inset-0
           h-full
           w-full
-          object-cover
+          object-contain md:object-cover
           object-center
 
           transition-transform
           duration-[1400ms]
           ease-[cubic-bezier(0.16,1,0.3,1)]
 
-          group-hover:scale-[1.08]
-          group-hover:rotate-[0.3deg]
-        "
+          group-hover:scale-[1.04]
+          ${product.desktopCardImage ? "md:hidden" : ""}
+        `}
       />
 
-      {/* DARK OVERLAY */}
+      {/* Desktop Image */}
+      {product.desktopCardImage && (
+        <img
+          src={product.desktopCardImage}
+          alt={product.title.replace("\n", " ")}
+          loading="lazy"
+          decoding="async"
+          draggable={false}
+          className="
+            absolute
+            inset-0
+            h-full
+            w-full
+            object-contain md:object-cover
+            object-center
+
+            transition-transform
+            duration-[1400ms]
+            ease-[cubic-bezier(0.16,1,0.3,1)]
+
+            group-hover:scale-[1.04]
+            hidden
+            md:block
+          "
+        />
+      )}
 
       <div
         className="
@@ -572,13 +599,14 @@ function AnimatedMilitaryCard({
         <h3
           className="
             whitespace-pre-line
-            text-[clamp(27px,4vw,55px)]
+            text-[clamp(24px,7vw,55px)]
             font-black
             uppercase
-            leading-[0.84]
+            leading-[0.9]
+            sm:leading-[0.84]
             tracking-[-0.05em]
             text-white
-            drop-shadow-[0_3px_15px_rgba(0,0,0,0.9)]
+            
 
             transition-transform
             duration-700
@@ -592,11 +620,15 @@ function AnimatedMilitaryCard({
 
         <div
           className="
-            mt-4
+            mt-3
+            sm:mt-4
             flex
-            items-end
+            flex-col
+            sm:flex-row
+            sm:items-end
             justify-between
-            gap-4
+            gap-2
+            sm:gap-4
             opacity-80
             transition-all
             duration-700
@@ -605,8 +637,9 @@ function AnimatedMilitaryCard({
         >
           <p
             className="
-              max-w-[72%]
-              text-[7px]
+              max-w-full
+              sm:max-w-[72%]
+              text-[8px]
               font-medium
               uppercase
               leading-[1.5]
@@ -622,7 +655,8 @@ function AnimatedMilitaryCard({
           <span
             className="
               shrink-0
-              text-[8px]
+              text-[9px]
+              sm:text-[8px]
               font-medium
               uppercase
               tracking-[0.08em]

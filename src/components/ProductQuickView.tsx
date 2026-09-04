@@ -8,6 +8,7 @@ export interface Product {
   number: string;
   title: string;
   cardImage: string;
+  desktopCardImage?: string;
   quickViewImage: string;
   description: string;
   featured?: boolean;

@@ -586,7 +586,7 @@ function Production() {
                           w-1.5
                           rounded-full
                           bg-[#d93232]
-                          shadow-[0_0_10px_rgba(217,50,50,0.8)]
+                          
                         "
                       />
 

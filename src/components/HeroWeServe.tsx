@@ -33,7 +33,7 @@ const heroes: Hero[] = [
   {
     number: "04",
     title: "Officer",
-    image: "/converted-webp/webp-officer.webp",
+    image: "/converted-webp/webp-officer-desktop.webp",
     description: "Professional footwear for those who lead.",
   },
   {
@@ -451,7 +451,7 @@ function HeroesWeServe() {
                     absolute
                     left-1/2
                     top-1/2
-                    h-[390px]
+                    h-[440px]
                     w-[245px]
                     cursor-pointer
                     overflow-hidden
@@ -461,11 +461,11 @@ function HeroesWeServe() {
                     bg-[#101010]
                     shadow-[0_30px_80px_rgba(0,0,0,0.7)]
 
-                    sm:h-[460px]
+                    sm:h-[520px]
                     sm:w-[290px]
                     sm:rounded-[32px]
 
-                    lg:h-[520px]
+                    lg:h-[590px]
                     lg:w-[330px]
                     lg:rounded-[36px]
 
@@ -534,7 +534,7 @@ function HeroesWeServe() {
                       duration-[1400ms]
                       ease-out
 
-                      hover:scale-[1.06]
+                      hover:scale-[1.04]
                     "
                   />
 
@@ -551,7 +551,7 @@ function HeroesWeServe() {
                   />
 
                   <div
-                    className="
+                    className={`
                       absolute
                       inset-x-0
                       bottom-0
@@ -560,7 +560,10 @@ function HeroesWeServe() {
                       from-black
                       via-black/65
                       to-transparent
-                    "
+                      transition-opacity
+                      duration-500
+                      ${isCenter ? "opacity-0" : "opacity-100"}
+                    `}
                   />
 
                   <div
@@ -632,7 +635,7 @@ function HeroesWeServe() {
                         leading-[0.88]
                         tracking-[-0.045em]
                         text-white
-                        drop-shadow-[0_4px_15px_rgba(0,0,0,0.9)]
+                        drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]
                       "
                     >
                       {hero.title}
@@ -646,8 +649,9 @@ function HeroesWeServe() {
                           uppercase
                           leading-[1.6]
                           tracking-[0.08em]
-                          text-white/60
+                          text-white/80
                           sm:text-[9px]
+                          drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]
                         "
                       >
                         {hero.description}

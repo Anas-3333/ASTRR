@@ -189,7 +189,7 @@ function Header() {
 
           <button
             type="button"
-            onClick={() => scrollToSection("military")}
+            onClick={() => scrollToSection("military-shoes")}
             className="
               text-[14px]
               font-medium

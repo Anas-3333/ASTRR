@@ -88,7 +88,7 @@ function SafetyShoes() {
     <>
       <section
         ref={sectionRef}
-        id="safety-shoes"
+        id="military-shoes"
         className="
           relative
           w-full

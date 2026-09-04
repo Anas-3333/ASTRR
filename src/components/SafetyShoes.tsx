@@ -8,7 +8,7 @@ const shoes: Product[] = [
     number: "01",
     title: "COMBAT\nFORCES",
     cardImage: "/converted-webp/webp-combat.webp",
-    quickViewImage: "/converted-webp/combat_quickview.webp",
+    quickViewImage: "/converted-webp/MIL1.webp",
     description:
       "TACTICAL FOOTWEAR | GRIP • DURABILITY • CONTROL",
   },

@@ -3,7 +3,6 @@ import { useEffect } from "react";
 /* =========================================================
    SHARED PRODUCT TYPE
 ========================================================= */
-
 export interface Product {
   number: string;
   title: string;
@@ -17,7 +16,6 @@ export interface Product {
 /* =========================================================
    PROPS
 ========================================================= */
-
 type ProductQuickViewProps = {
   product: Product | null;
   onClose: () => void;
@@ -26,138 +24,88 @@ type ProductQuickViewProps = {
 /* =========================================================
    COMPONENT
 ========================================================= */
-
 function ProductQuickView({
   product,
   onClose,
 }: ProductQuickViewProps) {
-
   /* =======================================================
      ESC KEY
   ======================================================== */
-
   useEffect(() => {
     if (!product) {
+      document.body.style.overflow = "";
       return;
     }
-
-    const handleKeyDown = (
-      event: KeyboardEvent
-    ) => {
-      if (event.key === "Escape") {
-        onClose();
-      }
+    
+    document.body.style.overflow = "hidden";
+    
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
     };
-
-    document.addEventListener(
-      "keydown",
-      handleKeyDown
-    );
-
+    
+    window.addEventListener("keydown", handleEsc);
+    
     return () => {
-      document.removeEventListener(
-        "keydown",
-        handleKeyDown
-      );
+      window.removeEventListener("keydown", handleEsc);
+      document.body.style.overflow = "";
     };
   }, [product, onClose]);
 
-  /* =======================================================
-     LOCK BODY SCROLL
-  ======================================================== */
-
-  useEffect(() => {
-    if (!product) {
-      return;
-    }
-
-    const previousOverflow =
-      document.body.style.overflow;
-
-    document.body.style.overflow =
-      "hidden";
-
-    return () => {
-      document.body.style.overflow =
-        previousOverflow;
-    };
-  }, [product]);
-
-  /* =======================================================
-     CLOSED
-  ======================================================== */
-
-  if (!product) {
-    return null;
-  }
+  if (!product) return null;
 
   return (
     <div
       className="
         fixed
         inset-0
-        z-[9999]
+        z-[100]
         flex
         items-center
         justify-center
-        bg-black/80
-        p-3
-        backdrop-blur-[8px]
-        sm:p-5
-        lg:p-8
+        px-4
+        py-8
+        sm:p-8
+        lg:p-12
+        animate-[fadeIn_0.3s_ease-out]
       "
-      onClick={onClose}
     >
-      {/* ===================================================
-          MODAL
-      ==================================================== */}
+      {/* BACKDROP */}
+      <div
+        className="
+          absolute
+          inset-0
+          bg-black/80
+          backdrop-blur-sm
+        "
+        onClick={onClose}
+      />
 
+      {/* MODAL */}
       <div
         className="
           relative
+          z-10
           flex
-          max-h-[94vh]
+          h-full
           w-full
-          max-w-[1180px]
+          max-w-[1200px]
+          flex-col
           overflow-hidden
-          rounded-[18px]
+          bg-[#0a0a0a]
           border
           border-white/10
-          bg-[#0c0c0c]
-          shadow-[0_0_80px_rgba(0,0,0,0.8)]
-          max-lg:flex-col
+          animate-[modalIn_0.4s_ease-out]
+          lg:flex-row
         "
-        onClick={(event) =>
-          event.stopPropagation()
-        }
       >
-        {/* RED BORDER */}
-
-        <div
-          className="
-            pointer-events-none
-            absolute
-            inset-0
-            z-40
-            rounded-[18px]
-            ring-1
-            ring-inset
-            ring-[#d93232]/40
-          "
-        />
-
-        {/* =================================================
-            CLOSE
-        ================================================== */}
-
+        {/* CLOSE BUTTON */}
         <button
           type="button"
-          aria-label="Close product preview"
           onClick={onClose}
           className="
             absolute
-            right-4
-            top-4
+            right-5
+            top-5
             z-50
             flex
             h-10
@@ -165,52 +113,38 @@ function ProductQuickView({
             items-center
             justify-center
             rounded-full
-            border
-            border-white/20
-            bg-black/70
-            text-2xl
-            font-light
-            text-white/80
+            bg-white/5
+            text-white/60
             backdrop-blur-md
-            transition-all
-            duration-300
-            hover:border-[#d93232]
+            transition-colors
             hover:bg-[#d93232]
             hover:text-white
-            sm:right-5
-            sm:top-5
           "
         >
-          ×
+          ✕
         </button>
 
         {/* =================================================
-            IMAGE
+            IMAGE CONTAINER
         ================================================== */}
-
         <div
           className="
             relative
             flex
-            min-h-[330px]
             w-full
+            shrink-0
             items-center
             justify-center
-            overflow-hidden
-            bg-[#111]
-            sm:min-h-[400px]
-            lg:min-h-[650px]
+            bg-[#111111]
             lg:w-[58%]
           "
         >
-          {/* LIGHT */}
-
+          {/* GLOW BACKGROUND */}
           <div
             className="
-              pointer-events-none
               absolute
-              left-1/2
               top-1/2
+              left-1/2
               h-[55%]
               w-[65%]
               -translate-x-1/2
@@ -220,9 +154,8 @@ function ProductQuickView({
               blur-[100px]
             "
           />
-
+          
           {/* TOP LINE */}
-
           <div
             className="
               absolute
@@ -239,9 +172,8 @@ function ProductQuickView({
               sm:right-10
             "
           />
-
+          
           {/* PRODUCT IMAGE */}
-
           <img
             src={product.quickViewImage}
             alt={product.title.replace(
@@ -265,9 +197,8 @@ function ProductQuickView({
               lg:p-12
             "
           />
-
+          
           {/* PRODUCT NUMBER */}
-
           <div
             className="
               absolute
@@ -282,9 +213,8 @@ function ProductQuickView({
           >
             PRODUCT {product.number}
           </div>
-
+          
           {/* RED DOT */}
-
           <div
             className="
               absolute
@@ -302,7 +232,6 @@ function ProductQuickView({
         {/* =================================================
             INFORMATION
         ================================================== */}
-
         <div
           className="
             flex
@@ -319,7 +248,6 @@ function ProductQuickView({
           "
         >
           {/* LABEL */}
-
           <p
             className="
               mb-4
@@ -332,9 +260,8 @@ function ProductQuickView({
           >
             BUILT FOR THE MISSION
           </p>
-
+          
           {/* TITLE */}
-
           <h2
             className="
               whitespace-pre-line
@@ -350,9 +277,8 @@ function ProductQuickView({
           >
             {product.title}
           </h2>
-
+          
           {/* ACCENT */}
-
           <div
             className="
               mt-6
@@ -361,9 +287,8 @@ function ProductQuickView({
               bg-[#d93232]
             "
           />
-
+          
           {/* DESCRIPTION */}
-
           <p
             className="
               mt-6
@@ -380,11 +305,10 @@ function ProductQuickView({
             advanced grip and all-day
             performance.
           </p>
-
+          
           {/* =================================================
               FEATURES
           ================================================== */}
-
           <div
             className="
               mt-7
@@ -398,25 +322,21 @@ function ProductQuickView({
               title="Extreme"
               subtitle="Durability"
             />
-
             <Feature
               title="Advanced"
               subtitle="Grip"
             />
-
             <Feature
               title="Ergonomic"
               subtitle="Comfort"
             />
-
             <Feature
               title="Mission"
               subtitle="Ready"
             />
           </div>
-
+          
           {/* CATEGORY */}
-
           <div
             className="
               mt-7
@@ -436,7 +356,6 @@ function ProductQuickView({
             >
               CATEGORY
             </p>
-
             <p
               className="
                 mt-1
@@ -449,11 +368,10 @@ function ProductQuickView({
               {product.description}
             </p>
           </div>
-
+          
           {/* =================================================
               ACTIONS
           ================================================== */}
-
           <div
             className="
               mt-7
@@ -484,7 +402,6 @@ function ProductQuickView({
             >
               Explore Product →
             </button>
-
             <button
               type="button"
               className="
@@ -512,11 +429,10 @@ function ProductQuickView({
           </div>
         </div>
       </div>
-
+      
       {/* =====================================================
           ANIMATION
       ====================================================== */}
-
       <style>
         {`
           @keyframes fadeIn {
@@ -527,7 +443,6 @@ function ProductQuickView({
               opacity: 1;
             }
           }
-
           @keyframes modalIn {
             from {
               opacity: 0;
@@ -538,7 +453,6 @@ function ProductQuickView({
               transform: scale(1) translateY(0);
             }
           }
-
           @media (prefers-reduced-motion: reduce) {
             *,
             *::before,
@@ -557,7 +471,6 @@ function ProductQuickView({
 /* =========================================================
    FEATURE
 ========================================================= */
-
 type FeatureProps = {
   title: string;
   subtitle: string;
@@ -584,7 +497,6 @@ function Feature({
       >
         ◇
       </span>
-
       <div>
         <p
           className="
@@ -597,7 +509,6 @@ function Feature({
         >
           {title}
         </p>
-
         <p
           className="
             text-[10px]

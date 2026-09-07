@@ -140,9 +140,9 @@ function ProductQuickView({
         </button>
 
         {/* BRAND BADGE (Top Right styling) */}
-        <div className="absolute right-20 top-0 hidden lg:flex">
+        <div className="absolute right-20 top-0 hidden lg:flex z-50 origin-top scale-[0.85]">
           <div className="relative">
-            <svg width="70" height="90" viewBox="0 0 70 90" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-[#d93232]">
+            <svg width="70" height="90" viewBox="0 0 70 90" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-[#d93232] drop-shadow-lg">
               <path d="M0 0H70V60.5L35 90L0 60.5V0Z" fill="currentColor" />
             </svg>
             <div className="absolute inset-0 flex flex-col items-center pt-5">

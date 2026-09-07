@@ -8,13 +8,7 @@ const militaryShoes: Product[] = [
     number: "01",
     title: "Oil & Gas",
     cardImage: "/converted-webp/webp-oil & gas.webp",
-    quickViewImage: "/Astrr-security-photos/BM-1.webp",
-    galleryImages: [
-      "/Astrr-security-photos/BM-1.webp",
-      "/Astrr-security-photos/black-2.webp",
-      "/Astrr-security-photos/black-3.webp",
-      "/Astrr-security-photos/black-4.webp",
-    ],
+    quickViewImage: "/converted-webp/webp-oil & gas.webp",
     description:
       "TACTICAL FOOTWEAR | GRIP • DURABILITY • CONTROL",
   },
@@ -215,7 +209,7 @@ function MilitaryShoes() {
               bg-black
 
               md:grid-cols-2
-              md:auto-rows-[clamp(250px,28vw,1000px)]
+              md:auto-rows-[clamp(250px,26vw,3000px)]
 
 
             "
@@ -422,19 +416,19 @@ function AnimatedMilitaryCard({
       className={`
         group
         relative
-        min-h-[clamp(280px,70vw,800px)]
         w-full
         cursor-pointer
         overflow-hidden
         bg-[#111]
         outline-none
+        aspect-[4/3]
+        md:aspect-auto
 
         transform
         transition-all
         duration-[1200ms]
         ease-[cubic-bezier(0.16,1,0.3,1)]
 
-        md:min-h-0
         md:h-full
 
         ${
@@ -605,7 +599,7 @@ function AnimatedMilitaryCard({
         <h3
           className="
             whitespace-pre-line
-            text-[clamp(24px,7vw,55px)]
+            text-[clamp(24px,4vw,100px)]
             font-black
             uppercase
             leading-[0.9]
@@ -645,14 +639,12 @@ function AnimatedMilitaryCard({
             className="
               max-w-full
               sm:max-w-[72%]
-              text-[8px]
+              text-[clamp(8px,1vw,20px)]
               font-medium
               uppercase
               leading-[1.5]
               tracking-[0.07em]
               text-white/80
-              sm:text-[8px]
-              lg:text-[9px]
             "
           >
             {product.description}
@@ -661,8 +653,7 @@ function AnimatedMilitaryCard({
           <span
             className="
               shrink-0
-              text-[9px]
-              sm:text-[8px]
+              text-[clamp(9px,1.2vw,22px)]
               font-medium
               uppercase
               tracking-[0.08em]

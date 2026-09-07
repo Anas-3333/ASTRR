@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Feather, Grid3x3, Activity, ShieldCheck, Star } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Feather, Grid3x3, Activity, ShieldCheck, Star, ChevronLeft, ChevronRight } from "lucide-react";
 
 /* =========================================================
    SHARED PRODUCT TYPE
@@ -31,6 +31,15 @@ function ProductQuickView({
   onClose,
 }: ProductQuickViewProps) {
   const [activeImage, setActiveImage] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollGallery = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const { scrollLeft, clientWidth } = scrollRef.current;
+      const scrollTo = direction === 'left' ? scrollLeft - clientWidth / 2 : scrollLeft + clientWidth / 2;
+      scrollRef.current.scrollTo({ left: scrollTo, behavior: 'smooth' });
+    }
+  };
 
   /* =======================================================
      ESC KEY
@@ -229,27 +238,48 @@ function ProductQuickView({
             BOTTOM SECTION: Gallery
         ================================================== */}
         <div className="p-8 lg:px-12 flex flex-col gap-8 pb-10 shrink-0">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
-            {gallery.map((img, idx) => (
-              <div 
-                key={idx} 
-                className={`relative flex cursor-pointer flex-col items-center justify-center rounded-lg border p-4 transition-all duration-300 ${
-                  activeImage === idx 
-                    ? 'border-[#d93232] bg-[#d93232]/5' 
-                    : 'border-white/10 bg-white/5 hover:border-white/30'
-                }`}
-                onClick={() => setActiveImage(idx)}
-              >
-                <img 
-                  src={img} 
-                  alt={`${product.title.replace("\n", " ")} view ${idx + 1}`} 
-                  className="h-32 lg:h-40 w-full object-contain mix-blend-screen" 
-                />
-                <div className="mt-4 text-[10px] font-bold text-white/50 uppercase tracking-widest">
-                  {idx === 0 ? "SIDE VIEW" : idx === 1 ? "BACK VIEW" : idx === 2 ? "FRONT VIEW" : "SOLE VIEW"}
+          <div className="relative group">
+            {/* Left Navigation */}
+            <button
+              onClick={() => scrollGallery('left')}
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 lg:-translate-x-5 z-10 hidden h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur hover:bg-[#d93232] transition-colors sm:group-hover:flex border border-white/20"
+            >
+              <ChevronLeft className="h-6 w-6" />
+            </button>
+
+            {/* Right Navigation */}
+            <button
+              onClick={() => scrollGallery('right')}
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 lg:translate-x-5 z-10 hidden h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur hover:bg-[#d93232] transition-colors sm:group-hover:flex border border-white/20"
+            >
+              <ChevronRight className="h-6 w-6" />
+            </button>
+
+            <div 
+              ref={scrollRef}
+              className="flex gap-4 lg:gap-6 overflow-x-auto snap-x snap-mandatory py-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            >
+              {gallery.map((img, idx) => (
+                <div 
+                  key={idx} 
+                  className={`shrink-0 snap-start w-[calc(50%-0.5rem)] md:w-[calc(25%-0.75rem)] lg:w-[calc(25%-1.125rem)] min-w-[200px] relative flex cursor-pointer flex-col items-center justify-center rounded-lg border p-4 transition-all duration-300 ${
+                    activeImage === idx 
+                      ? 'border-[#d93232] bg-[#d93232]/5' 
+                      : 'border-white/10 bg-white/5 hover:border-white/30'
+                  }`}
+                  onClick={() => setActiveImage(idx)}
+                >
+                  <img 
+                    src={img} 
+                    alt={`${product.title.replace("\n", " ")} view ${idx + 1}`} 
+                    className="h-32 lg:h-40 w-full object-contain mix-blend-screen" 
+                  />
+                  <div className="mt-4 text-[10px] font-bold text-white/50 uppercase tracking-widest text-center whitespace-nowrap overflow-hidden text-ellipsis w-full">
+                    {idx === 0 ? "SIDE VIEW" : idx === 1 ? "BACK VIEW" : idx === 2 ? "FRONT VIEW" : idx === 3 ? "SOLE VIEW" : `VIEW 0${idx + 1}`}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
           <div className="text-center pt-2">

@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Feather, Grid3x3, Activity, ShieldCheck, Star } from "lucide-react";
 
 /* =========================================================
    SHARED PRODUCT TYPE
@@ -11,6 +12,7 @@ export interface Product {
   quickViewImage: string;
   description: string;
   featured?: boolean;
+  galleryImages?: string[]; // Array of gallery images
 }
 
 /* =========================================================
@@ -28,6 +30,8 @@ function ProductQuickView({
   product,
   onClose,
 }: ProductQuickViewProps) {
+  const [activeImage, setActiveImage] = useState(0);
+
   /* =======================================================
      ESC KEY
   ======================================================== */
@@ -38,6 +42,7 @@ function ProductQuickView({
     }
     
     document.body.style.overflow = "hidden";
+    setActiveImage(0); // reset image index on new product
     
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -52,6 +57,14 @@ function ProductQuickView({
   }, [product, onClose]);
 
   if (!product) return null;
+
+  // Fallback gallery images if none provided (4 same images for now)
+  const gallery = product.galleryImages || [
+    product.quickViewImage,
+    product.quickViewImage,
+    product.quickViewImage,
+    product.quickViewImage,
+  ];
 
   return (
     <div
@@ -74,8 +87,8 @@ function ProductQuickView({
         className="
           absolute
           inset-0
-          bg-black/80
-          backdrop-blur-sm
+          bg-black/90
+          backdrop-blur-md
         "
         onClick={onClose}
       />
@@ -87,15 +100,17 @@ function ProductQuickView({
           z-10
           flex
           h-full
+          max-h-[95vh]
           w-full
-          max-w-[1200px]
+          max-w-[1280px]
           flex-col
-          overflow-hidden
+          overflow-y-auto
+          overflow-x-hidden
           bg-[#0a0a0a]
           border
           border-white/10
+          rounded-xl
           animate-[modalIn_0.4s_ease-out]
-          lg:flex-row
         "
       >
         {/* CLOSE BUTTON */}
@@ -124,343 +139,135 @@ function ProductQuickView({
           ✕
         </button>
 
-        {/* =================================================
-            IMAGE CONTAINER
-        ================================================== */}
-        <div
-          className="
-            relative
-            flex
-            w-full
-            shrink-0
-            items-center
-            justify-center
-            bg-[#111111]
-            lg:w-[58%]
-          "
-        >
-          {/* GLOW BACKGROUND */}
-          <div
-            className="
-              absolute
-              top-1/2
-              left-1/2
-              h-[55%]
-              w-[65%]
-              -translate-x-1/2
-              -translate-y-1/2
-              rounded-full
-              bg-[#d93232]/10
-              blur-[100px]
-            "
-          />
-          
-          {/* TOP LINE */}
-          <div
-            className="
-              absolute
-              left-8
-              right-8
-              top-8
-              h-px
-              bg-gradient-to-r
-              from-[#d93232]
-              via-white/10
-              to-transparent
-              opacity-70
-              sm:left-10
-              sm:right-10
-            "
-          />
-          
-          {/* PRODUCT IMAGE */}
-          <img
-            src={product.quickViewImage}
-            alt={product.title.replace(
-              "\n",
-              " "
-            )}
-            draggable={false}
-            decoding="async"
-            className="
-              relative
-              z-10
-              h-full
-              max-h-[580px]
-              w-full
-              object-contain
-              p-8
-              transition-transform
-              duration-700
-              hover:scale-[1.025]
-              sm:p-10
-              lg:p-12
-            "
-          />
-          
-          {/* PRODUCT NUMBER */}
-          <div
-            className="
-              absolute
-              bottom-6
-              left-6
-              text-[10px]
-              font-medium
-              uppercase
-              tracking-[0.2em]
-              text-white/35
-            "
-          >
-            PRODUCT {product.number}
+        {/* BRAND BADGE (Top Right styling) */}
+        <div className="absolute right-20 top-0 hidden lg:flex">
+          <div className="relative">
+            <svg width="70" height="90" viewBox="0 0 70 90" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-[#d93232]">
+              <path d="M0 0H70V60.5L35 90L0 60.5V0Z" fill="currentColor" />
+            </svg>
+            <div className="absolute inset-0 flex flex-col items-center pt-5">
+              <span className="text-[10px] font-bold uppercase text-white/90">ASTRR</span>
+              <span className="text-[8px] font-medium uppercase text-white/60">APPROVED</span>
+              <ShieldCheck className="mt-2 h-4 w-4 text-white" />
+            </div>
           </div>
-          
-          {/* RED DOT */}
-          <div
-            className="
-              absolute
-              bottom-6
-              right-7
-              h-2
-              w-2
-              rounded-full
-              bg-[#d93232]
-              shadow-[0_0_15px_rgba(217,50,50,0.8)]
-            "
-          />
         </div>
 
         {/* =================================================
-            INFORMATION
+            TOP SECTION: Hero & Features
         ================================================== */}
-        <div
-          className="
-            flex
-            w-full
-            flex-col
-            justify-center
-            overflow-y-auto
-            px-6
-            py-8
-            sm:px-9
-            lg:w-[42%]
-            lg:px-10
-            lg:py-10
-          "
-        >
-          {/* LABEL */}
-          <p
-            className="
-              mb-4
-              text-[9px]
-              font-medium
-              uppercase
-              tracking-[0.25em]
-              text-white/40
-            "
-          >
-            BUILT FOR THE MISSION
-          </p>
+        <div className="flex flex-col lg:flex-row min-h-[450px] shrink-0">
           
-          {/* TITLE */}
-          <h2
-            className="
-              whitespace-pre-line
-              text-[38px]
-              font-black
-              uppercase
-              leading-[0.84]
-              tracking-[-0.045em]
-              text-white
-              sm:text-[48px]
-              lg:text-[56px]
-            "
-          >
-            {product.title}
-          </h2>
-          
-          {/* ACCENT */}
-          <div
-            className="
-              mt-6
-              h-[2px]
-              w-14
-              bg-[#d93232]
-            "
-          />
-          
-          {/* DESCRIPTION */}
-          <p
-            className="
-              mt-6
-              max-w-[470px]
-              text-[13px]
-              leading-6
-              text-white/55
-              sm:text-sm
-            "
-          >
-            Engineered for demanding
-            environments, ASTRR tactical
-            footwear combines durability,
-            advanced grip and all-day
-            performance.
-          </p>
-          
-          {/* =================================================
-              FEATURES
-          ================================================== */}
-          <div
-            className="
-              mt-7
-              grid
-              grid-cols-2
-              gap-x-6
-              gap-y-6
-            "
-          >
-            <Feature
-              title="Extreme"
-              subtitle="Durability"
-            />
-            <Feature
-              title="Advanced"
-              subtitle="Grip"
-            />
-            <Feature
-              title="Ergonomic"
-              subtitle="Comfort"
-            />
-            <Feature
-              title="Mission"
-              subtitle="Ready"
-            />
-          </div>
-          
-          {/* CATEGORY */}
-          <div
-            className="
-              mt-7
-              border-t
-              border-white/10
-              pt-5
-            "
-          >
-            <p
-              className="
-                text-[9px]
-                font-medium
-                uppercase
-                tracking-[0.18em]
-                text-white/30
-              "
-            >
-              CATEGORY
+          {/* LEFT: Text & List */}
+          <div className="flex w-full flex-col justify-center p-8 lg:w-[40%] lg:pl-12 lg:pr-6 pt-16 lg:pt-12">
+            <h4 className="text-[14px] font-bold text-[#d93232] tracking-wider uppercase mb-2">
+              ENGINEERED GEAR
+            </h4>
+            <h2 className="text-[42px] leading-[0.9] font-black text-white uppercase tracking-[-0.04em] mb-4 whitespace-pre-line">
+              {product.title}
+            </h2>
+            <p className="text-[13px] font-medium text-white/60 uppercase tracking-widest mb-10">
+              LIGHT ON WEIGHT.<br/>HEAVY ON PERFORMANCE.
             </p>
-            <p
-              className="
-                mt-1
-                text-[10px]
-                uppercase
-                tracking-wide
-                text-white/60
-              "
-            >
-              {product.description}
-            </p>
+
+            <div className="flex flex-col gap-8">
+              <DetailedFeature 
+                icon={<Feather className="h-5 w-5" />} 
+                title="ULTRA LIGHTWEIGHT" 
+                desc="Designed for all-day comfort & ease." 
+              />
+              <DetailedFeature 
+                icon={<Grid3x3 className="h-5 w-5" />} 
+                title="BREATHABLE MESH" 
+                desc="Keeps your feet cool and fresh." 
+              />
+              <DetailedFeature 
+                icon={<Activity className="h-5 w-5" />} 
+                title="SHOCK ABSORBING SOLE" 
+                desc="Superior cushioning with every step." 
+              />
+              <DetailedFeature 
+                icon={<ShieldCheck className="h-5 w-5" />} 
+                title="ANTI-SLIP OUTSOLE" 
+                desc="Maximum grip for all terrains." 
+              />
+            </div>
           </div>
-          
-          {/* =================================================
-              ACTIONS
-          ================================================== */}
-          <div
-            className="
-              mt-7
-              flex
-              flex-col
-              gap-3
-            "
-          >
-            <button
-              type="button"
-              className="
-                w-full
-                rounded-md
-                bg-[#d93232]
-                px-6
-                py-4
-                text-[11px]
-                font-semibold
-                uppercase
-                tracking-[0.08em]
-                text-white
-                shadow-[0_0_25px_rgba(217,50,50,0.2)]
-                transition-all
-                duration-300
-                hover:bg-[#ef3d3d]
-                hover:shadow-[0_0_35px_rgba(217,50,50,0.4)]
-              "
-            >
-              Explore Product →
-            </button>
-            <button
-              type="button"
-              className="
-                w-full
-                rounded-md
-                border
-                border-white/15
-                bg-transparent
-                px-6
-                py-4
-                text-[11px]
-                font-medium
-                uppercase
-                tracking-[0.08em]
-                text-white/75
-                transition-all
-                duration-300
-                hover:border-white/35
-                hover:bg-white/5
-                hover:text-white
-              "
-            >
-              Enquire Now
-            </button>
+
+          {/* RIGHT: Main Image */}
+          <div className="relative flex w-full items-center justify-center p-8 lg:w-[60%]">
+            {/* GLOW */}
+            <div className="absolute left-1/2 top-1/2 h-[60%] w-[60%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#d93232]/15 blur-[120px]" />
+            <img 
+              src={gallery[activeImage]} 
+              alt={product.title.replace("\n", " ")} 
+              draggable={false}
+              className="relative z-10 w-full max-w-[550px] h-auto max-h-[500px] object-contain drop-shadow-2xl transition-transform duration-700 hover:scale-[1.02]"
+            />
           </div>
         </div>
+
+        {/* =================================================
+            MIDDLE BAR: Horizontal Specs
+        ================================================== */}
+        <div className="mx-8 lg:mx-12 border-y border-white/10 py-5 shrink-0">
+          <div className="flex flex-wrap justify-between gap-4">
+            <SpecItem title="LIGHTWEIGHT FEEL" />
+            <div className="hidden w-px bg-white/10 md:block" />
+            <SpecItem title="ALL DAY COMFORT" />
+            <div className="hidden w-px bg-white/10 md:block" />
+            <SpecItem title="PREMIUM QUALITY" />
+            <div className="hidden w-px bg-white/10 md:block" />
+            <SpecItem title="TRENDY & STYLISH" />
+          </div>
+        </div>
+
+        {/* =================================================
+            BOTTOM SECTION: Gallery
+        ================================================== */}
+        <div className="p-8 lg:px-12 flex flex-col gap-8 pb-10 shrink-0">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
+            {gallery.map((img, idx) => (
+              <div 
+                key={idx} 
+                className={`relative flex cursor-pointer flex-col items-center justify-center rounded-lg border p-4 transition-all duration-300 ${
+                  activeImage === idx 
+                    ? 'border-[#d93232] bg-[#d93232]/5' 
+                    : 'border-white/10 bg-white/5 hover:border-white/30'
+                }`}
+                onClick={() => setActiveImage(idx)}
+              >
+                <img 
+                  src={img} 
+                  alt={`${product.title.replace("\n", " ")} view ${idx + 1}`} 
+                  className="h-32 lg:h-40 w-full object-contain mix-blend-screen" 
+                />
+                <div className="mt-4 text-[10px] font-bold text-white/50 uppercase tracking-widest">
+                  {idx === 0 ? "SIDE VIEW" : idx === 1 ? "BACK VIEW" : idx === 2 ? "FRONT VIEW" : "SOLE VIEW"}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center pt-2">
+            <p className="text-[11px] font-medium tracking-[0.3em] text-white/40 uppercase">
+              STEP INTO <span className="text-[#d93232]">COMFORT</span>. MOVE WITH <span className="text-[#d93232]">STYLE</span>.
+            </p>
+          </div>
+        </div>
+
       </div>
       
-      {/* =====================================================
-          ANIMATION
-      ====================================================== */}
+      {/* ANIMATIONS */}
       <style>
         {`
           @keyframes fadeIn {
-            from {
-              opacity: 0;
-            }
-            to {
-              opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
           }
           @keyframes modalIn {
-            from {
-              opacity: 0;
-              transform: scale(0.96) translateY(12px);
-            }
-            to {
-              opacity: 1;
-              transform: scale(1) translateY(0);
-            }
-          }
-          @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-              animation-duration: 0.01ms !important;
-              animation-iteration-count: 1 !important;
-              transition-duration: 0.01ms !important;
-            }
+            from { opacity: 0; transform: scale(0.96) translateY(12px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
           }
         `}
       </style>
@@ -469,56 +276,27 @@ function ProductQuickView({
 }
 
 /* =========================================================
-   FEATURE
+   FEATURE COMPONENT
 ========================================================= */
-type FeatureProps = {
-  title: string;
-  subtitle: string;
-};
-
-function Feature({
-  title,
-  subtitle,
-}: FeatureProps) {
+function DetailedFeature({ icon, title, desc }: { icon: React.ReactNode, title: string, desc: string }) {
   return (
-    <div
-      className="
-        flex
-        items-start
-        gap-3
-      "
-    >
-      <span
-        className="
-          mt-0.5
-          text-lg
-          text-white/60
-        "
-      >
-        ◇
-      </span>
-      <div>
-        <p
-          className="
-            text-[11px]
-            font-medium
-            uppercase
-            tracking-wide
-            text-white/85
-          "
-        >
-          {title}
-        </p>
-        <p
-          className="
-            text-[10px]
-            uppercase
-            text-white/35
-          "
-        >
-          {subtitle}
-        </p>
+    <div className="flex items-center gap-5">
+      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#d93232]/30 bg-[#d93232]/10 text-[#d93232]">
+        {icon}
       </div>
+      <div>
+        <h5 className="text-[12px] font-bold text-white uppercase tracking-wider">{title}</h5>
+        <p className="text-[11px] text-white/50 mt-0.5">{desc}</p>
+      </div>
+    </div>
+  );
+}
+
+function SpecItem({ title }: { title: string }) {
+  return (
+    <div className="flex flex-1 items-center justify-center gap-3">
+      <Star className="h-4 w-4 text-white/50" />
+      <span className="text-[10px] font-bold text-white/80 uppercase tracking-widest">{title}</span>
     </div>
   );
 }

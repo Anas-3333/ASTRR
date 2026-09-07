@@ -8,7 +8,13 @@ const militaryShoes: Product[] = [
     number: "01",
     title: "Oil & Gas",
     cardImage: "/converted-webp/webp-oil & gas.webp",
-    quickViewImage: "/converted-webp/webp-oil & gas.webp",
+    quickViewImage: "/Astrr-security-photos/BM-1.webp",
+    galleryImages: [
+      "/Astrr-security-photos/BM-1.webp",
+      "/Astrr-security-photos/black-2.webp",
+      "/Astrr-security-photos/black-3.webp",
+      "/Astrr-security-photos/black-4.webp",
+    ],
     description:
       "TACTICAL FOOTWEAR | GRIP • DURABILITY • CONTROL",
   },
@@ -461,8 +467,8 @@ function AnimatedMilitaryCard({
           inset-0
           h-full
           w-full
-          object-contain md:object-cover
-          object-center
+          object-cover
+          object-[center_85%]
 
           transition-transform
           duration-[1400ms]
@@ -486,8 +492,8 @@ function AnimatedMilitaryCard({
             inset-0
             h-full
             w-full
-            object-contain md:object-cover
-            object-center
+            object-cover
+            object-[center_85%]
 
             transition-transform
             duration-[1400ms]

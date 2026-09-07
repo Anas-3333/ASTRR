@@ -21,10 +21,10 @@ function App() {
 
       <Profile />
 
-      <SafetyShoes />
-      
       <MilitaryShoe />
 
+      <SafetyShoes />
+      
       <Production />
 
       <Contact />

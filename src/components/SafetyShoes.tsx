@@ -38,22 +38,6 @@ const shoes: Product[] = [
     description:
       "INDUSTRIAL SAFETY | GRIP • DURABILITY",
   },
-  {
-    number: "05",
-    title: "ELITE\nFORCES",
-    cardImage: "/converted-webp/webp-elite.webp",
-    quickViewImage: "/converted-webp/elite_quickview.webp",
-    description:
-      "ELITE FORCES | TACTICAL FOOTWEAR",
-  },
-  {
-    number: "06",
-    title: "TACTICAL\nOPERATIONS",
-    cardImage: "/converted-webp/webp-tactical.webp",
-    quickViewImage: "/converted-webp/webp-tactical.webp",
-    description:
-      "TACTICAL OPERATIONS | GRIP • CONTROL",
-  },
 ];
 
 function SafetyShoes() {
@@ -158,11 +142,11 @@ function SafetyShoes() {
             "
           >
             <span className="text-white">
-              MILITARY
+              Army and
             </span>
 
             <span className="text-[#d93232]">
-              SHOES
+              Defense Shoes
             </span>
           </h2>
 
@@ -187,7 +171,7 @@ function SafetyShoes() {
         </div>
 
         {/* =====================================================
-            EXACT 01-06 GRID
+            EXACT 01-04 GRID
         ====================================================== */}
 
         <div
@@ -276,38 +260,6 @@ function SafetyShoes() {
               className="
                 md:col-start-2
                 md:row-start-3
-              "
-            />
-
-            {/* 05 */}
-
-            <AnimatedShoeCard
-              product={shoes[4]}
-              onClick={() =>
-                setSelectedProduct(shoes[4])
-              }
-              isVisible={isVisible}
-              animation="left"
-              delay={580}
-              className="
-                md:col-start-1
-                md:row-start-4
-              "
-            />
-
-            {/* 06 */}
-
-            <AnimatedShoeCard
-              product={shoes[5]}
-              onClick={() =>
-                setSelectedProduct(shoes[5])
-              }
-              isVisible={isVisible}
-              animation="right"
-              delay={700}
-              className="
-                md:col-start-2
-                md:row-start-4
               "
             />
           </div>
@@ -444,8 +396,8 @@ function AnimatedShoeCard({
           inset-0
           h-full
           w-full
-          object-contain md:object-cover
-          object-center
+          object-cover
+          object-[center_85%]
 
           transition-transform
           duration-[1400ms]
@@ -469,8 +421,8 @@ function AnimatedShoeCard({
             inset-0
             h-full
             w-full
-            object-contain md:object-cover
-            object-center
+            object-cover
+            object-[center_85%]
 
             transition-transform
             duration-[1400ms]

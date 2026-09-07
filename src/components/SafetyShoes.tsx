@@ -192,7 +192,7 @@ function SafetyShoes() {
               bg-black
 
               md:grid-cols-2
-              md:auto-rows-[clamp(180px,25vw,350px)]
+              md:auto-rows-[clamp(250px,28vw,1000px)]
 
 
             "
@@ -351,7 +351,7 @@ function AnimatedShoeCard({
       className={`
         group
         relative
-        min-h-[clamp(260px,65vw,340px)]
+        min-h-[clamp(280px,70vw,800px)]
         w-full
         cursor-pointer
         overflow-hidden

@@ -111,6 +111,9 @@ function ProductQuickView({
           border-white/10
           rounded-xl
           animate-[modalIn_0.4s_ease-out]
+          [&::-webkit-scrollbar]:hidden
+          [-ms-overflow-style:none]
+          [scrollbar-width:none]
         "
       >
         {/* CLOSE BUTTON */}

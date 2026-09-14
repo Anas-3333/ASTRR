@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Feather, Grid3x3, Activity, ShieldCheck, Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { ShieldCheck, Star, ChevronLeft, ChevronRight } from "lucide-react";
 
 /* =========================================================
    SHARED PRODUCT TYPE
@@ -166,56 +166,43 @@ function ProductQuickView({
         </div>
 
         {/* =================================================
-            TOP SECTION: Hero & Features
+            TOP SECTION: Hero & Features (UPDATED)
         ================================================== */}
-        <div className="flex flex-col lg:flex-row min-h-[450px] shrink-0">
-          
-          {/* LEFT: Text & List */}
-          <div className="flex w-full flex-col justify-center p-8 lg:w-[40%] lg:pl-12 lg:pr-6 pt-16 lg:pt-12">
-            <h4 className="text-[14px] font-bold text-[#d93232] tracking-wider uppercase mb-2">
+        <div className="flex flex-col lg:relative lg:h-[550px] w-full shrink-0">
+          {/* TITLE & TEXT (Mobile: top, Desktop: overlay on top-left) */}
+          <div className="order-1 lg:order-none lg:absolute lg:left-12 lg:top-12 z-30 p-8 pb-0 lg:p-0">
+            <h4 className="text-[14px] font-bold text-[#d93232] tracking-wider uppercase mb-2 drop-shadow-md">
               ENGINEERED GEAR
             </h4>
-            <h2 className="text-[42px] leading-[0.9] font-black text-white uppercase tracking-[-0.04em] mb-4 whitespace-pre-line">
+            <h2 className="text-[42px] leading-[0.9] font-black text-white uppercase tracking-[-0.04em] mb-4 whitespace-pre-line drop-shadow-lg">
               {product.title}
             </h2>
-            <p className="text-[13px] font-medium text-white/60 uppercase tracking-widest mb-10">
+            <p className="text-[13px] font-medium text-white/60 uppercase tracking-widest drop-shadow-md">
               LIGHT ON WEIGHT.<br/>HEAVY ON PERFORMANCE.
             </p>
-
-            <div className="flex flex-col gap-8">
-              <DetailedFeature 
-                icon={<Feather className="h-5 w-5" />} 
-                title="ULTRA LIGHTWEIGHT" 
-                desc="Designed for all-day comfort & ease." 
-              />
-              <DetailedFeature 
-                icon={<Grid3x3 className="h-5 w-5" />} 
-                title="BREATHABLE MESH" 
-                desc="Keeps your feet cool and fresh." 
-              />
-              <DetailedFeature 
-                icon={<Activity className="h-5 w-5" />} 
-                title="SHOCK ABSORBING SOLE" 
-                desc="Superior cushioning with every step." 
-              />
-              <DetailedFeature 
-                icon={<ShieldCheck className="h-5 w-5" />} 
-                title="ANTI-SLIP OUTSOLE" 
-                desc="Maximum grip for all terrains." 
-              />
-            </div>
           </div>
 
-          {/* RIGHT: Main Image */}
-          <div className="relative flex w-full items-center justify-center p-8 lg:w-[60%]">
-            {/* GLOW */}
-            <div className="absolute left-1/2 top-1/2 h-[60%] w-[60%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#d93232]/15 blur-[120px]" />
+          {/* OVERLAPPING CATALOG IMAGE (Mobile: below title, Desktop: overlay on left) */}
+          <div className="relative order-2 lg:order-none lg:absolute lg:left-12 lg:bottom-0 lg:top-0 lg:w-[45%] flex items-center justify-center lg:justify-start p-8 lg:p-0 z-20 pointer-events-none mt-4 lg:mt-0 pt-20 lg:pt-24">
+            {/* Added drop shadow for glow effect and assumed transparent bg, object-contain ensures it fits */}
+            <img
+              src={product.quickViewImage}
+              alt="Catalog"
+              className="w-full max-w-[350px] lg:max-w-[450px] h-auto object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.2)]"
+            />
+          </div>
+
+          {/* BACKGROUND / FULL WIDTH IMAGE (Mobile: bottom, Desktop: full width background) */}
+          <div className="relative order-3 lg:order-none lg:absolute lg:inset-0 w-full h-[300px] lg:h-full z-10 lg:rounded-t-xl overflow-hidden">
             <img 
               src={gallery[activeImage]} 
               alt={product.title.replace("\n", " ")} 
               draggable={false}
-              className="relative z-10 w-full max-w-[550px] h-auto max-h-[500px] object-contain drop-shadow-2xl transition-transform duration-700 hover:scale-[1.02]"
+              className="w-full h-full object-cover lg:object-center object-top"
             />
+            {/* Gradient overlay for better text readability on desktop */}
+            <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent pointer-events-none" />
+            <div className="hidden lg:block absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-transparent pointer-events-none h-40" />
           </div>
         </div>
 
@@ -308,22 +295,7 @@ function ProductQuickView({
   );
 }
 
-/* =========================================================
-   FEATURE COMPONENT
-========================================================= */
-function DetailedFeature({ icon, title, desc }: { icon: React.ReactNode, title: string, desc: string }) {
-  return (
-    <div className="flex items-center gap-5">
-      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#d93232]/30 bg-[#d93232]/10 text-[#d93232]">
-        {icon}
-      </div>
-      <div>
-        <h5 className="text-[12px] font-bold text-white uppercase tracking-wider">{title}</h5>
-        <p className="text-[11px] text-white/50 mt-0.5">{desc}</p>
-      </div>
-    </div>
-  );
-}
+
 
 function SpecItem({ title }: { title: string }) {
   return (

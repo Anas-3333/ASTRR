@@ -11,7 +11,7 @@ const productionItems: ProductionItem[] = [
   {
     id: 1,
     image: "https://astrr.co/img/army-shoes/shoedryingandcuring.webp",
-    title: "Shoe Drying and Curing",
+    title: "Shoe Production",
     description:
       "Shoe Drying and Curing properly hardens adhesives and materials for stronger shoe construction.",
   },
@@ -45,7 +45,7 @@ const productionItems: ProductionItem[] = [
   },
   {
     id: 6,
-    image: "https://astrr.co/img/army-shoes/stitching.webp",
+    image: "/converted-webp/webp-Bleather.webp",
     title: "Leather Processing",
     description:
       "Carefully controlled leather processing creates durable and reliable finished products.",
@@ -56,13 +56,6 @@ const productionItems: ProductionItem[] = [
     title: "Manufacturing",
     description:
       "Precision manufacturing supported by advanced technology and skilled craftsmanship.",
-  },
-  {
-    id: 8,
-    image: "/images/production/production-8.webp",
-    title: "ASTRR Standards",
-    description:
-      "Our commitment to quality, safety, sustainability and dependable production.",
   },
 ];
 

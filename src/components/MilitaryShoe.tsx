@@ -49,7 +49,7 @@ const militaryShoes: Product[] = [
   {
     number: "06",
     title: "Factory",
-    cardImage: "/converted-webp/webp-factory.webp",
+    cardImage: "/converted-webp/webp-Mfactory.webp",
     quickViewImage: "/converted-webp/webp-factory.webp",
     description:
       "TACTICAL OPERATIONS | GRIP • CONTROL",

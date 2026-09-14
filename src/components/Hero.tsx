@@ -132,16 +132,16 @@ function Hero() {
               animationDelay: "150ms",
             }}
           >
-            BUILT
+            WHEN IT
             <br />
 
             <span className="text-[#d93232]">
-              FOR THE
+              MATTERS
             </span>
 
             <br />
 
-            MISSION.
+            MOST.
           </h1>
 
           {/* SUPPORTING LINE */}

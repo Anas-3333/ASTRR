@@ -35,7 +35,7 @@ const shoes: Product[] = [
     number: "03",
     title: "EXECUTIVE\nOFFICERS",
     cardImage: "/converted-webp/webp-executiveOfficer.webp",
-    desktopCardImage: "/converted-webp/webp-officer-desktop.webp",
+    desktopCardImage: "/converted-webp/webp-Mofficer.webp",
     quickViewImage: "/converted-webp/webp-executiveOfficer.webp",
     description:
       "EXECUTIVE OFFICERS | TACTICAL FOOTWEAR",

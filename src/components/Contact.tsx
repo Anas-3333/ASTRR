@@ -1,4 +1,36 @@
+import { useState } from "react";
+import { Factory, Settings } from "lucide-react";
+
+const locations = [
+  {
+    id: "registered-office",
+    title: "Registered Office",
+    address: "54-A Sanjay Nagar, Jajmau,\nKanpur – 208010, U.P. INDIA",
+    mapQuery: "54-A+Sanjay+Nagar,+Jajmau,+Kanpur,+Uttar+Pradesh+208010",
+    pill: null,
+    icon: null,
+  },
+  {
+    id: "unit-2",
+    title: "Manufacturing Unit",
+    address: "126 Iqbal Street, Jajmau,\nKanpur – 208010, U.P. INDIA",
+    mapQuery: "126+Iqbal+Street,+Jajmau,+Kanpur,+Uttar+Pradesh+208010",
+    pill: "UNIT II",
+    icon: <Factory size={20} className="text-white/40" />,
+  },
+  {
+    id: "unit-3",
+    title: "Operations Center",
+    address: "150 Feet Road, Jajmau,\nKanpur – 208010, U.P. INDIA",
+    mapQuery: "150+Feet+Road,+Jajmau,+Kanpur,+Uttar+Pradesh+208010",
+    pill: "UNIT III",
+    icon: <Settings size={20} className="text-white/40" />,
+  },
+];
+
 function Contact() {
+  const [activeLocation, setActiveLocation] = useState(locations[0]);
+
   const scrollToContactForm = () => {
     document
       .getElementById("contact-form")
@@ -346,7 +378,7 @@ function Contact() {
                       text-white/75
                     "
                   >
-                    +91-961-6242222
+                    +91-961-6242222 , +91-979-2722136
                   </p>
                 </div>
               </div>
@@ -392,7 +424,7 @@ function Contact() {
                       text-white/75
                     "
                   >
-                    info@astrr.co
+                    info@aligtannery.com
                   </p>
                 </div>
               </div>
@@ -763,97 +795,192 @@ function Contact() {
       <section
         className="
           relative
-          bg-black
+          bg-[#050505]
           py-16
+          border-t
+          border-white/10
 
-          lg:py-20
+          lg:py-24
         "
       >
-        {/* Heading */}
-
         <div
           className="
             mx-auto
             max-w-[1200px]
             px-5
-            pb-8
 
             sm:px-8
             lg:px-12
           "
         >
-          <p
-            className="
-              text-[9px]
-              uppercase
-              tracking-[0.3em]
-              text-[#d93232]
-            "
-          >
-            FIND US
-          </p>
+          {/* Heading */}
+          <div className="mb-12">
+            <p
+              className="
+                text-[9px]
+                uppercase
+                tracking-[0.3em]
+                text-[#d93232]
+              "
+            >
+              FIND US
+            </p>
 
-          <h2
-            className="
-              mt-3
-              text-3xl
-              font-black
-              uppercase
-              tracking-tight
+            <h2
+              className="
+                mt-3
+                text-3xl
+                font-black
+                uppercase
+                tracking-tight
 
-              sm:text-4xl
-              lg:text-5xl
-            "
-          >
-            OUR{" "}
-            <span className="text-[#d93232]">
-              LOCATION
-            </span>
-          </h2>
-        </div>
-
-        {/* MAP */}
-
-        <div
-          className="
-            relative
-            h-[420px]
-            w-full
-            overflow-hidden
-            border-y
-            border-white/10
-
-            sm:h-[500px]
-          "
-        >
-          <iframe
-            title="ASTRR Location"
-            src="https://www.google.com/maps?q=Hasanpur%2C%20Amroha%2C%20Uttar%20Pradesh&output=embed"
-            className="
-              h-full
-              w-full
-              border-0
-              grayscale
-              invert
-              opacity-70
-            "
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-
-          {/* Map overlay */}
+                sm:text-4xl
+                lg:text-5xl
+              "
+            >
+              OUR{" "}
+              <span className="text-[#d93232]">
+                LOCATIONS
+              </span>
+            </h2>
+          </div>
 
           <div
             className="
-              pointer-events-none
-              absolute
-              inset-0
-              bg-gradient-to-b
-              from-black/20
-              via-transparent
-              to-black/50
+              grid
+              gap-8
+              lg:grid-cols-[1fr_1.5fr]
+              lg:gap-12
             "
-          />
+          >
+            {/* Left side: Location Cards */}
+            <div className="flex flex-col gap-4">
+              {locations.map((loc) => {
+                const isActive = activeLocation.id === loc.id;
+                return (
+                  <button
+                    key={loc.id}
+                    onClick={() => setActiveLocation(loc)}
+                    className={`
+                      group
+                      relative
+                      flex
+                      w-full
+                      flex-col
+                      items-start
+                      overflow-hidden
+                      rounded-2xl
+                      border
+                      bg-[#0b0b0b]
+                      p-6
+                      text-left
+                      transition-all
+                      duration-300
+
+                      ${
+                        isActive
+                          ? "border-white/10 shadow-[0_0_30px_rgba(217,50,50,0.05)]"
+                          : "border-white/5 hover:border-white/10 hover:bg-[#111]"
+                      }
+                    `}
+                  >
+                    {/* Active Left Border indicator */}
+                    {isActive && (
+                      <div className="absolute bottom-0 left-0 top-0 w-1 bg-[#d93232]" />
+                    )}
+
+                    <div className="flex w-full items-center justify-between mb-3">
+                      {loc.pill && (
+                        <div
+                          className="
+                            rounded-full
+                            bg-[#d93232]
+                            px-3
+                            py-1
+                            text-[8px]
+                            font-bold
+                            uppercase
+                            tracking-[0.2em]
+                            text-white
+                          "
+                        >
+                          {loc.pill}
+                        </div>
+                      )}
+                      
+                      {!loc.pill && isActive && (
+                        <div className="h-6" /> // spacer for first card if active to match padding
+                      )}
+
+                      {loc.icon && <div>{loc.icon}</div>}
+                    </div>
+
+                    <h3 className="text-xl font-bold tracking-tight text-white mb-2">
+                      {loc.title}
+                    </h3>
+
+                    <p className="whitespace-pre-line text-sm text-white/50 leading-relaxed">
+                      {loc.address}
+                    </p>
+
+                    {isActive && (
+                      <div className="mt-4 flex items-center gap-2 text-xs font-bold text-[#d93232]">
+                        View on Map <span>→</span>
+                      </div>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Right side: Map iframe */}
+            <div
+              className="
+                relative
+                h-[400px]
+                w-full
+                overflow-hidden
+                rounded-2xl
+                border
+                border-white/10
+                bg-[#0b0b0b]
+
+                lg:h-auto
+                lg:min-h-[500px]
+              "
+            >
+              <iframe
+                key={activeLocation.id} // Re-mount iframe when location changes
+                title={`ASTRR Location - ${activeLocation.title}`}
+                src={`https://www.google.com/maps?q=${activeLocation.mapQuery}&output=embed`}
+                className="
+                  h-full
+                  w-full
+                  border-0
+                  grayscale
+                  invert
+                  opacity-70
+                  transition-opacity
+                  duration-500
+                "
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+
+              {/* Map overlay */}
+              <div
+                className="
+                  pointer-events-none
+                  absolute
+                  inset-0
+                  bg-gradient-to-b
+                  from-black/20
+                  via-transparent
+                  to-black/50
+                "
+              />
+            </div>
+          </div>
         </div>
       </section>
 

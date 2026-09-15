@@ -361,19 +361,19 @@ function AnimatedShoeCard({
       className={`
         group
         relative
-        min-h-[clamp(280px,70vw,800px)]
         w-full
         cursor-pointer
         overflow-hidden
         bg-[#111]
         outline-none
+        aspect-video
+        md:aspect-auto
 
         transform
         transition-all
         duration-[1200ms]
         ease-[cubic-bezier(0.16,1,0.3,1)]
 
-        md:min-h-0
         md:h-full
 
         ${

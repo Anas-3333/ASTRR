@@ -182,8 +182,8 @@ function ProductQuickView({
             </p>
           </div>
 
-          {/* OVERLAPPING CATALOG IMAGE (Mobile: below title, Desktop: overlay on left) */}
-          <div className="relative order-2 lg:order-none lg:absolute lg:left-12 lg:bottom-0 lg:top-0 lg:w-[45%] flex items-center justify-center lg:justify-start p-8 lg:p-0 z-20 pointer-events-none mt-4 lg:mt-0 pt-20 lg:pt-24">
+          {/* OVERLAPPING CATALOG IMAGE (Mobile: hidden, Desktop: overlay on left) */}
+          <div className="hidden lg:flex relative order-2 lg:order-none lg:absolute lg:left-12 lg:bottom-0 lg:top-0 lg:w-[45%] items-center justify-center lg:justify-start p-8 lg:p-0 z-20 pointer-events-none mt-4 lg:mt-0 pt-20 lg:pt-24">
             {/* Added drop shadow for glow effect and assumed transparent bg, object-contain ensures it fits */}
             <img
               src={product.quickViewImage}
@@ -193,12 +193,12 @@ function ProductQuickView({
           </div>
 
           {/* BACKGROUND / FULL WIDTH IMAGE (Mobile: bottom, Desktop: full width background) */}
-          <div className="relative order-3 lg:order-none lg:absolute lg:inset-0 w-full h-[300px] lg:h-full z-10 lg:rounded-t-xl overflow-hidden">
+          <div className="relative order-3 lg:order-none lg:absolute lg:inset-0 w-full h-[250px] sm:h-[350px] lg:h-full z-10 lg:rounded-t-xl overflow-hidden bg-black flex items-center justify-center">
             <img 
               src={gallery[activeImage]} 
               alt={product.title.replace("\n", " ")} 
               draggable={false}
-              className="w-full h-full object-cover lg:object-center object-top"
+              className="w-full h-full object-contain lg:object-cover object-center"
             />
             {/* Gradient overlay for better text readability on desktop */}
             <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent pointer-events-none" />

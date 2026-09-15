@@ -421,7 +421,7 @@ function AnimatedMilitaryCard({
         overflow-hidden
         bg-[#111]
         outline-none
-        aspect-[4/3]
+        aspect-video
         md:aspect-auto
 
         transform

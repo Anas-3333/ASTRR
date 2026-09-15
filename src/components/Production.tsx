@@ -17,41 +17,48 @@ const productionItems: ProductionItem[] = [
   },
   {
     id: 2,
+    image: "https://aligtannery.com/wp-content/uploads/2024/10/20240905184731_page-0001-1280x960.jpg",
+    title: "SA 8000 Certified",
+    description:
+      "SA8000 is a standard for ethical business practices. It's based on international standards and emphasizes continuous improvement in social performance.",
+  },
+  {
+    id: 3,
     image: "https://astrr.co/img/army-shoes/ali-certeficate-1.webp",
     title: "Waterless Processing Cert.",
     description:
       "Waterless tanning saves water, reduces chemicals, and needs less drainage.",
   },
   {
-    id: 3,
+    id: 4,
     image: "https://astrr.co/img/army-shoes/ali-certeficate-2.webp",
     title: "ISO 9001 Certified",
     description:
       "Ensuring adherence to the highest international quality, safety and environmental sustainability standards in our process.",
   },
   {
-    id: 4,
+    id: 5,
     image: "https://astrr.co/img/army-shoes/automatedshoelasting.webp",
     title: "Advanced Production",
     description:
       "Modern production processes combined with generations of manufacturing expertise.",
   },
   {
-    id: 5,
+    id: 6,
     image: "https://astrr.co/img/army-shoes/ali-certeficate-3.webp",
     title: "Quality Control",
     description:
       "Every stage of production is carefully monitored to maintain consistent quality.",
   },
   {
-    id: 6,
+    id: 7,
     image: "/converted-webp/webp-Bleather.webp",
     title: "Leather Processing",
     description:
       "Carefully controlled leather processing creates durable and reliable finished products.",
   },
   {
-    id: 7,
+    id: 8,
     image: "https://astrr.co/img/army-shoes/automatedleatherstitching.webp",
     title: "Manufacturing",
     description:

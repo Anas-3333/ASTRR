@@ -6,7 +6,7 @@ const locations = [
     id: "registered-office",
     title: "Registered Office",
     address: "54-A Sanjay Nagar, Jajmau,\nKanpur – 208010, U.P. INDIA",
-    mapQuery: "54-A+Sanjay+Nagar,+Jajmau,+Kanpur,+Uttar+Pradesh+208010",
+    mapSrc: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3572.6428408075367!2d80.405!3d26.435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjbCsDI2JzA2LjAiTiA4MMKwMjQnMTguMCJF!5e0!3m2!1sen!2sin!4v1789454691235!5m2!1sen!2sin",
     pill: null,
     icon: null,
   },
@@ -14,7 +14,7 @@ const locations = [
     id: "unit-2",
     title: "Manufacturing Unit",
     address: "126 Iqbal Street, Jajmau,\nKanpur – 208010, U.P. INDIA",
-    mapQuery: "126+Iqbal+Street,+Jajmau,+Kanpur,+Uttar+Pradesh+208010",
+    mapSrc: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3572.549834488526!2d80.40599999999999!3d26.437999999999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjbCsDI2JzE2LjgiTiA4MMKwMjQnMjEuNiJF!5e0!3m2!1sen!2sin!4v1789454723272!5m2!1sen!2sin",
     pill: "UNIT II",
     icon: <Factory size={20} className="text-white/40" />,
   },
@@ -22,7 +22,7 @@ const locations = [
     id: "unit-3",
     title: "Operations Center",
     address: "150 Feet Road, Jajmau,\nKanpur – 208010, U.P. INDIA",
-    mapQuery: "150+Feet+Road,+Jajmau,+Kanpur,+Uttar+Pradesh+208010",
+    mapSrc: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3573.0116693881805!2d80.4131!3d26.423099999999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjbCsDI1JzIzLjIiTiA4MMKwMjQnNDcuMiJF!5e0!3m2!1sen!2sin!4v1789454761075!5m2!1sen!2sin",
     pill: "UNIT III",
     icon: <Settings size={20} className="text-white/40" />,
   },
@@ -952,7 +952,7 @@ function Contact() {
               <iframe
                 key={activeLocation.id} // Re-mount iframe when location changes
                 title={`ASTRR Location - ${activeLocation.title}`}
-                src={`https://www.google.com/maps?q=${activeLocation.mapQuery}&output=embed`}
+                src={activeLocation.mapSrc}
                 className="
                   h-full
                   w-full

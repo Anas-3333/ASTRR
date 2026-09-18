@@ -24,41 +24,34 @@ const productionItems: ProductionItem[] = [
   },
   {
     id: 3,
-    image: "https://astrr.co/img/army-shoes/ali-certeficate-1.webp",
-    title: "Waterless Processing Cert.",
-    description:
-      "Waterless tanning saves water, reduces chemicals, and needs less drainage.",
-  },
-  {
-    id: 4,
     image: "https://astrr.co/img/army-shoes/ali-certeficate-2.webp",
     title: "ISO 9001 Certified",
     description:
       "Ensuring adherence to the highest international quality, safety and environmental sustainability standards in our process.",
   },
   {
-    id: 5,
+    id: 4,
     image: "https://astrr.co/img/army-shoes/automatedshoelasting.webp",
     title: "Advanced Production",
     description:
       "Modern production processes combined with generations of manufacturing expertise.",
   },
   {
-    id: 6,
+    id: 5,
     image: "https://astrr.co/img/army-shoes/ali-certeficate-3.webp",
     title: "Quality Control",
     description:
       "Every stage of production is carefully monitored to maintain consistent quality.",
   },
   {
-    id: 7,
+    id: 6,
     image: "/converted-webp/webp-Bleather.webp",
     title: "Leather Processing",
     description:
       "Carefully controlled leather processing creates durable and reliable finished products.",
   },
   {
-    id: 8,
+    id: 7,
     image: "https://astrr.co/img/army-shoes/automatedleatherstitching.webp",
     title: "Manufacturing",
     description:

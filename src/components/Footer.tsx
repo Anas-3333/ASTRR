@@ -375,7 +375,7 @@ function Footer() {
 
             <div className="mt-[47px]">
               <img
-                src="https://astrr.co/img/army-shoes/astrr-logo-nav.webp"
+                src="	https://astrr.co/img/army-shoes/astrr-logo-nav.webp"
                 alt="ASTRR"
                 className="
                   h-auto

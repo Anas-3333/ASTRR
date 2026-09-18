@@ -21,7 +21,7 @@ const heroes: Hero[] = [
   {
     number: "02",
     title: "Air Forces",
-    image: "/converted-webp/Air-force.webp",
+    image: "/converted-webp/webp-AirForce.webp",
     description: "Protection for demanding environments.",
   },
   {

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { ArrowRight } from "lucide-react";
 import type { Product } from "./ProductQuickView";
 
 type DetailedProductQuickViewProps = {
@@ -11,6 +12,16 @@ export default function DetailedProductQuickView({
   onClose,
 }: DetailedProductQuickViewProps) {
   const [activeImage, setActiveImage] = useState(0);
+
+  const handleContactClick = () => {
+    onClose();
+    setTimeout(() => {
+      const contactSection = document.getElementById("contact") || document.getElementById("contact-form");
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100);
+  };
 
   useEffect(() => {
     if (!product) {
@@ -138,13 +149,36 @@ export default function DetailedProductQuickView({
           </div>
 
           <div className="text-center pb-4">
-            <p className="text-[11px] font-medium tracking-[0.3em] text-white/40 uppercase">
-              STEP INTO <span className="text-[#d93232]">COMFORT</span>. MOVE WITH <span className="text-[#d93232]">STYLE</span>.
-            </p>
+            <button
+              type="button"
+              onClick={handleContactClick}
+              className="group inline-flex items-center justify-center gap-2.5 text-[11px] sm:text-xs font-semibold tracking-[0.25em] text-white/70 hover:text-white uppercase transition-colors cursor-pointer py-1.5 px-4 rounded-full hover:bg-white/5 border border-transparent hover:border-white/10"
+            >
+              <span>CONTACT US FOR MORE DESIGNS</span>
+              <span className="inline-flex items-center text-[#d93232] group-hover:text-white transition-colors">
+                <ArrowRight className="w-4 h-4 animate-slide-right group-hover:translate-x-1.5 transition-transform" />
+              </span>
+            </button>
           </div>
         </div>
 
       </div>
+
+      <style>
+        {`
+          @keyframes slideRight {
+            0%, 100% {
+              transform: translateX(0);
+            }
+            50% {
+              transform: translateX(6px);
+            }
+          }
+          .animate-slide-right {
+            animation: slideRight 1.4s ease-in-out infinite;
+          }
+        `}
+      </style>
     </div>
   );
 }

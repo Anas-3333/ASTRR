@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Factory, Settings } from "lucide-react";
+import { Factory, Settings, Warehouse } from "lucide-react";
 
 const locations = [
   {
@@ -25,6 +25,14 @@ const locations = [
     mapSrc: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3573.0116693881805!2d80.4131!3d26.423099999999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjbCsDI1JzIzLjIiTiA4MMKwMjQnNDcuMiJF!5e0!3m2!1sen!2sin!4v1789454761075!5m2!1sen!2sin",
     pill: "UNIT III",
     icon: <Settings size={20} className="text-white/40" />,
+  },
+  {
+    id: "unit-4",
+    title: "Leather Techno. Park",
+    address: "A-25 Leather Techno. Park,\nBanther, Unnao U.P. INDIA",
+    mapSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3571.142448258172!2d80.45961947442458!3d26.483357978411824!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399c1558e5ab1fcb%3A0xcc7c064494889fe6!2sISLAM%20TANNERS%20%2C%20B-10%2C%20LEATHER%20TECHNOLOGY%20PARK%2C%20BANTHER%2C%20UNNAO!5e0!3m2!1sen!2sin!4v1789809133969!5m2!1sen!2sin",
+    pill: "UNIT IV",
+    icon: <Warehouse size={20} className="text-white/40" />,
   },
 ];
 
@@ -424,7 +432,7 @@ function Contact() {
                       text-white/75
                     "
                   >
-                    info@aligtannery.com
+                    info@astrr.co
                   </p>
                 </div>
               </div>

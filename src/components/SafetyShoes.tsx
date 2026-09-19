@@ -17,6 +17,7 @@ const shoes: Product[] = [
     title: "SECURITY\nFORCES",
     cardImage: "/converted-webp/webp-securityforce.webp",
     desktopCardImage: "/converted-webp/webp-security-desktop.webp",
+    catalogImage: "/converted-webp/catalogeImage1.webp",
     quickViewImage: "/Astrr-security-photos/BM-1.webp",
     galleryImages: [
       "/Astrr-security-photos/BM-1.webp",

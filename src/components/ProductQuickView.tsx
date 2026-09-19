@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ShieldCheck, Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { ShieldCheck, Star, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 
 /* =========================================================
    SHARED PRODUCT TYPE
@@ -10,6 +10,7 @@ export interface Product {
   cardImage: string;
   desktopCardImage?: string;
   quickViewImage: string;
+  catalogImage?: string;
   description: string;
   featured?: boolean;
   galleryImages?: string[]; // Array of gallery images
@@ -39,6 +40,16 @@ function ProductQuickView({
       const scrollTo = direction === 'left' ? scrollLeft - clientWidth / 2 : scrollLeft + clientWidth / 2;
       scrollRef.current.scrollTo({ left: scrollTo, behavior: 'smooth' });
     }
+  };
+
+  const handleContactClick = () => {
+    onClose();
+    setTimeout(() => {
+      const contactSection = document.getElementById("contact") || document.getElementById("contact-form");
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100);
   };
 
   /* =======================================================
@@ -168,31 +179,45 @@ function ProductQuickView({
         {/* =================================================
             TOP SECTION: Hero & Features (UPDATED)
         ================================================== */}
-        <div className="flex flex-col lg:relative lg:h-[550px] w-full shrink-0">
-          {/* TITLE & TEXT (Mobile: top, Desktop: overlay on top-left) */}
-          <div className="order-1 lg:order-none lg:absolute lg:left-12 lg:top-12 z-30 p-8 pb-0 lg:p-0">
-            <h4 className="text-[14px] font-bold text-[#d93232] tracking-wider uppercase mb-2 drop-shadow-md">
-              ENGINEERED GEAR
-            </h4>
-            <h2 className="text-[42px] leading-[0.9] font-black text-white uppercase tracking-[-0.04em] mb-4 whitespace-pre-line drop-shadow-lg">
-              {product.title}
-            </h2>
-            <p className="text-[13px] font-medium text-white/60 uppercase tracking-widest drop-shadow-md">
-              LIGHT ON WEIGHT.<br/>HEAVY ON PERFORMANCE.
-            </p>
+        <div className={`flex flex-col lg:relative ${product.catalogImage ? "lg:h-[580px] xl:h-[620px]" : "lg:h-[550px]"} w-full shrink-0`}>
+          {/* LEFT SIDE CONTENT: Heading + Catalog visible size image below it */}
+          <div className="order-1 lg:order-none lg:absolute lg:left-10 xl:left-12 lg:top-8 lg:bottom-6 lg:w-[48%] xl:w-[46%] z-30 flex flex-col justify-start p-6 pb-2 lg:p-0 pointer-events-none">
+            {/* HEADING */}
+            <div className="shrink-0 pointer-events-auto">
+              <h4 className="text-[13px] font-bold text-[#d93232] tracking-wider uppercase mb-1.5 drop-shadow-md">
+                ENGINEERED GEAR
+              </h4>
+              <h2 className="text-[32px] sm:text-[36px] lg:text-[34px] xl:text-[40px] leading-[0.94] font-black text-white uppercase tracking-[-0.04em] mb-2.5 whitespace-pre-line drop-shadow-lg">
+                {product.title}
+              </h2>
+              <p className="text-[11px] sm:text-[12px] font-medium text-white/60 uppercase tracking-widest drop-shadow-md">
+                LIGHT ON WEIGHT.<br className="hidden sm:inline lg:hidden xl:inline"/> HEAVY ON PERFORMANCE.
+              </p>
+            </div>
+
+            {/* CATALOG VISIBLE SIZE IMAGE (Clearly below heading) */}
+            {product.catalogImage && (
+              <div className="mt-4 sm:mt-5 lg:mt-3 xl:mt-4 flex-1 flex items-center justify-center lg:justify-start">
+                <img
+                  src={product.catalogImage}
+                  alt={`${product.title.replace("\n", " ")} Catalog`}
+                  className="w-auto max-w-full max-h-[260px] sm:max-h-[320px] lg:max-h-[360px] xl:max-h-[400px] object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.9)] filter transition-all duration-300"
+                />
+              </div>
+            )}
           </div>
 
-          {/* BACKGROUND / FULL WIDTH IMAGE (Mobile: bottom, Desktop: full width background) */}
-          <div className="relative order-2 lg:order-none lg:absolute lg:inset-0 w-full h-[250px] sm:h-[350px] lg:h-full z-10 lg:rounded-t-xl overflow-hidden bg-black flex items-center justify-center">
+          {/* BACKGROUND / PRODUCT QUICKVIEW IMAGE (Desktop: right side visible image; Mobile: below catalog) */}
+          <div className={`relative ${product.catalogImage ? "order-2" : "order-2"} lg:order-none lg:absolute lg:inset-0 w-full h-[250px] sm:h-[350px] lg:h-full z-10 lg:rounded-t-xl overflow-hidden bg-black flex items-center justify-center border-t lg:border-t-0 border-white/5`}>
             <img 
               src={gallery[activeImage]} 
               alt={product.title.replace("\n", " ")} 
               draggable={false}
-              className="w-full h-full object-contain lg:object-cover object-center"
+              className="w-full h-full object-contain lg:object-cover object-center lg:object-right transition-all duration-300"
             />
-            {/* Gradient overlay for better text readability on desktop */}
-            <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent pointer-events-none" />
-            <div className="hidden lg:block absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-transparent pointer-events-none h-40" />
+            {/* Gradient overlay for contrast behind left-side text and catalog on desktop */}
+            <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-black via-black/85 via-50% to-transparent pointer-events-none" />
+            <div className="hidden lg:block absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-transparent pointer-events-none h-36" />
           </div>
         </div>
 
@@ -260,9 +285,16 @@ function ProductQuickView({
           </div>
 
           <div className="text-center pt-2">
-            <p className="text-[11px] font-medium tracking-[0.3em] text-white/40 uppercase">
-              STEP INTO <span className="text-[#d93232]">COMFORT</span>. MOVE WITH <span className="text-[#d93232]">STYLE</span>.
-            </p>
+            <button
+              type="button"
+              onClick={handleContactClick}
+              className="group inline-flex items-center justify-center gap-2.5 text-[11px] sm:text-xs font-semibold tracking-[0.25em] text-white/70 hover:text-white uppercase transition-colors cursor-pointer py-1.5 px-4 rounded-full hover:bg-white/5 border border-transparent hover:border-white/10"
+            >
+              <span>CONTACT US FOR MORE DESIGNS</span>
+              <span className="inline-flex items-center text-[#d93232] group-hover:text-white transition-colors">
+                <ArrowRight className="w-4 h-4 animate-slide-right group-hover:translate-x-1.5 transition-transform" />
+              </span>
+            </button>
           </div>
         </div>
 
@@ -278,6 +310,17 @@ function ProductQuickView({
           @keyframes modalIn {
             from { opacity: 0; transform: scale(0.96) translateY(12px); }
             to { opacity: 1; transform: scale(1) translateY(0); }
+          }
+          @keyframes slideRight {
+            0%, 100% {
+              transform: translateX(0);
+            }
+            50% {
+              transform: translateX(6px);
+            }
+          }
+          .animate-slide-right {
+            animation: slideRight 1.4s ease-in-out infinite;
           }
         `}
       </style>

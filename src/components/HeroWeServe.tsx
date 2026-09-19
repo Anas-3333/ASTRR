@@ -45,7 +45,7 @@ const heroes: Hero[] = [
   {
     number: "06",
     title: "Safety Work",
-    image: "/converted-webp/Industrial-safety.webp",
+    image: "/converted-webp/Industrial-safety-1.webp",
     description: "Designed for tactical performance.",
   },
 ];

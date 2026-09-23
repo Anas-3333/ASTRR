@@ -14,7 +14,7 @@ const locations = [
     id: "unit-2",
     title: "Manufacturing Unit",
     address: "126 Iqbal Street, Jajmau,\nKanpur – 208010, U.P. INDIA",
-    mapSrc: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3572.549834488526!2d80.40599999999999!3d26.437999999999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjbCsDI2JzE2LjgiTiA4MMKwMjQnMjEuNiJF!5e0!3m2!1sen!2sin!4v1789454723272!5m2!1sen!2sin",
+    mapSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57160.204101331234!2d80.31947525788463!3d26.43919590019227!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399c4100675c429d%3A0x103d47b65be98d13!2sJajmau%20kanpur!5e0!3m2!1sen!2sin!4v1790152863065!5m2!1sen!2sin",
     pill: "UNIT II",
     icon: <Factory size={20} className="text-white/40" />,
   },
@@ -972,7 +972,7 @@ function Contact() {
                   duration-500
                 "
                 loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
+                referrerPolicy="strict-origin-when-cross-origin"
               />
 
               {/* Map overlay */}

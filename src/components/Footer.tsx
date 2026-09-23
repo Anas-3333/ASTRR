@@ -55,7 +55,7 @@ function Footer() {
             </a>
 
             <a
-              href="mailto:info@aligtannery.com"
+              href="mailto:info@astrr.co"
               className="
                 mt-[17px]
                 w-fit
@@ -68,7 +68,7 @@ function Footer() {
                 hover:opacity-70
               "
             >
-              info@aligtannery.com
+              info@astrr.co
             </a>
 
             <p

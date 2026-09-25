@@ -277,7 +277,7 @@ function ProductQuickView({
                     className="h-32 lg:h-40 w-full object-contain mix-blend-screen" 
                   />
                   <div className="mt-4 text-[10px] font-bold text-white/50 uppercase tracking-widest text-center whitespace-nowrap overflow-hidden text-ellipsis w-full">
-                    {idx === 0 ? "SIDE VIEW" : idx === 1 ? "BACK VIEW" : idx === 2 ? "FRONT VIEW" : idx === 3 ? "SOLE VIEW" : `VIEW 0${idx + 1}`}
+                    {idx === 0 ? "SIDE VIEW" : idx === 1 ? "BACK VIEW" : idx === 2 ? "FRONT VIEW" : idx === 3 ? "SOLE VIEW" : `VIEW ${String(idx + 1).padStart(2, '0')}`}
                   </div>
                 </div>
               ))}

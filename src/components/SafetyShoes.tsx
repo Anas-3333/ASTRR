@@ -6,7 +6,7 @@ import ProductQuickView, {
 const shoes: Product[] = [
   {
     number: "01",
-    title: "COMBAT\nFORCES",
+    title: "MILITARY\nSHOES",
     cardImage: "/converted-webp/webp-combat.webp",
     quickViewImage: "/webp/Combat forces/12307 Image.webp",
     galleryImages: [
@@ -30,7 +30,7 @@ const shoes: Product[] = [
   },
   {
     number: "02",
-    title: "SECURITY\nFORCES",
+    title: "SECURITY\nSHOES",
     cardImage: "/converted-webp/webp-securityforce.webp",
     desktopCardImage: "/converted-webp/webp-security-desktop.webp",
     catalogImage: "/converted-webp/catalogeImage1.webp",
@@ -69,7 +69,7 @@ const shoes: Product[] = [
   },
   {
     number: "03",
-    title: "EXECUTIVE\nOFFICERS",
+    title: "OFFICERS\nSHOES",
     cardImage: "/converted-webp/webp-executiveOfficer.webp",
     desktopCardImage: "/converted-webp/webp-Mofficer.webp",
     quickViewImage: "/webp/Executice officers/12121 image.webp",
@@ -100,8 +100,8 @@ const shoes: Product[] = [
   },
   {
     number: "04",
-    title: "INDUSTRIAL\nSAFETY",
-    cardImage: "/converted-webp/webp-industrialsafety.webp",
+    title: "POLICE\nSHOES",
+    cardImage: "public/images/police.webp",
     quickViewImage: "/webp/Industrial safety/12273 image.webp",
     galleryImages: [
       "/webp/Industrial safety/12273 image.webp",

@@ -26,7 +26,7 @@ const militaryShoes: Product[] = [
   },
   {
     number: "02",
-    title: "EMS",
+    title: "LIGHT INDUSTRY",
     cardImage: "/converted-webp/webp-ems.webp",
     desktopCardImage: "/converted-webp/webp-EMS-desktop.webp",
     quickViewImage: "/webp/Safety Shoe/EMS/12577 Image.webp",

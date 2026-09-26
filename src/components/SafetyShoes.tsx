@@ -101,7 +101,7 @@ const shoes: Product[] = [
   {
     number: "04",
     title: "POLICE\nSHOES",
-    cardImage: "public/images/police.webp",
+    cardImage: "/images/police.webp",
     quickViewImage: "/webp/Industrial safety/12273 image.webp",
     galleryImages: [
       "/webp/Industrial safety/12273 image.webp",

@@ -177,17 +177,17 @@ function ProductQuickView({
         </div>
 
         {/* =================================================
-            TOP SECTION: Hero & Features (UPDATED)
+            TOP SECTION: Hero & Features (FULLY VISIBLE MAIN IMAGE)
         ================================================== */}
-        <div className={`flex flex-col lg:relative ${product.catalogImage ? "lg:h-[580px] xl:h-[620px]" : "lg:h-[550px]"} w-full shrink-0`}>
-          {/* LEFT SIDE CONTENT: Heading + Catalog visible size image below it */}
-          <div className="order-1 lg:order-none lg:absolute lg:left-10 xl:left-12 lg:top-8 lg:bottom-6 lg:w-[48%] xl:w-[46%] z-30 flex flex-col justify-start p-6 pb-2 lg:p-0 pointer-events-none">
+        <div className="flex flex-col lg:flex-row w-full shrink-0 min-h-[400px] lg:min-h-[500px]">
+          {/* LEFT COLUMN: Info & Catalog Image */}
+          <div className="flex flex-col justify-between p-6 sm:p-8 lg:p-10 lg:w-[42%] xl:w-[40%] z-20 shrink-0">
             {/* HEADING */}
-            <div className="shrink-0 pointer-events-auto">
+            <div>
               <h4 className="text-[13px] font-bold text-[#d93232] tracking-wider uppercase mb-1.5 drop-shadow-md">
                 ENGINEERED GEAR
               </h4>
-              <h2 className="text-[32px] sm:text-[36px] lg:text-[34px] xl:text-[40px] leading-[0.94] font-black text-white uppercase tracking-[-0.04em] mb-2.5 whitespace-pre-line drop-shadow-lg">
+              <h2 className="text-[30px] sm:text-[36px] lg:text-[32px] xl:text-[38px] leading-[0.95] font-black text-white uppercase tracking-[-0.04em] mb-2.5 whitespace-pre-line drop-shadow-lg">
                 {product.title}
               </h2>
               <p className="text-[11px] sm:text-[12px] font-medium text-white/60 uppercase tracking-widest drop-shadow-md">
@@ -195,29 +195,32 @@ function ProductQuickView({
               </p>
             </div>
 
-            {/* CATALOG VISIBLE SIZE IMAGE (Clearly below heading) */}
+            {/* CATALOG VISIBLE SIZE IMAGE (If available) */}
             {product.catalogImage && (
-              <div className="mt-4 sm:mt-5 lg:mt-3 xl:mt-4 flex-1 flex items-center justify-center lg:justify-start">
+              <div className="mt-4 sm:mt-6 flex-1 flex items-center justify-center lg:justify-start min-h-[180px]">
                 <img
                   src={product.catalogImage}
                   alt={`${product.title.replace("\n", " ")} Catalog`}
-                  className="w-auto max-w-full max-h-[260px] sm:max-h-[320px] lg:max-h-[360px] xl:max-h-[400px] object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.9)] filter transition-all duration-300"
+                  className="w-auto max-w-full max-h-[220px] sm:max-h-[280px] lg:max-h-[300px] object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.9)] transition-all duration-300"
                 />
               </div>
             )}
           </div>
 
-          {/* BACKGROUND / PRODUCT QUICKVIEW IMAGE (Desktop: right side visible image; Mobile: below catalog) */}
-          <div className={`relative ${product.catalogImage ? "order-2" : "order-2"} lg:order-none lg:absolute lg:inset-0 w-full h-[250px] sm:h-[350px] lg:h-full z-10 lg:rounded-t-xl overflow-hidden bg-black flex items-center justify-center border-t lg:border-t-0 border-white/5`}>
+          {/* RIGHT COLUMN: MAIN PRODUCT QUICKVIEW IMAGE SHOWCASE */}
+          <div className="relative flex-1 min-h-[300px] sm:min-h-[400px] lg:min-h-[480px] p-4 sm:p-6 lg:p-8 bg-[#050505] flex items-center justify-center border-t lg:border-t-0 lg:border-l border-white/10 lg:rounded-tr-xl overflow-hidden group">
+            {/* Current View Badge */}
+            <div className="absolute top-4 left-4 z-20 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[10px] font-bold text-white/80 uppercase tracking-widest">
+              {activeImage === 0 ? "SIDE VIEW" : activeImage === 1 ? "BACK VIEW" : activeImage === 2 ? "FRONT VIEW" : activeImage === 3 ? "SOLE VIEW" : `VIEW ${String(activeImage + 1).padStart(2, '0')}`}
+            </div>
+
+            {/* Main Image - Fully Visible, Centered & Uncropped */}
             <img 
               src={gallery[activeImage]} 
               alt={product.title.replace("\n", " ")} 
               draggable={false}
-              className="w-full h-full object-contain lg:object-cover object-center lg:object-right transition-all duration-300"
+              className="relative z-10 w-full h-full max-h-[360px] sm:max-h-[440px] lg:max-h-[480px] object-contain object-center transition-all duration-300 filter drop-shadow-[0_15px_30px_rgba(0,0,0,0.8)]"
             />
-            {/* Gradient overlay for contrast behind left-side text and catalog on desktop */}
-            <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-black via-black/85 via-50% to-transparent pointer-events-none" />
-            <div className="hidden lg:block absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-transparent pointer-events-none h-36" />
           </div>
         </div>
 
